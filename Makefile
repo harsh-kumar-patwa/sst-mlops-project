@@ -2,7 +2,7 @@ PY      ?= .venv/bin/python
 GOLDEN  ?= $(if $(wildcard eval/golden.csv),eval/golden.csv,eval/smoke.csv)
 export PYTHONPATH := src
 
-.PHONY: setup index test eval eval-retrieval gate baseline serve dashboard loadtest sweep docmap
+.PHONY: setup index test eval eval-retrieval gate baseline serve dashboard loadtest sweep docmap calibrate calibration-score
 
 setup:            ## create the virtualenv and install everything
 	python3.12 -m venv .venv
@@ -41,3 +41,9 @@ sweep:            ## experiment: chunk size x retrieval mode, retrieval metrics 
 
 docmap:           ## list every doc page and section heading, to help write golden questions
 	$(PY) -m rag.evaluation.docmap > eval/doc_map.md
+
+calibrate:        ## export 20 answers for human labelling (eval/calibration.md + .csv)
+	$(PY) -m rag.evaluation.calibrate export
+
+calibration-score: ## judge vs human agreement once eval/calibration.csv is labelled
+	$(PY) -m rag.evaluation.calibrate score
