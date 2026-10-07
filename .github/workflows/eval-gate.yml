@@ -27,6 +27,11 @@ jobs:
       FASTEMBED_CACHE_PATH: .cache/fastembed
       ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      # Optional: when set, every eval answer is traced to Langfuse with its scores, tagged "ci".
+      LANGFUSE_PUBLIC_KEY: ${{ secrets.LANGFUSE_PUBLIC_KEY }}
+      LANGFUSE_SECRET_KEY: ${{ secrets.LANGFUSE_SECRET_KEY }}
+      LANGFUSE_HOST: ${{ secrets.LANGFUSE_HOST }}
+      LANGFUSE_ENV: ci
     steps:
       - uses: actions/checkout@v7
         with:
