@@ -15,12 +15,13 @@ from contextlib import asynccontextmanager
 from pathlib import Path
 from typing import Literal
 
-from fastapi import BackgroundTasks, FastAPI, HTTPException
+from fastapi import BackgroundTasks, FastAPI, HTTPException, Request
 from fastapi.responses import HTMLResponse
 from pydantic import BaseModel, Field
 
 from rag import telemetry, tracing
 from rag.pipeline import RagPipeline
+from rag.ratelimit import RateLimiter, client_id
 
 STATIC_PAGE = Path(__file__).with_name("chat.html")
 state: dict = {}
@@ -29,8 +30,10 @@ state: dict = {}
 @asynccontextmanager
 async def lifespan(_: FastAPI):
     state["pipeline"] = RagPipeline()
+    state["limiter"] = RateLimiter.from_env()
     state["judge"] = None
-    if os.getenv("OPENAI_API_KEY"):
+    # The public deployment sets ONLINE_JUDGE_RATE=0: sampled judging costs more than answering.
+    if os.getenv("OPENAI_API_KEY") and telemetry.ONLINE_JUDGE_RATE > 0:
         from rag.evaluation.judge import Judge
         state["judge"] = Judge(state["pipeline"].config)
     yield
@@ -53,7 +56,9 @@ class FeedbackRequest(BaseModel):
 
 # Sync handlers: FastAPI runs them in a worker thread, so a slow LLM call never blocks the event loop.
 @app.post("/ask")
-def ask(body: AskRequest, background: BackgroundTasks) -> dict:
+def ask(body: AskRequest, request: Request, background: BackgroundTasks) -> dict:
+    if refusal := state["limiter"].check(client_id(request.headers, request.client and request.client.host)):
+        raise HTTPException(429, refusal)
     answer = state["pipeline"].answer(body.question, include_context=True)
     # With tracing on, the request id IS the Langfuse trace id, so feedback attaches to the right trace.
     request_id = answer.extras.get("trace_id") or uuid.uuid4().hex
@@ -92,6 +97,7 @@ def health() -> dict:
         "generator": config["generation"]["model"],
         "prompt_version": config["generation"]["prompt_version"],
         "online_judge": state["judge"] is not None,
+        "limits": {"per_minute": state["limiter"].per_minute, "per_day": state["limiter"].per_day},
         "langfuse_tracing": tracing.enabled(),
     }
 
