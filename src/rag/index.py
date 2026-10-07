@@ -14,7 +14,11 @@ from rag.chunking import chunk_corpus
 from rag.config import REPO_ROOT, collection_name, load_config
 from rag.store import DENSE, SPARSE, create_collection, dense_model, get_client, point_id, sparse_model, to_sparse
 
-BATCH_SIZE = 128
+BATCH_SIZE = 128        # chunks upserted to Qdrant per call
+# Chunks per embedding forward pass. Attention memory grows with batch x seq_len^2: measured peak
+# RSS of a full index build was >3 GB at 128 (OOM-killed on the Hugging Face build machine),
+# 821 MB at 16 and 412 MB at 4. Embeddings are identical; only the pass size changes.
+EMBED_BATCH_SIZE = 4
 
 
 def build_index(force: bool = False) -> str:
@@ -38,8 +42,8 @@ def build_index(force: bool = False) -> str:
     for start in range(0, len(chunks), BATCH_SIZE):
         batch = chunks[start:start + BATCH_SIZE]
         texts = [chunk.embedding_text for chunk in batch]
-        dense_vectors = list(embedder.passage_embed(texts))
-        sparse_vectors = list(sparse_embedder.passage_embed(texts))
+        dense_vectors = list(embedder.passage_embed(texts, batch_size=EMBED_BATCH_SIZE))
+        sparse_vectors = list(sparse_embedder.passage_embed(texts, batch_size=EMBED_BATCH_SIZE))
         points = [
             models.PointStruct(
                 id=point_id(chunk.chunk_id),
