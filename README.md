@@ -97,6 +97,20 @@ Scores attached to traces: `faithfulness` and `correctness` from eval runs (tagg
 from the sampled live judge, and `user_feedback` from 👍/👎. The API's `request_id` is the trace id.
 Export happens in a background thread, so tracing adds no request latency; without keys it is a no-op.
 
+## Deployment
+
+Hosted on Hugging Face Spaces (Docker). `.github/workflows/deploy.yml` deploys **only after the eval gate has
+passed on `main`**: it pushes the image sources to the Space, then polls the live `/health` until it reports the
+same `config_hash` as the commit, so the deployed app is verified to match `main`.
+
+- **Rollout:** every change reaches `main` through a PR that passed the gate, then deploys automatically.
+- **Rollback:** revert the commit on `main`; the revert passes the gate and redeploys the previous version.
+  `config_hash` in every response shows which version answered.
+- **Image:** the vector index and embedding models are built into the image (810 MB, ~340 MB RAM, starts in ~4 s),
+  so no vector-database server is needed and an image tag pins code, config and index together.
+- **Public-demo protection:** 10 questions/minute per visitor and 300/day in total (`ASK_LIMIT_PER_MINUTE`,
+  `ASK_LIMIT_PER_DAY`), sampled online judging off (`ONLINE_JUDGE_RATE=0`), plus a hard spend limit on the OpenAI account.
+
 ## Judge calibration
 
 The faithfulness judge (GPT-4.1) is checked against an independent labelling of 20 sampled answers
