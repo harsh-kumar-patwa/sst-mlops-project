@@ -28,17 +28,20 @@ retrieval:
   min_score: 0.55                # refuse to answer if the best dense cosine score is below this
 
 generation:
-  provider: anthropic
-  model: claude-haiku-4-5
+  provider: openai               # openai | anthropic (e.g. claude-haiku-4-5 at $1/$5 per Mtok)
+  model: gpt-4o-mini
   temperature: 0.0
   max_tokens: 1024
   timeout_seconds: 30
   prompt_version: answer_v1      # file in prompts/
   max_context_tokens: 3000
-  price_per_mtok: {input: 1.00, output: 5.00}
+  price_per_mtok: {input: 0.15, output: 0.60}   # list prices; check the provider's pricing page
 
 judge:
   provider: openai
-  model: gpt-4o-mini             # different model family from the generator, avoids self-preference bias
+  # A stronger, different-generation model than the generator. Same provider is a deliberate
+  # trade-off (one API key, budget); the self-preference risk is measured by the human-agreement
+  # calibration in eval/calibration.csv rather than assumed away.
+  model: gpt-4.1
   temperature: 0.0
-  price_per_mtok: {input: 0.15, output: 0.60}
+  price_per_mtok: {input: 2.00, output: 8.00}

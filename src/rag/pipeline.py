@@ -4,14 +4,12 @@ Failure handling follows "degrade, never fail": if the LLM is down, rate-limited
 the caller still gets the most relevant documentation excerpts instead of an error.
 """
 
-import os
 import re
 import time
 from dataclasses import asdict, dataclass, field
 
-import anthropic
-
 from rag import llm_cache, tracing
+from rag.llm import PROVIDER_ERRORS, ChatModel
 from rag.config import load_config, load_prompt
 from rag.retrieve import Hit, Retriever
 
@@ -43,13 +41,10 @@ class Answer:
 
 class RagPipeline:
     def __init__(self, config: dict | None = None):
-        if not os.getenv("ANTHROPIC_API_KEY"):
-            raise RuntimeError("ANTHROPIC_API_KEY is not set. Copy .env.example to .env and fill it in.")
         self.config = config or load_config()
+        self.model = ChatModel(self.config["generation"])
         self.retriever = Retriever(self.config)
-        generation = self.config["generation"]
-        self.system_prompt = load_prompt(generation["prompt_version"])
-        self.client = anthropic.Anthropic(timeout=generation["timeout_seconds"], max_retries=2)
+        self.system_prompt = load_prompt(self.config["generation"]["prompt_version"])
 
     def build_context(self, hits: list[Hit]) -> tuple[str, list[Hit]]:
         budget = self.config["generation"]["max_context_tokens"] * CHARS_PER_TOKEN
@@ -64,28 +59,12 @@ class RagPipeline:
         return "\n\n".join(blocks), used
 
     def generate(self, question: str, context: str, use_cache: bool) -> dict:
-        generation = self.config["generation"]
-        request = {
-            "model": generation["model"],
-            "max_tokens": generation["max_tokens"],
-            # anthropic 1.x dropped the keyword; Haiku 4.5 still honours it and the eval relies
-            # on temperature 0 for repeatable answers, so it goes in the raw request body.
-            "extra_body": {"temperature": generation["temperature"]},
-            "system": self.system_prompt,
-            "messages": [{"role": "user", "content": f"Documentation excerpts:\n\n{context}\n\nQuestion: {question}"}],
-        }
+        request = self.model.request(self.system_prompt,
+                                     f"Documentation excerpts:\n\n{context}\n\nQuestion: {question}")
         key = llm_cache.cache_key(request)
         if use_cache and (cached := llm_cache.get(key)):
             return {**cached, "cached": True}
-
-        response = self.client.messages.create(**request)
-        text = "".join(block.text for block in response.content if block.type == "text").strip()
-        result = {
-            "text": text,
-            "input_tokens": response.usage.input_tokens,
-            "output_tokens": response.usage.output_tokens,
-            "stop_reason": response.stop_reason,
-        }
+        result = self.model.complete(request)
         if use_cache:
             llm_cache.put(key, result)
         return {**result, "cached": False}
@@ -142,7 +121,7 @@ class RagPipeline:
                           metadata={"prompt_version": self.config["generation"]["prompt_version"]}) as span:
             try:
                 result = self.generate(question, context, use_cache)
-            except (anthropic.RateLimitError, anthropic.APIStatusError, anthropic.APIConnectionError) as error:
+            except PROVIDER_ERRORS as error:
                 span.update(level="ERROR", status_message=type(error).__name__)
                 fallback = "Summary unavailable right now. The most relevant documentation sections are:\n" + \
                     "\n".join(f"- {h.breadcrumb} ({h.doc_path})" for h in used)

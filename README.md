@@ -13,11 +13,11 @@ quality is blocked from merging**.
 |---|---|
 | Golden set | 60 questions: 15 factual, 15 how-to, 12 config-flag, 8 multi-hop, 10 unanswerable (`eval/golden.csv`) |
 | Recall@5 / MRR@10 (dense, chunk 400) | 0.870 / 0.833 (multi-hop Recall@5: 0.688) |
-| Faithfulness / Correctness (LLM judge) | _fill in_ |
-| Refusal accuracy on unanswerable questions | _fill in_ |
-| Latency p50 / p99 (end to end) | _fill in from the dashboard_ |
+| Faithfulness / Correctness (GPT-4.1 judge) | 0.957 / 0.800 |
+| Refusal accuracy (unanswerable) / false refusals (answerable) | 1.00 / 0.14 |
+| Latency p50 / p95 / p99 (end to end, uncached) | 1.43 s / 2.21 s / 3.89 s |
 | Retrieval latency (warm) | ~4–50 ms |
-| Cost per query (Claude Haiku 4.5) | _≈ $0.005, fill in measured_ |
+| Cost per query (gpt-4o-mini generator) | $0.00025 · full 60-question eval incl. judge ≈ $0.19 |
 | Load test throughput | _fill in from `make loadtest`_ |
 
 ## Architecture
@@ -32,11 +32,11 @@ flowchart LR
   subgraph ONLINE["Online · REST/JSON"]
     U["User / chat page"] -- "POST /ask" --> A["FastAPI"]
     A -- "embed + search" --> Q
-    A -- "top-5 excerpts + prompt" --> L["Claude Haiku 4.5"]
+    A -- "top-5 excerpts + prompt" --> L["gpt-4o-mini"]
     L --> A
     A -- "answer, citations, cost,<br/>latency, config_hash" --> U
     A -. "background" .-> LOG["request logs"] -.-> DASH["Streamlit dashboard"]
-    A -. "20% sample" .-> J["GPT-4o-mini judge"]
+    A -. "20% sample" .-> J["GPT-4.1 judge"]
     A -. "async export" .-> LF["Langfuse traces<br/>retrieve → generate spans"]
   end
   subgraph CI["CI · every pull request"]
@@ -48,7 +48,7 @@ flowchart LR
 
 **Request path:** embed the question (same model as the index; the service refuses to start on a mismatch) →
 top-20 dense search (optionally fused with BM25 by Reciprocal Rank Fusion) → refuse if nothing relevant →
-top-5 excerpts wrapped in `[BEGIN DOCUMENT n]` delimiters → Claude Haiku answers with `[n]` citations →
+top-5 excerpts wrapped in `[BEGIN DOCUMENT n]` delimiters → gpt-4o-mini answers with `[n]` citations →
 citations checked against the retrieved set. If the LLM fails, the service returns the relevant doc sections instead of an error.
 
 ## Evaluation
@@ -56,7 +56,7 @@ citations checked against the retrieved set. If the LLM fails, the service retur
 | Layer | Metrics | How | When |
 |---|---|---|---|
 | Retrieval | Recall@1/5/10, MRR@10, Section@5, per slice | Programmatic, against `source_docs` | Every PR (free) |
-| Generation | Faithfulness, correctness, citation validity | GPT-4o-mini judge (a different model family from the generator) | Every PR when keys are set |
+| Generation | Faithfulness, correctness, citation validity | GPT-4.1 judge (stronger than the generator; human-agreement calibrated) | Every PR when keys are set |
 | Refusals | Refusal accuracy, false-refusal rate | Programmatic, on the `unanswerable` slice | Every PR |
 | Online | Thumbs up/down, sampled faithfulness | `/feedback`, background judge on 20% of traffic | Live |
 
@@ -84,7 +84,7 @@ Export happens in a background thread, so tracing adds no request latency; witho
 
 ```bash
 make setup                 # virtualenv + dependencies
-cp .env.example .env       # add ANTHROPIC_API_KEY and OPENAI_API_KEY
+cp .env.example .env       # add OPENAI_API_KEY (and optional Langfuse keys)
 make index                 # ~2 min on a laptop CPU
 make eval-retrieval        # free retrieval eval
 make eval                  # full eval with the LLM judge
@@ -99,7 +99,7 @@ make test                  # unit tests
 |---|---|---|
 | Qdrant (embedded locally/CI, Cloud optional) | Chroma, pgvector | Payload filtering, dense + sparse vectors in one collection, and the same client with no server in CI |
 | bge-small via fastembed (local CPU) | API embeddings | Free, deterministic in CI, no vendor lock-in |
-| Claude Haiku 4.5 generator, GPT-4o-mini judge | One model for both | A judge from a different family avoids grading its own answers |
+| gpt-4o-mini generator, GPT-4.1 judge (same provider) | Two providers | One API key and budget; the stronger judge plus a human-agreement check bounds the self-preference risk |
 | Chunk size 400 tokens | 512 | bge-small truncates at 512 tokens, and every chunk carries a page/section breadcrumb |
 | Hosted LLM API | Self-hosted vLLM on a GPU | At ~1k queries/day the API costs a few dollars, a GPU costs hundreds a month |
 
