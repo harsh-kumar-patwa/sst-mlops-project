@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>vLLM Docs Assistant</title>
+<style>
+  :root { --bg:#f6f8f9; --card:#fff; --fg:#17232b; --muted:#5b6a73; --line:#d8e0e4; --accent:#0b6e8a; --ok:#1a7f37; --warn:#9a6700; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#10181d; --card:#18242b; --fg:#e3ebee; --muted:#98a8b0; --line:#2c3d46; --accent:#5cc3dd; --ok:#56d364; --warn:#e3b341; } }
+  * { box-sizing:border-box } body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.55 system-ui, sans-serif; padding:0 16px }
+  main { max-width:760px; margin:0 auto; padding:32px 0 64px; display:grid; gap:16px }
+  h1 { font-size:1.6rem; margin:0 } p.sub { margin:0; color:var(--muted) }
+  form { display:flex; gap:8px } input { flex:1; padding:12px 14px; font:inherit; border:1px solid var(--line); border-radius:8px; background:var(--card); color:var(--fg) }
+  button { padding:10px 16px; font:inherit; font-weight:600; border:0; border-radius:8px; background:var(--accent); color:#fff; cursor:pointer }
+  button.ghost { background:transparent; color:var(--fg); border:1px solid var(--line); padding:4px 10px }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:16px 18px; display:grid; gap:10px }
+  .answer { white-space:pre-wrap } .meta { font:13px ui-monospace, monospace; color:var(--muted); display:flex; flex-wrap:wrap; gap:6px 14px }
+  .sources { margin:0; padding-left:1.2em; font-size:14px } .status-refused { color:var(--warn) } .status-degraded { color:var(--warn) }
+  .row { display:flex; gap:8px; align-items:center; font-size:14px; color:var(--muted) }
+</style>
+</head>
+<body>
+<main>
+  <h1>vLLM Docs Assistant</h1>
+  <p class="sub">Answers come only from the vLLM v0.31.0 documentation, with sources.</p>
+  <form id="ask"><input id="q" placeholder="e.g. How do I enable automatic prefix caching?" required minlength="3"><button>Ask</button></form>
+  <div id="out"></div>
+</main>
+<script>
+const form = document.getElementById("ask"), out = document.getElementById("out");
+form.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  out.innerHTML = '<div class="card">Searching the docs…</div>';
+  try {
+    const response = await fetch("/ask", { method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ question: document.getElementById("q").value }) });
+    const data = await response.json();
+    if (!response.ok) throw new Error(JSON.stringify(data.detail || data));
+    render(data);
+  } catch (error) { out.innerHTML = `<div class="card">Request failed: ${escapeHtml(String(error))}</div>`; }
+});
+function escapeHtml(text) { return text.replace(/[&<>"]/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;" }[c])); }
+function render(data) {
+  const sources = data.citations.map(c => `<li>[${c.n}] ${escapeHtml(c.section)} <code>${escapeHtml(c.doc_path)}</code></li>`).join("");
+  out.innerHTML = `<div class="card">
+    <div class="answer status-${data.status}">${escapeHtml(data.answer)}</div>
+    ${sources ? `<ol class="sources">${sources}</ol>` : ""}
+    <div class="meta"><span>${data.status}</span><span>${data.latency_ms.total} ms</span><span>$${data.cost_usd.toFixed(5)}</span>
+      <span>${data.model}</span><span>${data.prompt_version}</span><span>config ${data.config_hash}</span></div>
+    <div class="row">Was this helpful? <button class="ghost" data-r="up">👍</button><button class="ghost" data-r="down">👎</button><span id="thanks"></span></div>
+  </div>`;
+  out.querySelectorAll("button[data-r]").forEach(button => button.addEventListener("click", async () => {
+    await fetch("/feedback", { method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ request_id: data.request_id, rating: button.dataset.r }) });
+    document.getElementById("thanks").textContent = "Thanks, recorded.";
+  }));
+}
+</script>
+</body>
+</html>
