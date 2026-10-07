@@ -1,7 +1,12 @@
 """Judge calibration: how often does the LLM judge agree with a human?
 
   python -m rag.evaluation.calibrate export   # writes eval/calibration.md (to read) + eval/calibration.csv (to label)
-  python -m rag.evaluation.calibrate score    # agreement between your labels and the judge
+  python -m rag.evaluation.calibrate score    # judge agreement with each filled label column
+
+Label columns are kept apart and reported separately, never mixed:
+  human_faithful   a person's label (the real calibration)
+  panel_faithful   an independent AI panel (two opposing Claude labellers + adjudicator), a
+                   cross-family check on the GPT judge, not a substitute for human labels
 
 The review file hides the judge's verdict so the human label is independent. Label each answer
 "yes" if every factual claim in it is supported by the excerpts shown, otherwise "no".
@@ -49,30 +54,37 @@ def export() -> None:
     REVIEW.write_text("\n".join(lines))
     with LABELS.open("w", newline="") as handle:
         writer = csv.writer(handle)
-        writer.writerow(["id", "human_faithful", "note"])
-        writer.writerows([[row["id"], "", ""] for row in sample])
+        writer.writerow(["id", "human_faithful", "panel_faithful", "panel_how", "panel_reason", "note"])
+        writer.writerows([[row["id"], "", "", "", "", ""] for row in sample])
     print(f"wrote {REVIEW.relative_to(REPO_ROOT)} and {LABELS.relative_to(REPO_ROOT)} ({len(sample)} answers)")
+
+
+def _agreement(pairs: list[tuple[bool, bool]]) -> dict:
+    n = len(pairs)
+    agree = sum(label == model for label, model in pairs) / n
+    label_yes, judge_yes = sum(l for l, _ in pairs) / n, sum(m for _, m in pairs) / n
+    expected = label_yes * judge_yes + (1 - label_yes) * (1 - judge_yes)
+    kappa = (agree - expected) / (1 - expected) if expected < 1 else 1.0
+    return {"labelled": n, "agreement": round(agree, 3), "cohens_kappa": round(kappa, 3),
+            "labeller_says_faithful": round(label_yes, 3), "judge_says_faithful": round(judge_yes, 3)}
 
 
 def score() -> None:
     judge = {row["id"]: row["faithfulness"] >= 1.0
              for row in json.loads(RESULTS.read_text())["per_question"]["generation"] if row["status"] == "answered"}
     with LABELS.open(newline="") as handle:
-        labels = {row["id"]: row["human_faithful"].strip().lower() for row in csv.DictReader(handle)}
-    pairs = [(labels[qid] == "yes", judge[qid]) for qid in labels if labels[qid] in ("yes", "no") and qid in judge]
-    if not pairs:
-        sys.exit("No labels yet: fill human_faithful with yes/no in eval/calibration.csv")
+        rows = list(csv.DictReader(handle))
 
-    n = len(pairs)
-    agree = sum(human == model for human, model in pairs) / n
-    human_yes, judge_yes = sum(h for h, _ in pairs) / n, sum(m for _, m in pairs) / n
-    expected = human_yes * judge_yes + (1 - human_yes) * (1 - judge_yes)
-    kappa = (agree - expected) / (1 - expected) if expected < 1 else 1.0
-    disagreements = [qid for qid in labels if qid in judge and labels[qid] in ("yes", "no")
-                     and (labels[qid] == "yes") != judge[qid]]
-    summary = {"labelled": n, "agreement": round(agree, 3), "cohens_kappa": round(kappa, 3),
-               "human_says_faithful": round(human_yes, 3), "judge_says_faithful": round(judge_yes, 3),
-               "disagreements": disagreements}
+    summary = {"judge": "faithfulness == 1.0 means the judge says faithful"}
+    for column in ("human_faithful", "panel_faithful"):
+        labels = {row["id"]: (row.get(column) or "").strip().lower() for row in rows}
+        usable = [qid for qid, value in labels.items() if value in ("yes", "no") and qid in judge]
+        if not usable:
+            continue
+        summary[column] = {**_agreement([(labels[qid] == "yes", judge[qid]) for qid in usable]),
+                           "disagreements": [qid for qid in usable if (labels[qid] == "yes") != judge[qid]]}
+    if len(summary) == 1:
+        sys.exit("No labels yet: fill human_faithful (or panel_faithful) with yes/no in eval/calibration.csv")
     (REPO_ROOT / "eval" / "calibration_result.json").write_text(json.dumps(summary, indent=2))
     print(json.dumps(summary, indent=2))
 
