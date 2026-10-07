@@ -82,10 +82,12 @@ jobs:
 
       - name: Run evaluation
         run: |
-          if [ -n "$ANTHROPIC_API_KEY" ] && [ -n "$OPENAI_API_KEY" ]; then
+          # The generator and judge both use OpenAI (config/rag.yaml); ANTHROPIC_API_KEY is only
+          # needed if generation.provider is switched to anthropic.
+          if [ -n "$OPENAI_API_KEY" ]; then
             python -m rag.evaluation.run --golden "$GOLDEN"
           else
-            echo "::warning::API key secrets not set, running the retrieval-only evaluation"
+            echo "::warning::OPENAI_API_KEY secret not set, running the retrieval-only evaluation"
             python -m rag.evaluation.run --golden "$GOLDEN" --retrieval-only
           fi
 
