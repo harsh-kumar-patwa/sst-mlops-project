@@ -4,6 +4,10 @@ A question-answering service over the [vLLM](https://github.com/vllm-project/vll
 Every pull request is evaluated against a hand-written golden set, and **a PR that lowers answer
 quality is blocked from merging**.
 
+**Live demo:** https://huggingface.co/spaces/harsh-personal/vllm-docs-rag
+(API: `https://harsh-personal-vllm-docs-rag.hf.space`, e.g. `GET /health`, `POST /ask`). The Space sleeps when idle,
+so the first request after a pause can take about a minute.
+
 > Problem: RAG systems are usually built once and never measured again, so quality drops quietly
 > whenever the prompt, chunking or model changes. Here every change is measured before it ships.
 
@@ -99,7 +103,7 @@ Export happens in a background thread, so tracing adds no request latency; witho
 
 ## Deployment
 
-Hosted on Hugging Face Spaces (Docker). `.github/workflows/deploy.yml` deploys **only after the eval gate has
+Hosted on [Hugging Face Spaces](https://huggingface.co/spaces/harsh-personal/vllm-docs-rag) (Docker, CPU upgrade at $0.03/hour with sleep when idle). `.github/workflows/deploy.yml` deploys **only after the eval gate has
 passed on `main`**: it pushes the image sources to the Space, then polls the live `/health` until it reports the
 same `config_hash` as the commit, so the deployed app is verified to match `main`.
 
@@ -108,6 +112,9 @@ same `config_hash` as the commit, so the deployed app is verified to match `main
   (README, tests, eval data), so the live app is not rebuilt and restarted for nothing.
 - **Rollback:** revert the commit on `main`; the revert passes the gate and redeploys the previous version.
   `config_hash` in every response shows which version answered.
+- **First deploy failed, and that is in the history:** the image build was OOM-killed while embedding
+  (128 chunks per forward pass peaked above 3 GB). PR #7 embedded in batches of 4 (412 MB peak, identical retrieval
+  scores), passed the gate, and the redeploy verified itself against `/health`.
 - **Image:** the vector index and embedding models are built into the image (810 MB, ~340 MB RAM, starts in ~4 s),
   so no vector-database server is needed and an image tag pins code, config and index together.
 - **Public-demo protection:** 10 questions/minute per visitor and 300/day in total (`ASK_LIMIT_PER_MINUTE`,
