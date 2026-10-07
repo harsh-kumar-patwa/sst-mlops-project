@@ -1,0 +1,127 @@
+name: eval-gate
+
+# Every pull request is evaluated against the golden set. If answer quality drops past the
+# rules in config/gate.yaml, this check fails and (with branch protection on main) the PR
+# cannot be merged. The scores are posted as a comment on the PR.
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: eval-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  eval:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      PYTHONPATH: src
+      FASTEMBED_CACHE_PATH: .cache/fastembed
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements*.txt
+
+      - name: Install
+        run: pip install -r requirements-dev.txt
+
+      - name: Unit tests
+        run: pytest -q
+
+      - name: Index version
+        id: version
+        run: echo "index_hash=$(python -c 'from rag.config import load_config; print(load_config()["index_hash"])')" >> "$GITHUB_OUTPUT"
+
+      # The index only depends on corpus + chunking + embedding model, so it is rebuilt only when
+      # one of those changes; prompt or model changes reuse the cached vectors.
+      - name: Restore index cache
+        uses: actions/cache@v6
+        with:
+          path: |
+            .qdrant
+            .cache/fastembed
+          key: index-${{ steps.version.outputs.index_hash }}
+
+      - name: Build index
+        run: python -m rag.index
+
+      # Cached LLM responses are keyed by the full request, so unchanged questions cost nothing
+      # and any prompt/model/context change still gets a fresh answer.
+      - name: Restore LLM response cache
+        uses: actions/cache@v6
+        with:
+          path: .cache/llm
+          key: llm-${{ github.run_id }}
+          restore-keys: llm-
+
+      - name: Choose golden set
+        run: |
+          if [ -f eval/golden.csv ]; then echo "GOLDEN=eval/golden.csv" >> "$GITHUB_ENV"
+          else echo "GOLDEN=eval/smoke.csv" >> "$GITHUB_ENV"; fi
+
+      - name: Run evaluation
+        run: |
+          if [ -n "$ANTHROPIC_API_KEY" ] && [ -n "$OPENAI_API_KEY" ]; then
+            python -m rag.evaluation.run --golden "$GOLDEN"
+          else
+            echo "::warning::API key secrets not set, running the retrieval-only evaluation"
+            python -m rag.evaluation.run --golden "$GOLDEN" --retrieval-only
+          fi
+
+      # PRs are compared with the baseline on the TARGET branch, so a PR cannot pass the gate
+      # by editing eval/baseline.json itself.
+      - name: Fetch baseline
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ] && \
+             git show "origin/${{ github.base_ref }}:eval/baseline.json" > "$RUNNER_TEMP/baseline.json" 2>/dev/null; then
+            echo "Using baseline from ${{ github.base_ref }}"
+          else
+            cp eval/baseline.json "$RUNNER_TEMP/baseline.json"
+          fi
+
+      - name: Eval gate
+        id: gate
+        continue-on-error: true
+        run: python -m rag.evaluation.compare "$RUNNER_TEMP/baseline.json" eval/results/latest.json --report gate_report.md
+
+      - name: Job summary
+        if: always()
+        run: cat gate_report.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Comment on the PR
+        if: always() && github.event_name == 'pull_request'
+        uses: marocchino/sticky-pull-request-comment@v3
+        with:
+          header: eval-gate
+          path: gate_report.md
+
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: eval-results
+          path: |
+            eval/results/latest.json
+            gate_report.md
+
+      - name: Block merge on regression
+        if: steps.gate.outcome == 'failure'
+        run: |
+          echo "::error::Eval gate failed, see the PR comment for which metric regressed"
+          exit 1

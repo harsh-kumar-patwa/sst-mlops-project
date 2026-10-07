@@ -1,0 +1,7 @@
+id,question,reference_answer,source_docs,source_section,slice,author
+smoke01,What address does the vLLM OpenAI-compatible server listen on by default?,It starts at http://localhost:8000; change it with --host and --port.,getting_started/quickstart.md,Online Serving,factual,smoke-test
+smoke02,How do I turn on automatic prefix caching?,Set enable_prefix_caching=True in the vLLM engine.,features/automatic_prefix_caching.md,Enabling APC in vLLM,config_flag,smoke-test
+smoke03,My model does not fit on one GPU. How can I spread it across several GPUs on the same machine?,Use tensor parallelism by setting tensor_parallel_size to the number of GPUs.,configuration/conserving_memory.md;serving/parallelism_scaling.md,Tensor Parallelism (TP),how_to,smoke-test
+smoke04,On the CPU backend how do I control the size of the KV cache?,Set the VLLM_CPU_KVCACHE_SPACE environment variable (default 4 GiB).,configuration/conserving_memory.md,Adjust cache size,config_flag,smoke-test
+smoke05,What do I need to install before serving a GGUF model?,The vllm-gguf-plugin package; GGUF support moved to an out-of-tree plugin.,features/quantization/gguf.md,,factual,smoke-test
+smoke06,How much does a vLLM enterprise license cost per month?,Not in the documentation; the system should refuse.,,,unanswerable,smoke-test

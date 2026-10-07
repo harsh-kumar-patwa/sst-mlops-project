@@ -1,0 +1,136 @@
+{
+  "meta": {
+    "timestamp": "2026-10-07T19:06:23+00:00",
+    "git_sha": "unknown",
+    "n_questions": 6,
+    "golden": "eval/smoke.csv",
+    "config_hash": "c73325c5cb6c",
+    "index_hash": "92296854eba9",
+    "retrieval_mode": "dense",
+    "chunk_size": 400,
+    "prompt_version": "answer_v1",
+    "generator": "claude-haiku-4-5",
+    "judge": "gpt-4o-mini",
+    "duration_s": 0.2
+  },
+  "retrieval": {
+    "overall": {
+      "recall_at_1": 1.0,
+      "recall_at_5": 1.0,
+      "recall_at_10": 1.0,
+      "mrr_at_10": 1.0,
+      "section_at_5": 0.8
+    },
+    "by_slice": {
+      "config_flag": {
+        "recall_at_1": 1.0,
+        "recall_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "mrr_at_10": 1.0,
+        "section_at_5": 1.0,
+        "n": 2
+      },
+      "factual": {
+        "recall_at_1": 1.0,
+        "recall_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "mrr_at_10": 1.0,
+        "section_at_5": 0.5,
+        "n": 2
+      },
+      "how_to": {
+        "recall_at_1": 1.0,
+        "recall_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "mrr_at_10": 1.0,
+        "section_at_5": 1.0,
+        "n": 1
+      }
+    },
+    "n": 5
+  },
+  "per_question": {
+    "retrieval": [
+      {
+        "id": "smoke01",
+        "slice": "factual",
+        "recall_at_1": 1.0,
+        "recall_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "mrr_at_10": 1.0,
+        "section_at_5": 1.0,
+        "top_docs": [
+          "getting_started/quickstart.md",
+          "serving/online_serving/openai_compatible_server.md",
+          "deployment/integrations/llamastack.md",
+          "deployment/integrations/production-stack.md",
+          "deployment/frameworks/runpod.md"
+        ]
+      },
+      {
+        "id": "smoke02",
+        "slice": "config_flag",
+        "recall_at_1": 1.0,
+        "recall_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "mrr_at_10": 1.0,
+        "section_at_5": 1.0,
+        "top_docs": [
+          "features/automatic_prefix_caching.md",
+          "benchmarking/cli.md",
+          "features/automatic_prefix_caching.md",
+          "design/prefix_caching.md",
+          "serving/online_serving/README.md"
+        ]
+      },
+      {
+        "id": "smoke03",
+        "slice": "how_to",
+        "recall_at_1": 1.0,
+        "recall_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "mrr_at_10": 1.0,
+        "section_at_5": 1.0,
+        "top_docs": [
+          "configuration/conserving_memory.md",
+          "getting_started/installation/gpu.cuda.inc.md",
+          "getting_started/installation/gpu.cuda.inc.md",
+          "features/preload.md",
+          "usage/troubleshooting.md"
+        ]
+      },
+      {
+        "id": "smoke04",
+        "slice": "config_flag",
+        "recall_at_1": 1.0,
+        "recall_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "mrr_at_10": 1.0,
+        "section_at_5": 1.0,
+        "top_docs": [
+          "configuration/conserving_memory.md",
+          "features/kv_offloading_usage.md",
+          "configuration/optimization.md",
+          "getting_started/installation/cpu.md",
+          "benchmarking/cli.md"
+        ]
+      },
+      {
+        "id": "smoke05",
+        "slice": "factual",
+        "recall_at_1": 1.0,
+        "recall_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "mrr_at_10": 1.0,
+        "section_at_5": 0.0,
+        "top_docs": [
+          "features/quantization/gguf.md",
+          "serving/expert_parallel_deployment.md",
+          "features/quantization/gguf.md",
+          "deployment/k8s.md",
+          "deployment/integrations/kthena.md"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+# Rules the CI eval gate enforces on every pull request.
+# A PR fails if ANY rule is broken. "max_drop" compares the PR against eval/baseline.json;
+# "min" is an absolute floor so many small accepted drops cannot erode quality over time.
+
+retrieval:            # deterministic and free, so the gate is tight
+  recall_at_5: {min: 0.75, max_drop: 0.03}
+  mrr_at_10:   {min: 0.55, max_drop: 0.05}
+  slice_max_drop: 0.10   # per-slice Recall@5 drop; an aggregate can hide a regression in one slice
+
+generation:           # LLM-judge scores are noisy, so tolerances are wider
+  faithfulness:     {min: 0.85, max_drop: 0.05}
+  correctness:      {min: 0.70, max_drop: 0.07}
+  refusal_accuracy: {min: 0.80, max_drop: 0.10}
+  citation_validity: {min: 0.95, max_drop: 0.03}

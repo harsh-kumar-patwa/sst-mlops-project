@@ -1,0 +1,1721 @@
+# vLLM v0.31.0 docs: pages and sections
+
+Use the `path` exactly as shown in the `source_docs` column of eval/golden.csv.
+
+- `README.md`: **Welcome to vLLM**
+- `api/README.md`: **Summary**
+  - Configuration
+  - Multi-Modality
+  - Internal data structures
+  - Model Development
+- `benchmarking/README.md`: **Benchmark Suites**
+- `benchmarking/cli.md`: **Benchmark CLI**
+  - Dataset Overview
+  - 🚀 Online Benchmark
+  - Understanding the Latency Metrics
+  - Results Visualization
+  - Custom Dataset
+  - Custom Audio Dataset
+  - Custom Image Dataset
+  - VisionArena Benchmark for Vision Language Models
+  - InstructCoder Benchmark with Speculative Decoding
+  - Spec Bench Benchmark with Speculative Decoding
+  - SPEED-Bench Benchmark with Speculative Decoding
+  - BFCL (Tool-Calling) Benchmark
+  - Other HuggingFaceDataset Examples
+  - Responses API Benchmark
+  - Running With Sampling Parameters
+  - Running With Ramp-Up Request Rate
+  - Probe Requests
+  - Load Pattern Configuration
+  - 📈 Offline Throughput Benchmark
+  - Synthetic Random Multimodal (random-mm)
+  - JSON Schema Benchmark
+  - Grammar-based Generation Benchmark
+  - Regex-based Generation Benchmark
+  - Choice-based Generation Benchmark
+  - XGrammar Benchmark Dataset
+  - Basic Long Document QA Test
+  - Different Repeat Modes
+  - Fixed Prompt with Prefix Caching
+  - ShareGPT Dataset with Prefix Caching
+  - Running MoonshotAI traces
+  - 🧪 Hashing Benchmarks
+  - Basic Prioritization Test
+  - Multiple Sequences per Prompt
+  - Images (ShareGPT4V)
+  - Videos (ShareGPT4Video)
+  - Synthetic Random Images (random-mm)
+  - 🔬 Multimodal Processor Benchmark
+  - Basic Example with Synthetic Data (random-mm)
+  - Using a HuggingFace Dataset
+  - Warmup, Custom Percentiles, and JSON Output
+  - Text Embeddings
+  - Multi-modal Embeddings
+  - Reranker Benchmark
+- `benchmarking/dashboard.md`: **Performance Dashboard**
+  - Manually Trigger the benchmark
+  - Runtime environment variables
+  - Visualization
+  - Performance Results Comparison
+  - Continuous Benchmarking
+  - How It Works
+  - Benchmark Configuration
+- `benchmarking/sweeps.md`: **Parameter Sweeps**
+  - Basic
+  - Workload Explorer
+  - Startup Benchmark
+  - Pareto chart
+- `cli/README.md`: **vLLM CLI Guide**
+  - serve
+  - launch
+  - chat
+  - complete
+  - bench
+  - latency
+  - throughput
+  - run-batch
+  - preload
+- `configuration/README.md`: **Configuration Options**
+- `configuration/conserving_memory.md`: **Conserving Memory**
+  - Tensor Parallelism (TP)
+  - Quantization
+  - Context length and batch size
+  - Reduce CUDA Graphs
+  - Adjust cache size
+  - Multi-modal input limits
+  - Configurable options
+  - Multi-modal processor arguments
+- `configuration/engine_args.md`: **Engine Arguments**
+- `configuration/env_vars.md`: **Environment Variables**
+- `configuration/model_resolution.md`: **Model Resolution**
+- `configuration/optimization.md`: **Optimization and Tuning**
+  - Optimization Levels
+  - Faster Startup
+  - Preemption
+  - Chunked Prefill
+  - Performance Tuning with Chunked Prefill
+  - Parallelism Strategies
+  - Tensor Parallelism (TP)
+  - Pipeline Parallelism (PP)
+  - Expert Parallelism (EP)
+  - Data Parallelism (DP)
+  - NUMA Binding for Multi-Socket GPU Nodes
+  - CPU Backend Thread Affinity
+  - Batch-level DP for Multi-Modal Encoders
+  - fastokens Backend
+  - Parallel Processing
+  - Multi-Modal Caching
+  - Processor Caching
+  - IPC Caching
+  - Key-Replicated Cache
+  - Shared Memory Cache
+  - Configuration
+  - Cache Placement
+  - CPU Resources for GPU Deployments
+  - Minimum CPU Requirements
+  - Data Parallel and Multi-API Server Deployments
+  - Performance Impact
+  - Attention Backend Selection
+- `configuration/serve_args.md`: **Server Arguments**
+  - CLI Arguments
+  - Configuration file
+  - Generate a configuration from vLLM Recipes
+- `deployment/docker.md`: **Using Docker**
+  - Run a vLLM Recipes configuration
+  - Persist the compile cache across containers
+  - Run as a non-root user
+- `deployment/frameworks/anyscale.md`: **Anyscale**
+  - Production-ready vLLM on Anyscale quickstarts
+- `deployment/frameworks/anything-llm.md`: **AnythingLLM**
+  - Deploy
+- `deployment/frameworks/autogen.md`: **AutoGen**
+  - Prerequisites
+  - Deploy
+- `deployment/frameworks/bentoml.md`: **BentoML**
+- `deployment/frameworks/cerebrium.md`: **Cerebrium**
+- `deployment/frameworks/chatbox.md`: **Chatbox**
+  - Deploy
+- `deployment/frameworks/crusoe.md`: **Crusoe**
+  - Prerequisites
+  - Using the OpenAI SDK
+  - Verifying with curl
+  - Available models
+- `deployment/frameworks/dify.md`: **Dify**
+  - Prerequisites
+  - Deploy
+- `deployment/frameworks/dstack.md`: **dstack**
+- `deployment/frameworks/haystack.md`: **Haystack**
+  - Deploy
+- `deployment/frameworks/helm.md`: **Helm**
+  - Prerequisites
+  - Installing the chart
+  - Uninstalling the chart
+  - Values
+  - Using S3 Model Download (Default)
+  - Using Custom Init Containers Only
+- `deployment/frameworks/hf_inference_endpoints.md`: **Hugging Face Inference Endpoints**
+  - Overview
+  - Deployment Methods
+  - Method 1: Deploy from the Catalog
+  - Method 2: Guided Deployment (Transformers Models)
+  - Method 3: Manual Deployment (Advanced Models)
+  - Advanced Deployment Details
+  - Next Steps
+- `deployment/frameworks/litellm.md`: **LiteLLM**
+  - Chat completion
+  - Embeddings
+- `deployment/frameworks/lobe-chat.md`: **Lobe Chat**
+- `deployment/frameworks/lws.md`: **LWS**
+  - Prerequisites
+  - Deploy and Serve
+  - Access ClusterIP service
+  - Serve the model
+- `deployment/frameworks/modal.md`: **Modal**
+- `deployment/frameworks/nebius.md`: **Nebius Serverless AI**
+  - Prerequisites
+  - Create the Endpoint
+  - Check readiness
+  - Send a chat request
+  - Stop or delete the Endpoint
+  - Troubleshooting
+- `deployment/frameworks/open-webui.md`: **Open WebUI**
+- `deployment/frameworks/retrieval_augmented_generation.md`: **Retrieval-Augmented Generation**
+  - Prerequisites
+  - Deploy
+- `deployment/frameworks/runpod.md`: **RunPod**
+  - Prerequisites
+  - Starting the Server
+  - Exposing Port 8000
+  - Troubleshooting 502 Bad Gateway
+  - Verifying the Deployment
+- `deployment/frameworks/skypilot.md`: **SkyPilot**
+  - Prerequisites
+  - Run on a single instance
+  - Scale up to multiple replicas
+  - **Optional**: Connect a GUI to the endpoint
+- `deployment/frameworks/streamlit.md`: **Streamlit**
+  - Prerequisites
+  - Deploy
+- `deployment/frameworks/triton.md`: **NVIDIA Triton**
+- `deployment/integrations/aibrix.md`: **AIBrix**
+- `deployment/integrations/dynamo.md`: **NVIDIA Dynamo**
+- `deployment/integrations/kaito.md`: **KAITO**
+- `deployment/integrations/kserve.md`: **KServe**
+- `deployment/integrations/kthena.md`: **Kthena**
+  - 1. Prerequisites
+  - 1.1 Install Volcano
+  - 1.2 Install Kthena
+  - 2. The Multi-Node vLLM `ModelServing` Example
+  - 3.1 Prepare the Manifest
+  - 3.2 Apply the `ModelServing`
+  - 4.1 Check ModelServing Status
+  - 4.2 Check Pods
+  - 5. Accessing the vLLM OpenAI-Compatible API
+  - 6. Clean Up
+- `deployment/integrations/kubeai.md`: **KubeAI**
+- `deployment/integrations/kuberay.md`: **KubeRay**
+  - Why KubeRay instead of manual scripts?
+  - Learn more
+- `deployment/integrations/llamastack.md`: **Llama Stack**
+  - Inference using OpenAI-Compatible API
+  - Inference using Embedded vLLM
+- `deployment/integrations/llm-d.md`: **llm-d**
+  - What llm-d adds to vLLM
+  - Performance
+  - Get started
+- `deployment/integrations/llmaz.md`: **llmaz**
+- `deployment/integrations/production-stack.md`: **Production stack**
+  - Pre-requisite
+  - Deployment using vLLM production stack
+  - Validate Installation
+  - Send a Query to the Stack
+  - (Advanced) Configuring vLLM production stack
+- `deployment/k8s.md`: **Using Kubernetes**
+  - Deployment with CPUs
+  - Deployment with GPUs
+  - Serving with gRPC
+  - Startup Probe or Readiness Probe Failure, container log contains "KeyboardInterrupt: terminated"
+  - Conclusion
+- `deployment/nginx.md`: **Using Nginx**
+  - Build Nginx Container
+  - Create Simple Nginx Config file
+  - Build vLLM Container
+  - Launch vLLM Containers
+  - Launch Nginx
+  - Verify That vLLM Servers Are Ready
+- `design/arch_overview.md`: **Architecture Overview**
+  - Entrypoints
+  - LLM Class
+  - Online Serving
+  - V1 Process Architecture
+  - API Server Process
+  - Engine Core Process
+  - GPU Worker Processes
+  - DP Coordinator Process (conditional)
+  - Process Count Summary
+  - LLM Engine
+  - LLMEngine
+  - AsyncLLMEngine
+  - Worker
+  - Model Runner
+  - Model
+  - Class Hierarchy
+- `design/attention_backends.md`: **Attention Backend Feature Support**
+  - Command Line
+  - Python API
+  - Triton/FlashAttention Composite
+  - Triton/FlashInfer Composite
+  - Manual Selection
+  - Automatic Selection
+  - Backend Priority (CUDA)
+  - MLA Attention (DeepSeek-style)
+  - Legend
+  - Standard Attention (MHA, MQA, GQA) Backends
+  - b12x
+  - MiniMax M3 Sparse Attention Backends
+  - Prefill Backends
+  - Decode Backends
+  - DeepSeek V4 Decode Backends
+- `design/cuda_graphs.md`: **CUDA Graphs**
+  - Motivation
+  - `CudagraphModes`
+  - Overview
+  - `BatchDescriptor`
+  - `CudagraphDispatcher`
+  - `CUDAGraphWrapper`
+  - Nested Wrapper design
+  - Full CUDA Graph capturing & warm-up
+  - CUDA Graphs Compatibility of Attention Backends
+  - Usage guide
+  - Python examples
+  - Piecewise compilation and full graph custom passes (attention fusion, sequence parallelism)
+  - About the Performance
+- `design/cuda_graphs_multimodal.md`: **Vision Encoder (ViT) CUDA Graphs**
+  - Compatibility Matrix
+  - Model x Feature
+  - Model x Hardware
+  - Motivation
+  - Design
+  - Budget-based graph capture
+  - Greedy bin-packing at runtime
+  - Multi-Path graph capture
+  - Data-parallel support
+  - Video inference support
+  - Model integration via `SupportsEncoderCudaGraph`
+  - Configuration
+  - Image inference
+  - Video inference
+  - Benchmark Results
+  - Single GPU (1x GB200)
+  - Multi-GPU (4x GB200, TP=4, DP=4)
+- `design/custom_op.md`: **CustomOp**
+  - How CustomOp Works in vLLM
+  - How to Customise Your Configuration for CustomOp
+  - Types of Supported CustomOp in vLLM
+  - Implement a New CustomOp in vLLM
+  - Register a New CustomOp in OOT Device Plugins
+- `design/dbo.md`: **Dual Batch Overlap**
+  - Motivation
+  - Introduction
+  - Running with DBO
+  - GPU Model Runner
+  - UBatchWrapper
+  - Interfaces
+  - UBatchContext
+- `design/debug_vllm_compile.md`: **How to debug the vLLM-torch.compile integration**
+  - vLLM-torch.compile overview
+  - Use tlparse
+  - Turn off vLLM-torch.compile integration
+  - Debugging TorchDynamo
+  - Debugging Dynamic Shape full graph capture
+  - Debugging constraint violations and dynamic shapes guards issues
+  - Printing guards
+  - Debugging TorchInductor
+  - Inductor runtime assertions
+  - Editable TorchInductor code
+  - Debugging vLLM-compile cache
+  - Debugging CUDAGraphs
+- `design/endpoint_plugins.md`: **Endpoint Plugins**
+  - The `EndpointPlugin` protocol
+  - The two phase lifecycle
+  - Engine less servers (the render server)
+  - Reaching the engine from a route handler
+  - Registering the entry point
+  - Gating: `VLLM_PLUGINS` and `required_tasks`
+  - Pairing with `vllm.general_plugins`
+  - Path-prefix convention
+  - Compatibility
+- `design/fused_moe_modular_kernel.md`: **Fused MoE Modular Kernel**
+  - Introduction
+  - Motivation
+  - ModularKernel Components
+  - TopKWeightAndReduce
+  - FusedMoEPrepareAndFinalizeModular
+  - FusedMoEExpertsModular
+  - apply()
+  - workspace_shapes()
+  - finalize_weight_and_reduce_impl()
+  - FusedMoEModularKernel
+  - How To Add a FusedMoEPrepareAndFinalizeModular Type
+  - Step 1: Add an All2All manager
+  - Step 2: Add a FusedMoEPrepareAndFinalizeModular Type
+  - How To Add a FusedMoEExpertsModular Type
+  - FusedMoEModularKernel Initialization
+  - maybe_make_prepare_finalize
+  - select_gemm_impl
+  - init_prepare_finalize
+  - How To Unit Test
+  - How To Check `FusedMoEPrepareAndFinalizeModular` & `FusedMoEExpertsModular` Compatibility
+  - How To Profile
+  - FusedMoEPrepareAndFinalizeModular Implementations
+- `design/fusions.md`: **Fusion torch.compile passes**
+  - Quick Reference
+  - Support Matrix
+  - Enabling / Disabling Fusions
+  - AllReduce + RMSNorm (`fuse_allreduce_rms`)
+  - Attention + Quantization (`fuse_attn_quant`)
+  - RoPE + KV-Cache Update (`fuse_rope_kvcache`)
+  - Sequence Parallelism (`enable_sp`)
+  - AsyncTP GEMM + Collective Overlap (`fuse_gemm_comms`)
+  - QK Norm + RoPE (`enable_qk_norm_rope_fusion`)
+  - RMSNorm + Quantization (`fuse_norm_quant`)
+  - SiLU+Mul + Quantization (`fuse_act_quant`)
+  - RMSNorm + Padding (`fuse_act_padding`)
+  - MLA Dual RMSNorm (`fuse_mla_dual_rms_norm`)
+  - See Also
+- `design/hisparse.md`: **HiSparse local KV offload architecture**
+  - The short version
+  - Ownership
+  - Code boundary
+  - Resident device pages
+  - P/D import target
+  - Indexer KV offloading
+  - Spill transaction
+  - Hot lookup and LRU
+  - Main classes
+  - Performance invariants
+  - What remains platform-specific
+- `design/huggingface_integration.md`: **Integration with Hugging Face**
+- `design/hybrid_kv_cache_manager.md`: **Hybrid KV Cache Manager**
+  - What is a hybrid model?
+  - Definitions
+  - High level idea
+  - Case 1: toy model
+  - Case 2: same `kv_hidden_size` and a regular pattern
+  - Case 3: same `kv_hidden_size` and no regular pattern
+  - Case 4: different `kv_hidden_size` (mainly hybrid mamba models)
+  - Case 5: KV sharing
+  - Case 0: full attention only models
+  - Case 1: sliding window attention only models
+  - Case 2: sliding window attention + full attention models
+  - Case 3: mamba models
+  - Overview
+  - Memory Layout
+- `design/io_processor_plugins.md`: **IO Processor Plugins**
+  - Writing an IO Processor Plugin
+  - Using an IO Processor plugin
+- `design/logits_processors.md`: **Logits Processors**
+  - Logits Processors Background
+  - Logits Processors in the vLLM engine
+  - Updating Logits Processor Internal State
+  - Applying Logits Processors to the Model Output Logits
+  - Logits Processor Programming Model
+  - `BatchUpdate` data structure
+  - How the vLLM engine builds the `BatchUpdate` data structure
+  - Example: Batch Update with Fewer New Requests Than Finished Requests
+  - Example: Batch Update with More New Requests Than Finished Requests
+  - Best Practices for Writing Built-In Logits Processors
+  - Built-In Logits Processors
+  - Custom Logits Processors
+- `design/lora_resolver_plugins.md`: **LoRA Resolver Plugins**
+  - Overview
+  - Required Environment Variables
+  - Optional Environment Variables
+  - lora_filesystem_resolver
+  - Setup Steps
+  - Directory Structure Requirements
+  - Usage Example
+  - How It Works
+  - Multiple Resolvers
+  - Custom Resolver Implementation
+  - Common Issues
+  - Debugging Tips
+- `design/metrics.md`: **Metrics**
+  - Objectives
+  - Background
+  - v1 Metrics
+  - Grafana Dashboard
+  - Prometheus Client Library
+  - Multi-process Mode
+  - Built in Python/Process Metrics
+  - Metrics Design
+  - Legacy PRs
+  - Metrics Implementation PRs
+  - Metrics Collection
+  - Interval Calculations
+  - Scheduler Stats
+  - Engine Core Events
+  - Interval Calculations vs Preemptions
+  - Frontend Stats Collection
+  - KV Cache Residency Metrics
+  - Metrics Publishing - Logging
+  - Metrics Publishing - Prometheus
+  - Cache Config Info
+  - LoRA Metrics
+  - Prefix Cache metrics
+  - How To Deprecate
+  - Unimplemented - `vllm:tokens_total`
+  - Duplicated - Queue Time
+  - KV Cache Offloading
+  - Parallel Sampling
+  - Speculative Decoding
+  - Autoscaling and Load-balancing
+  - Metric Naming
+  - Adding More Metrics
+  - Tracing - OpenTelemetry
+  - OpenTelemetry Model Forward vs Execute Time
+- `design/mm_processing.md`: **Multi-Modal Data Processing**
+  - Dummy Input Text
+  - Prompt Update Detection
+  - Processor Output Caching
+  - Fused Normalisation on the Device
+  - Fusing Normalisation and Rescaling on the GPU
+  - Optimized Data Path
+  - Toggle: `mm_device_do_normalize`
+  - Key Properties and Gains
+- `design/model_runner_v2.md`: **Model Runner V2 Design Document**
+  - Introduction
+  - Background
+  - Problems with V1's Approach
+  - MRV2's Solution
+  - 2. Async-First
+  - 3. Removing Async Barrier
+  - MRV2's Solution: Eliminate the Race
+  - 4. StagedWriteTensor
+  - 5. GPU-Native Input Metadata Preparation and Output Processing
+  - Universal Virtual Addressing (UVA)
+  - Gumbel Sampling Kernel
+  - Efficient Top-K Logprobs
+  - Memory-Efficient Prompt Logprobs
+  - Better Compatibility with Speculative Decoding
+  - 7. Modularity
+  - 8. No Abuse of `dummy_run`
+  - 9. Explicit CUDA Graph Management
+  - Fused Multi-Step Draft Decoding
+  - Development Philosophy
+- `design/moe_kernel_features.md`: **Fused MoE Kernel Features**
+  - Fused MoE Modular All2All backends
+  - Fused Experts Kernels
+  - Modular Kernel "families"
+- `design/multiprocessing.md`: **Python Multiprocessing**
+  - Debugging
+  - Introduction
+  - Multiprocessing Methods
+  - Tradeoffs
+  - Compatibility with Dependencies
+  - Current State (v0)
+  - Prior State in v1
+  - Changes Made in v1
+  - Detect if a `__main__` guard is present
+  - Use `forkserver`
+  - Force `spawn` all the time
+  - Future Work
+- `design/nixl_kv_cache_lease.md`: **NIXL KV Cache Lease Renewal**
+  - The single-timeout problem
+  - The overloading problem
+  - Solution: lease renewal via heartbeats
+  - Lease lifecycle
+  - Piggybacking on NIXL notifications
+  - Scheduler-side tracking (D)
+  - Timing and simplicity
+  - Happy Path
+  - Decode Instance Crash
+  - Worker-side sending and receiving
+  - Bidirectional KV Transfer
+  - Key Design Decisions
+  - Configuration
+- `design/nixl_kv_push_connector.md`: **NIXL push-mode KV transfer**
+  - High-level flow
+  - Threads
+  - Wake model
+  - Writer-local matching tables
+  - Wire format
+  - Pipeline parallelism and hybrid KV caches
+  - Scheduler-side responsibilities
+  - Timeouts and watchdogs
+  - Failure handling
+  - Summary
+- `design/optimization_levels.md`: **Optimization Levels**
+  - Overview
+  - Level Summaries and Usage Examples
+  - `-O0`: No Optimization
+  - `-O1`: Fast Optimization
+  - `-O2`: Full Optimization (Default)
+  - `-O3`: Aggressive Optimization
+  - Common Issues
+- `design/paged_attention.md`: **Paged Attention**
+  - Inputs
+  - Concepts
+  - Query
+  - Key
+  - QK
+  - Softmax
+  - `qk_max` and `logits`
+  - `exp_sum`
+  - Value
+  - LV
+  - Output
+  - Citation
+- `design/plugin_system.md`: **Plugin System**
+  - How Plugins Work in vLLM
+  - How vLLM Discovers Plugins
+  - Types of supported plugins
+  - Guidelines for Writing Plugins
+  - Platform plugins guidelines
+  - Compatibility Guarantee
+  - Deprecation announcement
+- `design/prefix_caching.md`: **Automatic Prefix Caching**
+  - Data Structure
+  - Block Allocation
+  - Free
+  - Eviction (LRU)
+  - Example
+- `design/torch_compile.md`: **`torch.compile` integration**
+  - Compilation Cache
+  - Dynamic shapes and vllm guard dropping
+  - Configuring Dynamic Shapes
+  - Offline Inference Example (Using LLM class)
+  - Online Serving Example (Using vllm serve)
+  - Choosing the Right Mode
+  - Python Code Compilation
+  - Computation Graph Processing
+  - Computation Graph Compilation
+  - Cudagraph Capture
+  - Full Cudagraph capture
+- `design/torch_compile_multimodal.md`: **torch.compile with Multimodal Encoders**
+  - Overview
+  - APIs for Enablement
+  - CompilationConfig
+  - Applying torch.compile to a New Multimodal Model/Component
+  - Compile ranges
+  - Cudagraphs
+  - Graph Breaks in Vision Encoders
+  - Compilation Errors
+  - See Also
+- `design/vllm_ir.md`: **vLLM IR: Functional Intermediate Representation**
+  - Motivation
+  - Declaring an IR Operation
+  - Registering Implementations
+  - Using IR Operations in Models
+  - Configuring Kernel Selection
+  - Command Line Configuration
+  - Python Configuration
+  - Platform Defaults
+  - Compilation Pipeline
+  - 1. Dynamo Tracing
+  - 2. AOTAutograd and Functionalization
+  - 3. IR Fusion and Transformation Passes
+  - 4. IR Lowering
+  - 5. Clone Cleanup
+  - 6. Inductor Optimization and Codegen
+  - Pipeline Summary
+  - Operation Declaration
+  - The `maybe_inplace` Overload
+  - Semantics and Usage
+  - Compilation Behavior
+  - Eager Mode Behavior
+  - Memory Savings Example
+  - Implementation Registration
+  - Eager Mode vs Compile Mode
+  - Out-of-Tree Implementations
+  - Debugging and Observability
+  - Migration from CustomOp
+  - See Also
+- `examples/README.md`: **Examples**
+- `features/README.md`: **Features**
+  - Compatibility Matrix
+  - Feature x Feature
+  - Feature x Hardware
+- `features/automatic_prefix_caching.md`: **Automatic Prefix Caching**
+  - Introduction
+  - Enabling APC in vLLM
+  - Hybrid Mamba models
+  - Example workloads
+  - Limits
+- `features/batch_invariance.md`: **Batch Invariance**
+  - Motivation
+  - Hardware Requirements
+  - Attention Backend Selection for XPU
+  - Enabling Batch Invariance
+  - Online Inference (Server Mode)
+  - Offline Inference
+  - Tested Models
+  - Implementation Details
+  - Future Improvements
+- `features/context_extension.md`: **Context Extension**
+  - Offline Inference Example
+  - Usage
+  - Client Example
+  - Key Parameters
+- `features/cross_encoder_cache.md`: **Cross-Encoder Output Reuse**
+  - Requirements
+  - Usage
+  - Configuration
+  - Limitations
+- `features/custom_arguments.md`: **Custom Arguments**
+  - Offline Custom Arguments
+  - Online Custom Arguments
+- `features/custom_logitsprocs.md`: **Custom Logits Processors**
+  - Logits Processors Background
+  - Creating a Custom Logits Processor
+  - Passing Custom Argument to a Custom Logits Processor
+  - Example Custom Logits Processor Implementation
+  - Ways to Load Your Custom Logits Processor in vLLM
+  - Method 1: Pass the Custom Logits Processor Fully-Qualified Class Name (FQCN) to vLLM at Initialization Time
+  - Method 2: Automatically Detect Custom Logits Processors Installed in Your Python Environment As Entry Points
+  - Method 3 (Offline-only): Pass a Python Class Object to the vLLM Constructor
+  - Invoking a Custom Logits Processor Against a Request
+  - Best Practices for Writing Custom Logits Processors
+- `features/disagg_encoder.md`: **Disaggregated Encoder**
+  - 1. Independent, fine-grained scaling
+  - 2. Lower time-to-first-token (TTFT)
+  - 3. Cross-process reuse and caching
+  - ExampleConnector
+  - ECMooncakeConnector
+  - Audio inputs
+  - 3  Test Script
+  - 4  Development
+  - Key abstractions
+- `features/disagg_prefill.md`: **Disaggregated Prefilling (experimental)**
+  - Why disaggregated prefilling?
+  - Usage example
+  - Reusing prefill token ids on decode
+  - Development
+  - Third-party contributions
+- `features/ec_cpu_connector.md`: **CPU EC Connector Usage Guide**
+  - Prerequisites
+  - Basic Usage
+  - Usage With P2P NIXL
+  - Orchestration flow
+  - Protocol
+  - Configuration
+  - `ec_connector_extra_config` Reference
+  - Environment Variables
+  - Limitations
+- `features/engram.md`: **Engram: conditional memory via n-gram lookups**
+  - Supported models
+  - How it works
+  - CPU offload
+  - Data-parallel topologies (DeepSeek V4.1)
+  - Sharing host tables across DP replicas
+  - Limitations
+- `features/index_cache.md`: **IndexCache**
+  - Background
+  - CLI
+  - Configuration Reference
+  - Configuration Examples
+  - How It Works
+- `features/initialized_snapshots.md`: **Initialized engine snapshots**
+  - Requirements
+  - Restore behavior
+  - Tradeoffs and limitations
+- `features/interleaved_thinking.md`: **Interleaved Thinking**
+  - Introduction
+  - How Interleaved Thinking Works
+  - Supported Models
+  - Example Usage
+- `features/kv_offloading_usage.md`: **KV Offloading Usage Guide**
+  - Overview
+  - Per-request load control
+  - Terminology: Chunks
+  - Single-Tier Setup (CPU Only)
+  - Multi-Tier Setup
+  - `kv_connector_extra_config` Reference
+  - Custom Eviction Policies
+  - Out-of-tree (recommended)
+  - Registering a friendly short name (in-process only)
+  - Secondary Tiers
+  - Filesystem (FS)
+  - On-Disk Layout
+  - Cross-Process Sharing
+  - Object Store (OBJ)
+  - P2P (Including P/D)
+  - Environment Variables
+  - Orchestration-Layer Protocol
+  - Out-of-Tree Secondary Tiers
+  - Tuning Tips
+  - Per-Request Selective Offload
+  - Further Reading
+- `features/lora.md`: **LoRA Adapters**
+  - Serving LoRA Adapters
+  - Dynamically serving LoRA Adapters
+  - Using API Endpoints
+  - Using Plugins
+  - In-Place LoRA Reloading
+  - New format for `--lora-modules`
+  - Mixing 2D and 3D MoE LoRA Adapters
+  - LoRA model lineage in model card
+  - LoRA Support for Tower and Connector of Multi-Modal Model
+  - Default LoRA Models For Multimodal Models
+  - Sequence-Classification LoRA Adapters
+  - Configuring `max_lora_rank`
+  - Restricting LoRA to Specific Modules
+- `features/mooncake_connector_usage.md`: **MooncakeConnector Usage Guide**
+  - About Mooncake
+  - Installation
+  - Prefiller Node (192.168.0.2)
+  - Decoder Node (192.168.0.3)
+  - Proxy
+  - Environment Variables
+  - KV Role Options
+  - kv_connector_extra_config
+  - Example Scripts/Code
+- `features/mooncake_store_connector_usage.md`: **MooncakeStoreConnector Usage Guide**
+  - Install Mooncake
+  - Start the Mooncake Master Server
+  - Configure Mooncake
+  - Single-Node KV Cache Offloading
+  - Disaggregated Prefill-Decode (XpYd)
+  - Sharing one Store across multiple Prefill TP sizes
+  - Disk Offloading
+  - Tenant Isolation
+  - Environment Variables
+  - KV Role Options
+  - kv_connector_extra_config
+  - Reproducible Block Hashes Across Processes
+- `features/moriio_connector_usage.md`: **MoRIIOConnector Usage Guide**
+  - Installation
+  - Basic usage (single host)
+  - Producer (prefiller) configuration
+  - Consumer (decoder) configuration
+  - Proxy server
+  - Application-level configuration
+  - Transport configuration
+  - RDMA backend
+  - xGMI backend
+  - Multi-node deployment
+  - On both nodes
+  - On node 1
+  - On node 2
+  - `availDevices.size() > 0` assertion failure
+  - Appendix: installing NIC userspace libraries
+  - Further reading
+- `features/multimodal_inputs.md`: **Multimodal Inputs**
+  - Offline Inference
+  - Image Inputs
+  - Custom RGBA Background Color
+  - Moondream3 Prompt Recipes { #moondream3-prompt-recipes }
+  - Video Inputs
+  - Video Token Pruning
+  - Audio Inputs
+  - Chunking Long Audio for Transcription
+  - Automatic Audio Channel Normalization
+  - Embedding Inputs
+  - Image Embeddings
+  - Audio Embedding Inputs
+  - Cached Inputs
+  - Online Serving
+  - Video Decoding Backend
+  - Video Frame Recovery
+  - GPU Video Decoding with PyNvVideoCodec (NVDEC)
+  - GPU Video Decoding with DeepStream (NVDEC)
+  - Pre-extracted Frame Sequences with `media_io_kwargs`
+  - Audio Decoding Backend
+  - Image Embedding Inputs
+- `features/nixl_connector_compatibility.md`: **NixlConnector Compatibility Matrix**
+  - Model Architecture x Capability
+  - What must match between P and D
+  - What can safely differ between P and D
+  - KV cache layout
+  - Pipeline parallelism
+  - Quantized KV cache
+- `features/nixl_connector_usage.md`: **NixlConnector Usage Guide**
+  - Installation
+  - Transport Configuration
+  - Selecting a NIXL transport backend (plugin)
+  - Example: using LIBFABRIC backend
+  - Producer (Prefiller) Configuration
+  - Consumer (Decoder) Configuration
+  - Proxy Server
+  - Environment Variables
+  - Bidirectional KV Transfer (Multi-turn)
+  - How it works
+  - Configuration
+  - Multi-turn proxy setup
+  - Client usage
+  - Benchmarking the multi-turn proxy
+  - Limitations
+  - Multiple Prefiller Instances on Different Machines
+  - Multiple Decoder Instances on Different Machines
+  - Proxy for Multiple Instances
+  - KV Role Options
+  - KV Load Failure Policy
+  - For NVIDIA GB-series GPUs
+  - Heterogeneous KV Layout support
+  - Metrics Reference
+  - Prometheus metrics
+  - Example Scripts/Code
+- `features/per_request_metrics.md`: **Per-Request Metrics**
+  - Enabling
+  - Response Format
+  - Example Request
+  - Completions API
+  - Responses API
+  - Relationship to Prometheus Metrics
+  - Speculative Decoding Acceptance
+- `features/preload.md`: **Preload**
+  - Quick start
+  - How it works
+  - Multi-node and data parallelism
+  - Speculative decoding
+  - Cache modes
+  - Loader configuration
+  - Limitations
+  - Security
+  - Daemon lifecycle
+- `features/prompt_embeds.md`: **Prompt Embedding Inputs**
+  - What are prompt embeddings?
+  - Offline Inference
+  - Hugging Face Transformers Inputs
+  - Online Serving
+  - Completions API
+  - Chat Completions API
+  - Transformers Inputs via OpenAI Client
+- `features/quantization/README.md`: **Quantization**
+  - Selecting Linear Backends per Quantization
+  - Supported Hardware
+  - Out-of-Tree Quantization Plugins
+  - Registering a Custom Quantization Method
+  - Required QuantizationConfig Methods
+  - Implementing a Quantized Linear Method
+  - Implementing a Quantized MoE Method
+  - Using the Plugin
+- `features/quantization/auto_awq.md`: **AutoAWQ**
+- `features/quantization/b12x.md`: **b12x Linear and MoE Backends**
+  - Supported Configurations
+- `features/quantization/bnb.md`: **BitsAndBytes**
+  - Read quantized checkpoint
+  - Inflight quantization: load as 4bit quantization
+  - OpenAI Compatible Server
+- `features/quantization/fp8_vit_attn.md`: **FP8 ViT Encoder Attention**
+  - Requirements
+  - Usage
+  - Calibrate-Once, Reuse Workflow (Recommended)
+  - Scale File Format
+  - Performance
+  - Accuracy
+- `features/quantization/gguf.md`: **GGUF**
+- `features/quantization/gptqmodel.md`: **GPTQModel**
+  - Installation
+  - Quantizing a model
+  - Running a quantized model with vLLM
+  - Using GPTQModel with vLLM's Python API
+- `features/quantization/inc.md`: **Intel Quantization Support**
+  - Key Features
+  - Supported Recipes on Intel Platforms
+  - Quantize with CLI
+  - Quantize with Python API
+  - Deploying AutoRound Quantized Models in vLLM
+  - Evaluating the Quantized Model with vLLM
+- `features/quantization/llm_compressor/README.md`: **LLM Compressor**
+  - Why use LLM Compressor?
+  - Key features
+  - Resources
+- `features/quantization/llm_compressor/fp8.md`: **FP8 W8A8**
+  - Installation
+  - Quantization Process
+  - 1. Loading the Model
+  - 2. Applying Quantization
+  - 3. Evaluating Accuracy
+  - Troubleshooting and Support
+  - Online Dynamic Quantization
+- `features/quantization/llm_compressor/int4.md`: **INT4 W4A16**
+  - Prerequisites
+  - Quantization Process
+  - 1. Loading the Model
+  - 2. Preparing Calibration Data
+  - 3. Applying Quantization
+  - 4. Evaluating Accuracy
+  - Best Practices
+  - Troubleshooting and Support
+- `features/quantization/llm_compressor/int8_w4a8.md`: **INT8 W4A8**
+  - Prerequisites
+  - Quantization Process
+  - 1. Loading the Model
+  - 2. Preparing Calibration Data
+  - 3. Applying Quantization
+  - 4. Evaluating Accuracy
+  - Best Practices
+  - Troubleshooting and Support
+- `features/quantization/llm_compressor/int8_w8a8.md`: **INT8 W8A8**
+  - Prerequisites
+  - Quantization Process
+  - 1. Loading the Model
+  - 2. Preparing Calibration Data
+  - 3. Applying Quantization
+  - 4. Evaluating Accuracy
+  - Best Practices
+  - Troubleshooting and Support
+- `features/quantization/modelopt.md`: **NVIDIA Model Optimizer**
+  - Supported ModelOpt checkpoint formats
+  - Quantizing HuggingFace Models with PTQ
+  - Running the OpenAI-compatible server
+  - Testing (local checkpoints)
+- `features/quantization/online.md`: **Online Quantization**
+  - Quick Start
+  - Supported Schemes
+  - Schema
+  - Activation overrides on already-quantized checkpoints
+  - Online quantization on unquantized layers from partially-quantized checkpoints
+  - Separate Schemes for Dense and MoE Layers
+  - Excluding Layers from Quantization
+  - Fine-Grained Per-Layer Quantization Schemes
+- `features/quantization/quantized_kvcache.md`: **Quantized KV Cache**
+  - FP8 KV Cache Overview
+  - Supported FP8 KV-Cache Quantization Schemes
+  - Scale Calibration Approaches
+  - Additional `kv_cache_dtype` Options
+  - Skipping Specific Layers from KV-Cache Quantization
+  - 1. No Calibration (`kv_cache_dtype="fp8"`)
+  - 2. **[Recommended] Calibration Using a Dataset (with `llm-compressor`)**
+  - Example: Quantize Llama Attention & KV Cache to FP8
+- `features/quantization/quark.md`: **AMD Quark**
+  - Quark Installation
+  - Quantization Process
+  - 1. Load the Model
+  - 2. Prepare the Calibration Dataloader
+  - 3. Set the Quantization Configuration
+  - 4. Quantize the Model and Export
+  - 5. Evaluation in vLLM
+  - Quark Quantization Script
+  - Using OCP MX (MXFP4, MXFP6) models
+  - Using Quark Quantized layerwise Auto Mixed Precision (AMP) Models
+  - 1. Quantize a model using mixed precision in AMD Quark
+  - 2. inference the quantized mixed precision model in vLLM
+  - Online Quantization
+  - vLLM online quantization
+  - Quark online quantization
+  - Python API
+  - Native vLLM CLI
+  - Re-quantizing an offline checkpoint
+- `features/quantization/torchao.md`: **TorchAO**
+  - Quantizing HuggingFace Models
+- `features/reasoning_outputs.md`: **Reasoning Outputs**
+  - Supported Models
+  - Quickstart
+  - Streaming chat completions
+  - Tool Calling
+  - Server-Level Default Chat Template Kwargs
+  - Disabling Thinking Mode by Default
+  - Enabling Thinking Mode by Default
+  - Request-Level Override
+  - Thinking Budget Control
+  - Online Serving
+  - Offline Inference
+  - Automatic `enable_thinking` Activation
+  - Example
+  - Suppressing Reasoning Output
+  - Chat Completions API
+  - Responses API
+  - Limitations
+  - How to support a new reasoning model
+- `features/sleep_mode.md`: **Sleep Mode**
+  - Sleep levels
+  - Offline inference
+  - Python API
+  - RLHF weight updates
+  - Retaining frozen weights during RLHF updates
+  - Release only KV cache memory
+  - Online Serving
+  - Server in development mode
+  - HTTP endpoints
+  - Limitation
+- `features/speculative_decoding/README.md`: **Speculative Decoding**
+  - vLLM Speculation Methods
+  - Method Selection at a Glance
+  - Custom Proposer Backend (Experimental)
+  - `--speculative-config` schema
+  - Common keys
+  - N-gram
+  - Suffix decoding
+  - Cross-Vocabulary Draft Models (TLI)
+  - Notes
+  - Lossless guarantees of Speculative Decoding
+  - Known Feature Incompatibility
+  - Resources for vLLM contributors
+- `features/speculative_decoding/acceptance_metrics.md`: **Per-Request Acceptance Metrics**
+  - Enabling
+  - Response Format
+  - Streaming
+  - Relationship to Prometheus metrics
+- `features/speculative_decoding/adaptive_verification.md`: **Adaptive Verification**
+  - Support
+  - Usage
+  - Requirements and limitations
+  - Tuning the cost profile
+- `features/speculative_decoding/draft_model.md`: **Draft Models**
+  - Draft Model Method with heterogeneous vocabs
+- `features/speculative_decoding/dynamic_speculative_decoding.md`: **Dynamic Speculative Decoding**
+  - Why is Dynamic SD needed?
+  - Use cases
+  - `--speculative-config` schema
+  - Dynamic SD Eagle Drafter
+  - Dynamic SD Eagle3 Drafter
+  - Limitations
+- `features/speculative_decoding/eagle.md`: **EAGLE Draft Models**
+  - Eagle Drafter Example
+  - Eagle3 Drafter Example
+  - Pre-Trained Eagle Draft Models
+- `features/speculative_decoding/extract_hidden_states.md`: **Hidden State Extraction**
+  - Offline Example
+  - Online Example
+  - Per-Request Options
+  - Offline usage
+  - Online usage
+  - Configuration
+  - Output Format
+- `features/speculative_decoding/lilicorr.md`: **LiLiCorr**
+  - Usage
+  - Proposal sampling
+  - Checkpoint requirements
+- `features/speculative_decoding/mlp.md`: **MLP Draft Models**
+  - MLP Drafter Example
+  - Pre-Trained MLP Drafter Models
+- `features/speculative_decoding/mtp.md`: **MTP (Multi-Token Prediction)**
+  - Gemma 4 Assistant Models
+  - Offline Example
+  - Online Example
+  - Notes
+- `features/speculative_decoding/n_gram.md`: **N-Gram Speculation**
+- `features/speculative_decoding/parallel_draft_model.md`: **Parallel Draft Models**
+  - PARD Offline Mode Example
+  - PARD Online Mode Example
+- `features/speculative_decoding/speculators.md`: **vLLM-Project/Speculators**
+  - Why use Speculators?
+  - Resources
+- `features/speculative_decoding/suffix.md`: **Suffix Decoding**
+- `features/structured_outputs.md`: **Structured Outputs**
+  - Online Serving (OpenAI API)
+  - Reasoning Outputs
+  - Experimental Automatic Parsing (OpenAI API)
+  - Offline Inference
+- `features/tool_calling.md`: **Tool Calling**
+  - Quickstart
+  - Named Function Calling
+  - Required Function Calling
+  - None Function Calling
+  - Constrained Decoding Behavior
+  - Strict Mode
+  - Server-Side Strictness Floor
+  - Automatic Function Calling
+  - Hermes Models (`hermes`)
+  - Mistral Models (`mistral`)
+  - Llama Models (`llama3_json`)
+  - IBM Granite
+  - InternLM Models (`internlm`)
+  - Jamba Models (`jamba`)
+  - xLAM Models (`xlam`)
+  - Qwen Models
+  - DeepSeek-V3 Models (`deepseek_v3`)
+  - DeepSeek-V3.1 Models (`deepseek_v31`)
+  - OpenAI OSS Models (`openai`)
+  - Hunyuan Models (`hunyuan_a13b`)
+  - Cohere Command (`cohere_command3` / `cohere_command4`)
+  - LongCat-Flash-Chat Models (`longcat`)
+  - GLM-4.5 Models (`glm45`)
+  - FunctionGemma Models (`functiongemma`)
+  - Qwen3-Coder Models (`qwen3_xml`)
+  - Olmo 3 Models (`olmo3`)
+  - Gigachat 3 Models (`gigachat3`)
+  - Apertus Models (`apertus`)
+  - Models with Pythonic Tool Calls (`pythonic`)
+  - Benchmarking Tool-Calling Performance
+  - How to Write a Tool Parser Plugin
+- `features/watermarking.md`: **Text watermarking**
+  - Configuration
+  - Architecture
+  - Speculative decoding
+  - Gumbel-max
+  - Dual-key Gumbel-max
+  - SynthID-Text
+  - Pseudorandom functions
+  - Detection
+  - Limitations
+- `getting_started/installation/README.md`: **Installation**
+  - Hardware Plugins
+- `getting_started/installation/cpu.apple.inc.md`: **Cpu.Apple.Inc**
+- `getting_started/installation/cpu.arm.inc.md`: **Cpu.Arm.Inc**
+  - Install the latest code
+  - Install specific revisions
+  - Building for your target ARM CPU
+  - Launching the OpenAI server
+- `getting_started/installation/cpu.md`: **CPU**
+  - Technical Discussions
+  - Pre-built wheels
+  - Set up using Python-only build (without compilation) {#python-only-build}
+  - Related runtime environment variables
+  - Which `dtype` should be used?
+  - How to launch a vLLM service on CPU?
+  - What are supported models on CPU?
+  - How to find benchmark configuration examples for supported CPU models?
+  - Dry-Run
+  - How do I enable AMD Zen optimizations? {#how-do-i-enable-amd-zen-optimizations}
+  - How to decide `VLLM_CPU_OMP_THREADS_BIND`?
+  - How to decide `VLLM_CPU_KVCACHE_SPACE`?
+  - How to do performance tuning for vLLM CPU?
+  - Which quantization configs does vLLM CPU support?
+  - Why do I see `get_mempolicy: Operation not permitted` when running in Docker?
+- `getting_started/installation/cpu.s390x.inc.md`: **Cpu.S390X.Inc**
+- `getting_started/installation/cpu.x86.inc.md`: **Cpu.X86.Inc**
+  - Install the latest code
+  - Install specific revisions
+  - Serve with vLLM Recipes
+  - Building for your target CPU
+  - Building with AMD Zen optimizations
+  - Launching the OpenAI server {#launching-the-openai-server}
+  - Detection rules
+  - Supported dtypes
+  - Environment variables
+  - Docker
+  - Reference
+- `getting_started/installation/gpu.apple.inc.md`: **Gpu.Apple.Inc**
+  - Set up using vLLM-Metal
+  - Using vLLM-Metal
+  - Option 1: Interactive chat
+  - Option 2: API requests with curl
+  - Option 3: Python with OpenAI SDK
+- `getting_started/installation/gpu.cuda.inc.md`: **Gpu.Cuda.Inc**
+  - Install the latest code
+  - Set up using Python-only build (without compilation) {#python-only-build}
+  - Full build (with compilation) {#full-build}
+  - Unsupported OS build
+  - Running on Systems with Older CUDA Drivers
+  - Building vLLM's Docker Image from Source for Arm64/aarch64
+  - [Preview] Building vLLM's Docker Image from Source for NVIDIA Rubin GPU Architecture
+  - Use the custom-built vLLM Docker image**
+- `getting_started/installation/gpu.md`: **GPU**
+  - Requirements
+- `getting_started/installation/gpu.rocm.inc.md`: **Gpu.Rocm.Inc**
+  - Prebuilt Wheels
+  - Install the latest code
+  - Set up using Python-only build (without compilation) {#python-only-build}
+  - Full build (with compilation) {#full-build}
+  - Use AMD's Docker Images (Deprecated)
+- `getting_started/installation/gpu.xpu.inc.md`: **Gpu.Xpu.Inc**
+  - Install the latest code
+  - Install specific revisions
+- `getting_started/installation/python_env_setup.inc.md`: **Python Env Setup.Inc**
+- `getting_started/quickstart.md`: **Quickstart**
+  - Prerequisites
+  - Installation
+  - Offline Batched Inference
+  - Online Serving
+  - OpenAI Completions API with vLLM
+  - OpenAI Chat Completions API with vLLM
+  - On Attention Backends
+- `models/extensions/fastsafetensor.md`: **Fastsafetensor**
+- `models/extensions/instanttensor.md`: **Loading Model Weights with InstantTensor**
+  - Use InstantTensor in vLLM
+  - Benchmarks
+- `models/extensions/runai_model_streamer.md`: **Loading models with Run:ai Model Streamer**
+  - Tunable parameters
+  - Sharded Model Loading
+- `models/extensions/tensorizer.md`: **Loading models with CoreWeave's Tensorizer**
+  - The basics
+  - Serializing a vLLM model with Tensorizer
+  - Serving the model using Tensorizer
+  - Options for configuring Tensorizer
+- `models/generative_models.md`: **Generative Models**
+  - Model Runner (`--runner`)
+  - Offline Inference
+  - `LLM.generate`
+  - `LLM.beam_search`
+  - `LLM.chat`
+  - Online Serving
+- `models/hardware_supported_models/cpu.md`: **CPU - Intel® Xeon®**
+  - Validated Hardware
+  - Deploy from a vLLM Recipe
+  - Text-only Language Models
+  - Multimodal Language Models
+- `models/hardware_supported_models/xpu.md`: **XPU - Intel® GPUs**
+  - Validated Hardware
+  - Text-only Language Models
+  - Multimodal Language Models
+  - Embedding and Reranker Language Models
+- `models/pooling_models/README.md`: **Pooling Models**
+  - What are pooling models?
+  - Cheat Sheet
+  - Sequence-wise Task and Token-wise Task
+  - Pooling Tasks
+  - Pooling Types
+  - Score Types
+  - Pooling Usages
+  - Offline Inference
+  - Offline APIs corresponding to pooling usages
+  - `LLM.classify`
+  - `LLM.embed`
+  - `LLM.score`
+  - `LLM.encode`
+  - Examples
+  - Online Serving
+  - Pooling API
+  - Configuration
+  - Model Runner
+  - Model Conversion
+  - Predefined models
+  - Converted models
+  - Resolution precedence
+  - Encode task
+  - Score task
+  - Pooling multitask support
+- `models/pooling_models/classify.md`: **Classification Usages**
+  - Summary
+  - Classification
+  - Text-only Models
+  - Multimodal Models
+  - Cross-encoder Models
+  - Reward Models
+  - `LLM.classify`
+  - `LLM.encode`
+  - Completion Parameters
+  - Chat Parameters
+  - Example Requests
+  - Problem type (e.g. `multi_label_classification`)
+  - Affine Score Calibration
+  - Remove softmax from PoolingParams
+- `models/pooling_models/embed.md`: **Embedding Usages**
+  - Summary
+  - Pairwise Similarity
+  - Text-only Models
+  - Multimodal Models
+  - `LLM.embed`
+  - `LLM.encode`
+  - `LLM.score`
+  - OpenAI-Compatible Embeddings API
+  - Completion Parameters
+  - Chat Parameters
+  - Examples
+  - Cohere Embed API
+  - Cohere Embed API request parameters
+  - Text embedding
+  - Mixed text and image inputs
+  - Embedding types
+  - Truncation
+  - Input type and prompt prefixes
+  - Matryoshka Embeddings
+  - Manually enable Matryoshka Embeddings
+  - Offline Inference
+  - Online Inference
+- `models/pooling_models/reward.md`: **Reward Usages**
+  - Summary
+  - Reward Models
+  - Token Reward Models
+  - Process Reward Models
+  - `LLM.encode`
+  - Online Serving
+  - `LLM.reward`
+- `models/pooling_models/scoring.md`: **Scoring Usages**
+  - Summary
+  - Score Types
+  - Cross-encoder models
+  - Text-only Models
+  - Multimodal Models
+  - Late-interaction models
+  - Bi-encoder
+  - Pooling Parameters
+  - `LLM.score`
+  - Score API
+  - Examples
+  - Cohere Rerank API
+  - Supported Features
+  - Score Template
+- `models/pooling_models/specific_models.md`: **Specific Model Examples**
+  - ColBERT Late Interaction Models
+  - ColQwen3 Multi-Modal Late Interaction Models
+  - Text-only scoring and reranking
+  - Multi-modal scoring and reranking (text query × image documents)
+  - Raw token embeddings
+  - Examples
+  - ColQwen3.5 Multi-Modal Late Interaction Models
+  - Embedding Model
+  - Reranker Model
+  - BAAI/bge-m3
+  - Dense and sparse output through an IO processor plugin
+- `models/pooling_models/token_classify.md`: **Token Classification Usages**
+  - Summary
+  - Named Entity Recognition (NER)
+  - Forced Alignment
+  - Sparse retrieval (lexical matching)
+  - Supported Models
+  - Multimodal Models
+  - Reward Models
+  - `LLM.encode`
+  - More examples
+  - Supported Features
+- `models/pooling_models/token_embed.md`: **Token Embedding Usages**
+  - Summary
+  - Multi-Vector Retrieval
+  - Late interaction
+  - Extract last hidden states
+  - Text-only Models
+  - Multimodal Models
+  - Special models
+  - `LLM.encode`
+  - `LLM.score`
+  - More examples
+  - Supported Features
+- `models/supported_models.md`: **Supported Models**
+  - vLLM
+  - Transformers
+  - Custom models
+  - Writing custom models
+  - Plugins
+  - Hugging Face Hub
+  - Download a model
+  - List the downloaded models
+  - Delete a cached model
+  - Using a proxy
+  - MatrixHub
+  - ModelScope
+  - Feature Status Legend
+  - Text Generation
+  - List of Multimodal Language Models
+  - Transcription
+  - Realtime Transcription
+  - Pooling Models
+  - Model Support Policy
+- `serving/context_parallel_deployment.md`: **Context Parallel Deployment**
+  - Prefill Context Parallel
+  - Decode Context Parallel
+  - Technical Discussions
+- `serving/data_parallel_deployment.md`: **Data Parallel Deployment**
+  - Internal Load Balancing
+  - Hybrid Load Balancing
+  - External Load Balancing
+- `serving/distributed_troubleshooting.md`: **Troubleshooting distributed deployments**
+  - Verify inter-node GPU communication
+  - No available node types can fulfill resource request
+  - Ray observability
+- `serving/expert_parallel_deployment.md`: **Expert Parallel Deployment**
+  - Prerequisites
+  - Backend Selection Guide
+  - Configuration
+  - Layer Behavior with EP Enabled
+  - Example Command
+  - Multi-Node Deployment
+  - Deployment Steps
+  - Example: 2-Node Deployment
+  - Key Configuration Notes
+  - Network Configuration
+  - Expert Parallel Load Balancer (EPLB)
+  - EPLB Parameters
+  - Expert Distribution Formula
+  - Memory Footprint Overhead
+  - Performance Optimization
+  - Troubleshooting
+  - Benchmarking
+  - Disaggregated Serving (Prefill/Decode Split)
+  - Architecture Overview
+  - Setup Steps
+  - Client Orchestration Example
+- `serving/integrations/claude_code.md`: **Claude Code**
+  - How It Works
+  - Requirements
+  - Installation
+  - Starting the vLLM Server
+  - Configuring Claude Code
+  - Testing the Setup
+  - Troubleshooting
+- `serving/integrations/codex.md`: **Codex**
+  - How It Works
+  - Requirements
+  - Installation
+  - Starting the vLLM Server
+  - Configuring Codex
+  - Testing the Setup
+  - Troubleshooting
+- `serving/integrations/langchain.md`: **LangChain**
+- `serving/integrations/llamaindex.md`: **LlamaIndex**
+- `serving/offline_inference.md`: **Offline Inference**
+  - Model Types
+  - Generative APIs
+  - Asynchronous Queue APIs
+  - Pooling APIs
+  - Profiling APIs
+  - Sleep Mode APIs
+  - Cache Management APIs
+  - Metrics APIs
+  - Weight Transfer APIs (RL Training)
+  - Additional APIs
+  - Ray Data LLM API
+- `serving/online_serving/README.md`: **Online Serving**
+  - OpenAI-Compatible Server
+  - Cohere APIs
+  - Pooling APIs
+  - Speech to Text APIs
+  - Custom APIs
+  - Basic APIs
+  - Metrics APIs
+  - Offline API Documentation
+  - LoRA dynamic loading
+  - Profiling APIs
+  - SageMaker APIs
+  - Scale-Out APIs
+  - Tokens IN <> Tokens OUT APIs
+  - Renderer APIs
+  - Derenderer APIs
+  - Tokenize APIs
+  - Elastic Expert Parallelism (EEP)
+  - Server in development mode
+  - Cache Management APIs
+  - Weight Transfer APIs (RL Training)
+  - Sleep Mode APIs
+  - Chat Template
+  - Ray Serve LLM
+- `serving/online_serving/derenderer.md`: **Derenderer APIs**
+  - Pipeline
+  - API Reference
+  - Request format
+  - Parser configuration
+  - Streaming
+  - Streaming cost
+  - Example
+  - Streaming example
+- `serving/online_serving/generative_scoring.md`: **Generative Scoring**
+  - How it works
+  - Finding Token IDs
+  - Example
+- `serving/online_serving/openai_compatible_server.md`: **OpenAI-Compatible Server**
+  - Supported APIs
+  - Completions API
+  - Extra Parameters
+  - Extra HTTP Headers
+  - Extra parameters
+  - Chat API
+  - Responses API
+- `serving/online_serving/renderer.md`: **Renderer APIs**
+  - API Reference
+  - Get Responses prompt token IDs
+  - Multimodal Render Features
+  - Example
+  - Render response
+  - Prefill request
+- `serving/online_serving/speech_to_text.md`: **Speech to Text APIs**
+  - Transcriptions API
+  - API Enforced Limits
+  - Uploading Audio Files
+  - Extra Parameters
+  - Translations API
+  - Realtime API
+  - Protocol Overview
+  - Client → Server Events
+  - Server → Client Events
+  - Example Clients
+- `serving/online_serving/trace_replay.md`: **Trace Replay**
+  - Requirements
+  - Usage
+  - Behavior
+  - Limitations
+- `serving/parallelism_scaling.md`: **Parallelism and Scaling**
+  - Distributed inference strategies for a single-model replica
+  - Distributed serving of *Mixture of Experts* (*MoE*) models
+  - Single-node deployment
+  - Multi-node deployment
+  - What is Ray?
+  - Ray cluster setup with containers
+  - Running vLLM on a Ray cluster
+  - Running vLLM with MultiProcessing
+  - Optimizing network communication for tensor parallelism
+  - Enabling GPUDirect RDMA
+  - Troubleshooting distributed deployments
+- `training/async_rl.md`: **Async Reinforcement Learning**
+  - Overview
+  - The Pause and Resume API
+  - pause_generation
+  - resume_generation
+  - HTTP Endpoints
+  - Typical Async RL Flow
+  - Example
+- `training/layerwise.md`: **What is Layerwise (Re)loading?**
+  - Layerwise Reloading for QeRL
+  - Layerwise Loading with Online Quantization
+  - High Level Weight Transfer API
+  - Mid Level `reload_weights` API
+  - Low Level `layerwise` API
+  - Troubleshooting Excessive Memory Usage
+- `training/prompt_token_id_logprobs.md`: **Prompt Token ID Logprobs (Teacher Scoring)**
+  - Quick start
+  - Requirements
+  - Limitations
+- `training/rlhf.md`: **Reinforcement Learning from Human Feedback**
+- `training/sampling_mask.md`: **Sampling Mask (Distribution Replay)**
+  - Background
+  - Quick start
+  - Requirements
+  - How it works
+  - RL training usage
+  - Limitations
+- `training/trl.md`: **Transformers Reinforcement Learning**
+  - Modes of Using vLLM During Training
+  - Server mode
+  - Colocate mode
+- `training/weight_transfer/README.md`: **Weight Transfer**
+  - Architecture
+  - Available Backends
+  - Inference Side
+  - Trainer Side
+  - Where Each Setting Lives
+  - Multi-Rank Trainers
+  - API Endpoints
+  - Extending the System
+- `training/weight_transfer/base.md`: **Base Classes and Custom Engines**
+  - WeightSource
+  - ModuleSource
+  - Custom sources
+  - `held_names()`: partial ownership
+  - Gather groups
+  - VLLMWeightSyncClient
+  - TrainerWeightTransferEngine
+  - TrainerInitInfo
+  - Full-Resync vs. Delta Backends
+  - Implementing a Custom Trainer Engine
+  - WeightTransferTrainerFactory
+  - WeightTransferEngine
+  - Request Classes
+  - 1. Define Info Dataclasses
+  - 2. Implement the Engine
+  - 3. Register with the Factory
+  - WeightTransferEngineFactory
+- `training/weight_transfer/ipc.md`: **IPC Engine**
+  - How It Works
+  - Inference Side
+  - Trainer Side
+  - `IPCTrainerInitInfo`
+  - Packed (Chunked) Transfer
+  - Rank-Local Updates
+  - Examples
+- `training/weight_transfer/m2n.md`: **NCCL M2N Engine**
+  - When to Use NCCL M2N
+  - Requirements
+  - How It Works
+  - Destination resolution
+  - Configuration
+  - Trainer Side
+  - Limitations
+- `training/weight_transfer/nccl.md`: **NCCL Engine**
+  - When to Use NCCL
+  - How It Works
+  - Inference Side
+  - Trainer Side
+  - `NCCLTrainerInitInfo`
+  - Packed Tensor Broadcasting
+  - The two `WeightSource` channels must agree
+  - Sparse NCCL
+  - Examples
+- `training/weight_transfer/sharded_rdt.md`: **Sharded RDT Engine**
+  - When to Use Sharded RDT
+  - Slices are tracked through vLLM's own weight loaders
+  - Received slices land directly in the layerwise reload buffers
+  - Gathers and pulls are pipelined, which is what `gather_lookahead` bounds
+  - Ownership
+  - Inference Side
+  - Trainer Side
+  - `ShardedRDTTrainerInitInfo`
+  - Examples
+- `usage/README.md`: **Using vLLM**
+- `usage/faq.md`: **Frequently Asked Questions**
+  - Mitigation Strategies
+- `usage/metrics.md`: **Production Metrics**
+  - Simple CPU Offload Connector Metrics
+  - Deprecation Policy
+- `usage/reproducibility.md`: **Reproducibility**
+  - Setting the global seed
+  - Default Behavior
+- `usage/security.md`: **Security**
+  - Inter-Node Communication
+  - 2. **KV Cache Transfer Configuration:**
+  - 3. **Data Parallel Configuration:**
+  - Notes on PyTorch Distributed
+  - 1. **Network Isolation:**
+  - 2. **Configuration Best Practices:**
+  - 3. **Access Control:**
+  - 4. **Restrict Domains Access for Media URLs:**
+  - 5. **Restrict Media Download and Decode Sizes:**
+  - Security and Firewalls: Protecting Exposed vLLM Systems
+  - Firewall Configuration Guidance
+  - Overview
+  - Protected Endpoints (Require API Key)
+  - Unprotected Endpoints (No API Key Required)
+  - Security Implications
+  - 1. Minimize Exposed Endpoints
+  - 2. Deploy Behind a Reverse Proxy
+  - Request Parameter Resource Limits
+  - Recommendations
+  - Per-request multimodal arguments
+  - Tool Server and MCP Security
+  - Built-in Demo Tools (GPT-OSS)
+  - Code Interpreter (Python Tool) Security Risks
+  - Controlling Built-in Tool Availability
+  - Dynamic LoRA Loading
+  - Endpoint Plugins
+  - Recommended Security Practices
+  - gRPC Interface
+  - Cache Directory Security
+  - Cache Directory Configuration
+  - FIPS Compatibility
+  - FIPS-relevant configuration
+  - Automatic fallback for non-security MD5 use
+  - Dependencies that provide non-FIPS hash implementations
+  - Beyond hashing: other FIPS considerations
+  - Trust Assumption
+  - Driver-to-Worker Environment Variable Propagation
+  - When This Matters
+  - Hardening Recommendations
+  - 1. Denylist via Configuration File
+  - 2. Minimize Driver Environment
+  - 3. Network and Process Isolation
+  - 4. Limit Ray Cluster Access
+  - Background
+  - Cache Salting
+  - Usage with the OpenAI Python client
+  - Usage with a raw request
+  - How to choose a salt value
+  - Client Responsibility
+  - Multi-Tenant Risk
+  - Extra Protection with `cache_salt`
+  - Reporting Security Vulnerabilities
+- `usage/troubleshooting.md`: **Troubleshooting**
+  - Hangs downloading a model
+  - Hangs loading a model from disk
+  - Out of memory
+  - Generation quality changed
+  - Enable more logging
+  - Breakpoints
+  - Incorrect network setup
+  - Error near `self.graph.replay()`
+  - Incorrect hardware/driver
+  - `RuntimeError` Exception
+  - `torch.compile` Error
+  - Model failed to be inspected
+  - Model not supported
+  - Failed to infer device type
+  - NCCL error: unhandled system error during `ncclCommInitRank`
+  - CUDA error: the provided PTX was compiled with an unsupported toolchain
+  - ptxas fatal: Value 'sm_110a' is not defined for option 'gpu-name'
+  - Known Issues
+- `usage/usage_stats.md`: **Usage Stats Collection**
+  - What data is collected?
+  - Opting out
+- `usage/v1_guide.md`: **vLLM V1**
+  - Chunked Prefill
+  - Logprobs Calculation
+  - Prompt Logprobs with Prefix Caching
+  - Feature Support
+  - Hardware
+  - Models
+  - Pooling Models
+  - Mamba Models
+  - Encoder-Decoder Models
+  - Features
+  - Removed Features
