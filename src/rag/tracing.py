@@ -13,6 +13,8 @@ import os
 from contextlib import contextmanager, nullcontext
 from functools import lru_cache
 
+import rag.config  # noqa: F401  loads .env, so the keys are visible however this module is imported first
+
 
 class _NoopObservation:
     def update(self, **_):
