@@ -1,0 +1,11 @@
+.venv
+.git
+.env
+.qdrant
+.cache
+logs
+eval
+tests
+dashboard
+loadtest
+docs
