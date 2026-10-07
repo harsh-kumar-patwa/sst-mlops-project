@@ -14,6 +14,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from statistics import mean
 
+from rag import tracing
 from rag.config import REPO_ROOT, load_config
 from rag.evaluation.dataset import load_golden
 from rag.evaluation.metrics import average, by_slice, percentile, score_retrieval
@@ -49,7 +50,9 @@ def evaluate_generation(questions, config) -> tuple[dict, list[dict]]:
     rows = []
     for number, question in enumerate(questions, start=1):
         print(f"  generating {number}/{len(questions)}: {question.id}", end="\r")
-        result = pipeline.answer(question.question, use_cache=True, include_context=True)
+        result = pipeline.answer(question.question, use_cache=True, include_context=True,
+                                 trace_tags=("eval", question.slice, question.id))
+        trace_id = result.extras.get("trace_id")
         refused = result.status == "refused"
         row = {
             "id": question.id, "slice": question.slice, "status": result.status, "answer": result.answer,
@@ -60,14 +63,17 @@ def evaluate_generation(questions, config) -> tuple[dict, list[dict]]:
         if result.status == "answered":
             row["faithfulness"], row["claims"] = judge.faithfulness(result.answer, result.extras["context"])
             row["citation_valid"] = 1.0 if result.citations and not result.invalid_citations else 0.0
+            tracing.score(trace_id, "faithfulness", row["faithfulness"])
         if question.answerable:
             row["correctness"], row["correctness_reason"] = (
                 judge.correctness(question.question, question.reference_answer, result.answer)
                 if result.status == "answered" else (0.0, f"not answered ({result.status})"))
+            tracing.score(trace_id, "correctness", row["correctness"], row["correctness_reason"])
         else:
             row["refusal_correct"] = 1.0 if refused else 0.0
         rows.append(row)
     print()
+    tracing.flush()
 
     answered = [r for r in rows if r["status"] == "answered"]
     answerable = [r for r in rows if "correctness" in r]

@@ -19,7 +19,7 @@ from fastapi import BackgroundTasks, FastAPI, HTTPException
 from fastapi.responses import HTMLResponse
 from pydantic import BaseModel, Field
 
-from rag import telemetry
+from rag import telemetry, tracing
 from rag.pipeline import RagPipeline
 
 STATIC_PAGE = Path(__file__).with_name("chat.html")
@@ -34,6 +34,7 @@ async def lifespan(_: FastAPI):
         from rag.evaluation.judge import Judge
         state["judge"] = Judge(state["pipeline"].config)
     yield
+    tracing.flush()
     state.clear()
 
 
@@ -53,8 +54,9 @@ class FeedbackRequest(BaseModel):
 # Sync handlers: FastAPI runs them in a worker thread, so a slow LLM call never blocks the event loop.
 @app.post("/ask")
 def ask(body: AskRequest, background: BackgroundTasks) -> dict:
-    request_id = uuid.uuid4().hex
     answer = state["pipeline"].answer(body.question, include_context=True)
+    # With tracing on, the request id IS the Langfuse trace id, so feedback attaches to the right trace.
+    request_id = answer.extras.get("trace_id") or uuid.uuid4().hex
     context = answer.extras.pop("context", "")
     background.add_task(telemetry.log_request, request_id, answer)
     background.add_task(telemetry.maybe_score_online, request_id, answer, context, state["judge"])
@@ -90,6 +92,7 @@ def health() -> dict:
         "generator": config["generation"]["model"],
         "prompt_version": config["generation"]["prompt_version"],
         "online_judge": state["judge"] is not None,
+        "langfuse_tracing": tracing.enabled(),
     }
 
 

@@ -37,6 +37,7 @@ flowchart LR
     A -- "answer, citations, cost,<br/>latency, config_hash" --> U
     A -. "background" .-> LOG["request logs"] -.-> DASH["Streamlit dashboard"]
     A -. "20% sample" .-> J["GPT-4o-mini judge"]
+    A -. "async export" .-> LF["Langfuse traces<br/>retrieve → generate spans"]
   end
   subgraph CI["CI · every pull request"]
     PR["PR"] --> EV["Eval on golden set"] --> G{"Gate vs baseline<br/>config/gate.yaml"}
@@ -62,6 +63,15 @@ citations checked against the retrieved set. If the LLM fails, the service retur
 Gate rules (`config/gate.yaml`): a metric fails if it drops more than its tolerance from the target
 branch's baseline **or** falls below an absolute floor. Retrieval tolerances are tight because those
 metrics are deterministic; judge tolerances are wider because judge scores are noisy.
+
+## Tracing (Langfuse)
+
+Set `LANGFUSE_PUBLIC_KEY` / `LANGFUSE_SECRET_KEY` and every answer becomes a Langfuse trace:
+`rag-answer` → `retrieve` (pages + scores) → `generate` (prompt, model, tokens, cost). Traces are tagged with
+`config_hash`, prompt version and retrieval mode, so you can filter by version and compare before/after a change.
+Scores attached to traces: `faithfulness` and `correctness` from eval runs (tagged `eval`), `faithfulness_online`
+from the sampled live judge, and `user_feedback` from 👍/👎. The API's `request_id` is the trace id.
+Export happens in a background thread, so tracing adds no request latency; without keys it is a no-op.
 
 ## Versioning
 

@@ -11,7 +11,7 @@ from dataclasses import asdict, dataclass, field
 
 import anthropic
 
-from rag import llm_cache
+from rag import llm_cache, tracing
 from rag.config import load_config, load_prompt
 from rag.retrieve import Hit, Retriever
 
@@ -94,9 +94,27 @@ class RagPipeline:
         price = self.config["generation"]["price_per_mtok"]
         return (input_tokens * price["input"] + output_tokens * price["output"]) / 1_000_000
 
-    def answer(self, question: str, use_cache: bool = False, include_context: bool = False) -> Answer:
+    def answer(self, question: str, use_cache: bool = False, include_context: bool = False,
+               trace_tags: tuple[str, ...] = ("serving",)) -> Answer:
+        generation = self.config["generation"]
+        with tracing.trace(
+            "rag-answer", input=question, version=self.config["config_hash"],
+            tags=[*trace_tags, generation["prompt_version"], self.config["retrieval"]["mode"]],
+            metadata={"config_hash": self.config["config_hash"], "index_hash": self.config["index_hash"],
+                      "prompt_version": generation["prompt_version"], "model": generation["model"]},
+        ) as (root, trace_id):
+            result = self._answer(question, use_cache, include_context)
+            root.update(output=result.answer, metadata={"status": result.status, "reason": result.refusal_reason,
+                                                        "cost_usd": result.cost_usd, "latency_ms": result.latency_ms})
+        result.extras["trace_id"] = trace_id
+        return result
+
+    def _answer(self, question: str, use_cache: bool, include_context: bool) -> Answer:
         started = time.perf_counter()
-        hits = self.retriever.search(question)
+        with tracing.span("retrieve", as_type="retriever", input=question) as span:
+            hits = self.retriever.search(question)
+            span.update(output=[{"doc_path": h.doc_path, "section": h.breadcrumb, "score": round(h.score, 4)}
+                                for h in hits])
         retrieval_ms = (time.perf_counter() - started) * 1000
         retrieved = [{"rank": i + 1, "chunk_id": h.chunk_id, "doc_path": h.doc_path, "section": h.breadcrumb,
                       "score": round(h.score, 4), "dense_score": round(h.dense_score, 4)} for i, h in enumerate(hits)]
@@ -119,13 +137,21 @@ class RagPipeline:
 
         context, used = self.build_context(hits)
         generation_started = time.perf_counter()
-        try:
-            result = self.generate(question, context, use_cache)
-        except (anthropic.RateLimitError, anthropic.APIStatusError, anthropic.APIConnectionError) as error:
-            fallback = "Summary unavailable right now. The most relevant documentation sections are:\n" + \
-                "\n".join(f"- {h.breadcrumb} ({h.doc_path})" for h in used)
-            return finish(fallback, "degraded", reason=f"{type(error).__name__}",
-                          generation_ms=(time.perf_counter() - generation_started) * 1000)
+        with tracing.span("generate", as_type="generation", model=self.config["generation"]["model"],
+                          input={"system": self.system_prompt, "context": context, "question": question},
+                          metadata={"prompt_version": self.config["generation"]["prompt_version"]}) as span:
+            try:
+                result = self.generate(question, context, use_cache)
+            except (anthropic.RateLimitError, anthropic.APIStatusError, anthropic.APIConnectionError) as error:
+                span.update(level="ERROR", status_message=type(error).__name__)
+                fallback = "Summary unavailable right now. The most relevant documentation sections are:\n" + \
+                    "\n".join(f"- {h.breadcrumb} ({h.doc_path})" for h in used)
+                return finish(fallback, "degraded", reason=f"{type(error).__name__}",
+                              generation_ms=(time.perf_counter() - generation_started) * 1000)
+            span.update(output=result["text"],
+                        usage_details={"input": result["input_tokens"], "output": result["output_tokens"]},
+                        cost_details={"total": self.cost(result["input_tokens"], result["output_tokens"])},
+                        metadata={"cached": result["cached"], "stop_reason": result["stop_reason"]})
         generation_ms = (time.perf_counter() - generation_started) * 1000
 
         text = result["text"]

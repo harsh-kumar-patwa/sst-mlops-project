@@ -12,6 +12,7 @@ import random
 import threading
 from datetime import datetime, timezone
 
+from rag import tracing
 from rag.config import REPO_ROOT
 
 LOG_DIR = REPO_ROOT / "logs"
@@ -50,6 +51,7 @@ def log_request(request_id: str, answer) -> None:
 
 def log_feedback(request_id: str, rating: str, comment: str | None) -> None:
     _append("feedback.jsonl", {"request_id": request_id, "rating": rating, "comment": comment})
+    tracing.score(request_id, "user_feedback", 1.0 if rating == "up" else 0.0, comment)
 
 
 def maybe_score_online(request_id: str, answer, context: str, judge) -> None:
@@ -61,5 +63,6 @@ def maybe_score_online(request_id: str, answer, context: str, judge) -> None:
     except Exception as error:  # monitoring must never break serving; record the failure instead
         _append("online_scores.jsonl", {"request_id": request_id, "error": type(error).__name__})
         return
+    tracing.score(request_id, "faithfulness_online", score)
     _append("online_scores.jsonl", {"request_id": request_id, "faithfulness": round(score, 4),
                                     "config_hash": answer.config_hash, "prompt_version": answer.prompt_version})
