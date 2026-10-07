@@ -21,7 +21,7 @@ embedding:
   sparse_model: Qdrant/bm25      # only used when retrieval.mode = hybrid
 
 retrieval:
-  mode: dense                    # dense | hybrid (dense + BM25 fused with Reciprocal Rank Fusion)
+  mode: hybrid                   # dense | hybrid (dense + BM25 fused with Reciprocal Rank Fusion)
   candidates: 20                 # retrieved per retriever before fusion / truncation
   top_k: 5                       # chunks passed to the LLM
   rrf_k: 60

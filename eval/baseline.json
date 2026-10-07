@@ -1,56 +1,56 @@
 {
   "meta": {
-    "timestamp": "2026-10-07T20:24:29+00:00",
-    "git_sha": "c69e4a4",
+    "timestamp": "2026-10-07T20:52:59+00:00",
+    "git_sha": "0901b84",
     "n_questions": 60,
     "golden": "eval/golden.csv",
-    "config_hash": "ded53b960265",
+    "config_hash": "a41d80f69017",
     "index_hash": "92296854eba9",
-    "retrieval_mode": "dense",
+    "retrieval_mode": "hybrid",
     "chunk_size": 400,
     "prompt_version": "answer_v1",
     "generator": "gpt-4o-mini",
     "judge": "gpt-4.1",
-    "duration_s": 201.5
+    "duration_s": 200.8
   },
   "retrieval": {
     "overall": {
-      "recall_at_1": 0.72,
-      "recall_at_5": 0.87,
-      "recall_at_10": 0.92,
-      "mrr_at_10": 0.8329,
-      "section_at_5": 0.8
+      "recall_at_1": 0.78,
+      "recall_at_5": 0.93,
+      "recall_at_10": 0.98,
+      "mrr_at_10": 0.9057,
+      "section_at_5": 0.86
     },
     "by_slice": {
       "config_flag": {
-        "recall_at_1": 0.75,
+        "recall_at_1": 0.8333,
         "recall_at_5": 0.9167,
-        "recall_at_10": 0.9167,
-        "mrr_at_10": 0.7986,
+        "recall_at_10": 1.0,
+        "mrr_at_10": 0.8593,
         "section_at_5": 0.75,
         "n": 12
       },
       "factual": {
         "recall_at_1": 0.8667,
         "recall_at_5": 0.9333,
-        "recall_at_10": 0.9333,
-        "mrr_at_10": 0.8889,
+        "recall_at_10": 1.0,
+        "mrr_at_10": 0.9095,
         "section_at_5": 0.8667,
         "n": 15
       },
       "how_to": {
-        "recall_at_1": 0.7333,
-        "recall_at_5": 0.8667,
-        "recall_at_10": 0.9333,
-        "mrr_at_10": 0.7984,
-        "section_at_5": 0.7333,
+        "recall_at_1": 0.8,
+        "recall_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "mrr_at_10": 0.8889,
+        "section_at_5": 0.9333,
         "n": 15
       },
       "multi_hop": {
-        "recall_at_1": 0.375,
-        "recall_at_5": 0.6875,
+        "recall_at_1": 0.5,
+        "recall_at_5": 0.8125,
         "recall_at_10": 0.875,
-        "mrr_at_10": 0.8438,
+        "mrr_at_10": 1.0,
         "section_at_5": 0.875,
         "n": 8
       }
@@ -65,13 +65,13 @@
         "recall_at_1": 0.0,
         "recall_at_5": 1.0,
         "recall_at_10": 1.0,
-        "mrr_at_10": 0.3333333333333333,
+        "mrr_at_10": 0.5,
         "section_at_5": 1.0,
         "top_docs": [
           "design/metrics.md",
-          "features/nixl_connector_usage.md",
           "configuration/optimization.md",
-          "features/kv_offloading_usage.md",
+          "features/nixl_connector_usage.md",
+          "usage/v1_guide.md",
           "design/nixl_kv_cache_lease.md"
         ]
       },
@@ -87,7 +87,7 @@
           "features/kv_offloading_usage.md",
           "features/kv_offloading_usage.md",
           "features/kv_offloading_usage.md",
-          "design/prefix_caching.md",
+          "features/kv_offloading_usage.md",
           "features/kv_offloading_usage.md"
         ]
       },
@@ -102,39 +102,39 @@
         "top_docs": [
           "configuration/optimization.md",
           "design/optimization_levels.md",
-          "design/vllm_ir.md",
-          "getting_started/installation/cpu.md",
-          "usage/v1_guide.md"
+          "configuration/optimization.md",
+          "design/optimization_levels.md",
+          "design/fusions.md"
         ]
       },
       {
         "id": "q004",
         "slice": "how_to",
-        "recall_at_1": 1.0,
+        "recall_at_1": 0.0,
         "recall_at_5": 1.0,
         "recall_at_10": 1.0,
-        "mrr_at_10": 1.0,
+        "mrr_at_10": 0.3333333333333333,
         "section_at_5": 1.0,
         "top_docs": [
-          "features/reasoning_outputs.md",
-          "features/reasoning_outputs.md",
-          "features/reasoning_outputs.md",
           "deployment/frameworks/nebius.md",
-          "features/batch_invariance.md"
+          "features/speculative_decoding/draft_model.md",
+          "features/reasoning_outputs.md",
+          "features/reasoning_outputs.md",
+          "features/reasoning_outputs.md"
         ]
       },
       {
         "id": "q005",
         "slice": "multi_hop",
-        "recall_at_1": 0.0,
+        "recall_at_1": 0.5,
         "recall_at_5": 1.0,
         "recall_at_10": 1.0,
-        "mrr_at_10": 0.5,
+        "mrr_at_10": 1.0,
         "section_at_5": 1.0,
         "top_docs": [
+          "usage/troubleshooting.md",
           "design/multiprocessing.md",
           "usage/reproducibility.md",
-          "usage/troubleshooting.md",
           "design/multiprocessing.md",
           "design/multiprocessing.md"
         ]
@@ -152,7 +152,7 @@
           "training/async_rl.md",
           "training/async_rl.md",
           "training/async_rl.md",
-          "serving/online_serving/derenderer.md"
+          "serving/online_serving/README.md"
         ]
       },
       {
@@ -183,8 +183,8 @@
           "deployment/docker.md",
           "features/initialized_snapshots.md",
           "getting_started/installation/gpu.cuda.inc.md",
-          "getting_started/installation/gpu.rocm.inc.md",
-          "getting_started/installation/cpu.x86.inc.md"
+          "getting_started/installation/gpu.cuda.inc.md",
+          "getting_started/installation/gpu.rocm.inc.md"
         ]
       },
       {
@@ -197,10 +197,10 @@
         "section_at_5": 1.0,
         "top_docs": [
           "configuration/optimization.md",
-          "benchmarking/cli.md",
-          "configuration/conserving_memory.md",
           "configuration/optimization.md",
-          "deployment/integrations/kthena.md"
+          "benchmarking/cli.md",
+          "design/metrics.md",
+          "design/hybrid_kv_cache_manager.md"
         ]
       },
       {
@@ -213,9 +213,9 @@
         "section_at_5": 1.0,
         "top_docs": [
           "serving/parallelism_scaling.md",
+          "usage/troubleshooting.md",
           "serving/parallelism_scaling.md",
-          "usage/troubleshooting.md",
-          "usage/troubleshooting.md",
+          "training/weight_transfer/nccl.md",
           "usage/troubleshooting.md"
         ]
       },
@@ -223,16 +223,16 @@
         "id": "q012",
         "slice": "multi_hop",
         "recall_at_1": 0.5,
-        "recall_at_5": 0.5,
+        "recall_at_5": 1.0,
         "recall_at_10": 1.0,
         "mrr_at_10": 1.0,
         "section_at_5": 1.0,
         "top_docs": [
           "serving/distributed_troubleshooting.md",
-          "getting_started/installation/gpu.cuda.inc.md",
-          "serving/distributed_troubleshooting.md",
-          "getting_started/installation/gpu.cuda.inc.md",
-          "deployment/integrations/kthena.md"
+          "serving/parallelism_scaling.md",
+          "deployment/integrations/kthena.md",
+          "serving/parallelism_scaling.md",
+          "serving/parallelism_scaling.md"
         ]
       },
       {
@@ -247,8 +247,8 @@
           "features/reasoning_outputs.md",
           "features/reasoning_outputs.md",
           "features/reasoning_outputs.md",
-          "features/reasoning_outputs.md",
-          "features/quantization/inc.md"
+          "serving/online_serving/derenderer.md",
+          "features/reasoning_outputs.md"
         ]
       },
       {
@@ -262,9 +262,9 @@
         "top_docs": [
           "configuration/serve_args.md",
           "configuration/serve_args.md",
-          "configuration/serve_args.md",
-          "deployment/docker.md",
-          "cli/README.md"
+          "benchmarking/sweeps.md",
+          "deployment/k8s.md",
+          "design/attention_backends.md"
         ]
       },
       {
@@ -277,10 +277,10 @@
         "section_at_5": 1.0,
         "top_docs": [
           "features/lora.md",
+          "features/quantization/online.md",
           "usage/security.md",
-          "models/supported_models.md",
-          "models/extensions/tensorizer.md",
-          "usage/security.md"
+          "features/quantization/online.md",
+          "models/supported_models.md"
         ]
       },
       {
@@ -292,43 +292,43 @@
         "mrr_at_10": 1.0,
         "section_at_5": 1.0,
         "top_docs": [
-          "configuration/optimization.md",
-          "serving/data_parallel_deployment.md",
-          "serving/parallelism_scaling.md",
           "serving/expert_parallel_deployment.md",
+          "serving/data_parallel_deployment.md",
+          "serving/data_parallel_deployment.md",
+          "configuration/optimization.md",
           "configuration/optimization.md"
         ]
       },
       {
         "id": "q017",
         "slice": "config_flag",
-        "recall_at_1": 0.0,
+        "recall_at_1": 1.0,
         "recall_at_5": 1.0,
         "recall_at_10": 1.0,
-        "mrr_at_10": 0.3333333333333333,
+        "mrr_at_10": 1.0,
         "section_at_5": 1.0,
         "top_docs": [
+          "features/quantization/quantized_kvcache.md",
           "design/hybrid_kv_cache_manager.md",
           "design/hybrid_kv_cache_manager.md",
-          "features/quantization/quantized_kvcache.md",
-          "features/quantization/quantized_kvcache.md",
-          "features/quantization/quantized_kvcache.md"
+          "design/hybrid_kv_cache_manager.md",
+          "design/hybrid_kv_cache_manager.md"
         ]
       },
       {
         "id": "q018",
         "slice": "multi_hop",
-        "recall_at_1": 0.0,
+        "recall_at_1": 0.5,
         "recall_at_5": 0.5,
         "recall_at_10": 0.5,
-        "mrr_at_10": 0.25,
+        "mrr_at_10": 1.0,
         "section_at_5": 1.0,
         "top_docs": [
-          "deployment/integrations/kthena.md",
-          "deployment/integrations/kthena.md",
-          "features/speculative_decoding/adaptive_verification.md",
           "configuration/conserving_memory.md",
-          "deployment/integrations/kthena.md"
+          "deployment/integrations/kthena.md",
+          "deployment/integrations/kthena.md",
+          "design/cuda_graphs.md",
+          "features/speculative_decoding/adaptive_verification.md"
         ]
       },
       {
@@ -340,10 +340,10 @@
         "mrr_at_10": 1.0,
         "section_at_5": 1.0,
         "top_docs": [
+          "usage/security.md",
           "serving/online_serving/speech_to_text.md",
-          "usage/security.md",
-          "usage/security.md",
-          "usage/security.md",
+          "serving/online_serving/speech_to_text.md",
+          "features/multimodal_inputs.md",
           "usage/security.md"
         ]
       },
@@ -351,16 +351,16 @@
         "id": "q020",
         "slice": "multi_hop",
         "recall_at_1": 0.5,
-        "recall_at_5": 0.5,
+        "recall_at_5": 1.0,
         "recall_at_10": 1.0,
         "mrr_at_10": 1.0,
         "section_at_5": 1.0,
         "top_docs": [
           "deployment/docker.md",
+          "configuration/optimization.md",
+          "getting_started/installation/gpu.cuda.inc.md",
           "design/torch_compile.md",
-          "design/debug_vllm_compile.md",
-          "design/torch_compile.md",
-          "deployment/docker.md"
+          "design/debug_vllm_compile.md"
         ]
       },
       {
@@ -373,38 +373,38 @@
         "section_at_5": 0.0,
         "top_docs": [
           "configuration/model_resolution.md",
+          "models/supported_models.md",
           "usage/troubleshooting.md",
-          "usage/troubleshooting.md",
-          "serving/integrations/codex.md",
-          "deployment/frameworks/helm.md"
+          "features/engram.md",
+          "usage/troubleshooting.md"
         ]
       },
       {
         "id": "q024",
         "slice": "how_to",
-        "recall_at_1": 0.0,
+        "recall_at_1": 1.0,
         "recall_at_5": 1.0,
         "recall_at_10": 1.0,
-        "mrr_at_10": 0.3333333333333333,
+        "mrr_at_10": 1.0,
         "section_at_5": 1.0,
         "top_docs": [
-          "deployment/integrations/production-stack.md",
-          "benchmarking/cli.md",
           "serving/online_serving/openai_compatible_server.md",
+          "getting_started/quickstart.md",
+          "benchmarking/cli.md",
           "getting_started/installation/gpu.apple.inc.md",
-          "serving/expert_parallel_deployment.md"
+          "serving/online_serving/openai_compatible_server.md"
         ]
       },
       {
         "id": "q025",
         "slice": "how_to",
-        "recall_at_1": 0.0,
-        "recall_at_5": 0.0,
+        "recall_at_1": 1.0,
+        "recall_at_5": 1.0,
         "recall_at_10": 1.0,
-        "mrr_at_10": 0.14285714285714285,
-        "section_at_5": 0.0,
+        "mrr_at_10": 1.0,
+        "section_at_5": 1.0,
         "top_docs": [
-          "models/supported_models.md",
+          "configuration/conserving_memory.md",
           "models/supported_models.md",
           "models/supported_models.md",
           "models/supported_models.md",
@@ -422,9 +422,9 @@
         "top_docs": [
           "features/context_extension.md",
           "features/context_extension.md",
-          "features/batch_invariance.md",
-          "design/torch_compile.md",
-          "features/context_extension.md"
+          "configuration/conserving_memory.md",
+          "features/context_extension.md",
+          "features/batch_invariance.md"
         ]
       },
       {
@@ -447,16 +447,16 @@
         "id": "q028",
         "slice": "config_flag",
         "recall_at_1": 0.0,
-        "recall_at_5": 0.0,
-        "recall_at_10": 0.0,
-        "mrr_at_10": 0.0,
-        "section_at_5": 0.0,
+        "recall_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "mrr_at_10": 0.2,
+        "section_at_5": 1.0,
         "top_docs": [
+          "design/arch_overview.md",
+          "features/preload.md",
+          "features/preload.md",
           "features/sleep_mode.md",
-          "features/preload.md",
-          "features/preload.md",
-          "benchmarking/sweeps.md",
-          "models/extensions/instanttensor.md"
+          "usage/troubleshooting.md"
         ]
       },
       {
@@ -470,9 +470,9 @@
         "top_docs": [
           "training/weight_transfer/README.md",
           "training/weight_transfer/ipc.md",
-          "training/weight_transfer/ipc.md",
-          "training/async_rl.md",
-          "training/weight_transfer/m2n.md"
+          "training/weight_transfer/base.md",
+          "training/weight_transfer/README.md",
+          "training/weight_transfer/ipc.md"
         ]
       },
       {
@@ -486,7 +486,7 @@
         "top_docs": [
           "features/sleep_mode.md",
           "features/sleep_mode.md",
-          "features/sleep_mode.md",
+          "serving/offline_inference.md",
           "features/sleep_mode.md",
           "features/sleep_mode.md"
         ]
@@ -496,15 +496,15 @@
         "slice": "factual",
         "recall_at_1": 0.0,
         "recall_at_5": 0.0,
-        "recall_at_10": 0.0,
-        "mrr_at_10": 0.0,
+        "recall_at_10": 1.0,
+        "mrr_at_10": 0.14285714285714285,
         "section_at_5": 0.0,
         "top_docs": [
+          "features/quantization/inc.md",
           "configuration/optimization.md",
+          "features/context_extension.md",
           "design/mm_processing.md",
-          "usage/security.md",
-          "usage/security.md",
-          "features/kv_offloading_usage.md"
+          "design/cuda_graphs_multimodal.md"
         ]
       },
       {
@@ -518,9 +518,9 @@
         "top_docs": [
           "usage/usage_stats.md",
           "usage/usage_stats.md",
-          "usage/security.md",
           "usage/usage_stats.md",
-          "design/metrics.md"
+          "usage/security.md",
+          "design/nixl_kv_push_connector.md"
         ]
       },
       {
@@ -534,8 +534,8 @@
         "top_docs": [
           "usage/troubleshooting.md",
           "design/debug_vllm_compile.md",
-          "design/debug_vllm_compile.md",
           "usage/troubleshooting.md",
+          "design/debug_vllm_compile.md",
           "design/debug_vllm_compile.md"
         ]
       },
@@ -551,8 +551,8 @@
           "usage/reproducibility.md",
           "usage/reproducibility.md",
           "usage/v1_guide.md",
-          "deployment/frameworks/streamlit.md",
-          "README.md"
+          "features/kv_offloading_usage.md",
+          "features/mooncake_store_connector_usage.md"
         ]
       },
       {
@@ -565,10 +565,10 @@
         "section_at_5": 1.0,
         "top_docs": [
           "serving/expert_parallel_deployment.md",
+          "design/moe_kernel_features.md",
+          "design/moe_kernel_features.md",
           "getting_started/quickstart.md",
-          "serving/expert_parallel_deployment.md",
-          "serving/parallelism_scaling.md",
-          "configuration/optimization.md"
+          "design/dbo.md"
         ]
       },
       {
@@ -581,10 +581,10 @@
         "section_at_5": 1.0,
         "top_docs": [
           "features/structured_outputs.md",
-          "design/attention_backends.md",
-          "features/structured_outputs.md",
           "features/tool_calling.md",
-          "benchmarking/cli.md"
+          "features/tool_calling.md",
+          "features/structured_outputs.md",
+          "usage/v1_guide.md"
         ]
       },
       {
@@ -597,10 +597,10 @@
         "section_at_5": 0.0,
         "top_docs": [
           "models/supported_models.md",
+          "models/supported_models.md",
           "deployment/frameworks/hf_inference_endpoints.md",
           "design/huggingface_integration.md",
-          "models/supported_models.md",
-          "models/supported_models.md"
+          "design/huggingface_integration.md"
         ]
       },
       {
@@ -615,8 +615,8 @@
           "usage/faq.md",
           "getting_started/quickstart.md",
           "features/quantization/modelopt.md",
-          "deployment/frameworks/bentoml.md",
-          "serving/online_serving/openai_compatible_server.md"
+          "deployment/frameworks/skypilot.md",
+          "getting_started/quickstart.md"
         ]
       },
       {
@@ -626,12 +626,12 @@
         "recall_at_5": 1.0,
         "recall_at_10": 1.0,
         "mrr_at_10": 1.0,
-        "section_at_5": 0.0,
+        "section_at_5": 1.0,
         "top_docs": [
           "features/preload.md",
-          "configuration/optimization.md",
-          "models/extensions/instanttensor.md",
-          "configuration/optimization.md",
+          "features/preload.md",
+          "features/preload.md",
+          "cli/README.md",
           "features/sleep_mode.md"
         ]
       },
@@ -639,32 +639,32 @@
         "id": "q040",
         "slice": "how_to",
         "recall_at_1": 0.0,
-        "recall_at_5": 0.0,
-        "recall_at_10": 0.0,
-        "mrr_at_10": 0.0,
-        "section_at_5": 0.0,
+        "recall_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "mrr_at_10": 0.5,
+        "section_at_5": 1.0,
         "top_docs": [
-          "deployment/frameworks/streamlit.md",
-          "getting_started/installation/cpu.x86.inc.md",
           "getting_started/installation/cpu.arm.inc.md",
-          "deployment/frameworks/dify.md",
-          "getting_started/installation/cpu.arm.inc.md"
+          "cli/README.md",
+          "getting_started/installation/gpu.cuda.inc.md",
+          "getting_started/installation/gpu.cuda.inc.md",
+          "deployment/frameworks/streamlit.md"
         ]
       },
       {
         "id": "q043",
         "slice": "how_to",
-        "recall_at_1": 1.0,
+        "recall_at_1": 0.0,
         "recall_at_5": 1.0,
         "recall_at_10": 1.0,
-        "mrr_at_10": 1.0,
+        "mrr_at_10": 0.5,
         "section_at_5": 1.0,
         "top_docs": [
-          "benchmarking/cli.md",
-          "benchmarking/sweeps.md",
           "benchmarking/sweeps.md",
           "benchmarking/cli.md",
-          "cli/README.md"
+          "benchmarking/sweeps.md",
+          "benchmarking/cli.md",
+          "benchmarking/cli.md"
         ]
       },
       {
@@ -677,9 +677,9 @@
         "section_at_5": 0.0,
         "top_docs": [
           "models/supported_models.md",
+          "design/huggingface_integration.md",
           "models/supported_models.md",
-          "models/supported_models.md",
-          "models/supported_models.md",
+          "deployment/frameworks/hf_inference_endpoints.md",
           "design/huggingface_integration.md"
         ]
       },
@@ -695,8 +695,8 @@
           "features/sleep_mode.md",
           "features/sleep_mode.md",
           "features/sleep_mode.md",
-          "features/sleep_mode.md",
-          "features/sleep_mode.md"
+          "features/initialized_snapshots.md",
+          "training/trl.md"
         ]
       },
       {
@@ -710,7 +710,7 @@
         "top_docs": [
           "features/batch_invariance.md",
           "configuration/optimization.md",
-          "features/quantization/modelopt.md",
+          "features/batch_invariance.md",
           "features/batch_invariance.md",
           "features/quantization/modelopt.md"
         ]
@@ -718,17 +718,17 @@
       {
         "id": "q049",
         "slice": "how_to",
-        "recall_at_1": 0.0,
+        "recall_at_1": 1.0,
         "recall_at_5": 1.0,
         "recall_at_10": 1.0,
-        "mrr_at_10": 0.5,
+        "mrr_at_10": 1.0,
         "section_at_5": 1.0,
         "top_docs": [
-          "design/debug_vllm_compile.md",
           "deployment/docker.md",
+          "configuration/optimization.md",
           "design/torch_compile.md",
           "design/torch_compile.md",
-          "design/debug_vllm_compile.md"
+          "design/torch_compile.md"
         ]
       },
       {
@@ -759,8 +759,8 @@
           "serving/parallelism_scaling.md",
           "serving/parallelism_scaling.md",
           "serving/parallelism_scaling.md",
-          "deployment/frameworks/skypilot.md",
-          "serving/data_parallel_deployment.md"
+          "serving/data_parallel_deployment.md",
+          "serving/parallelism_scaling.md"
         ]
       },
       {
@@ -772,11 +772,11 @@
         "mrr_at_10": 1.0,
         "section_at_5": 1.0,
         "top_docs": [
+          "features/kv_offloading_usage.md",
           "features/batch_invariance.md",
-          "features/kv_offloading_usage.md",
-          "features/kv_offloading_usage.md",
-          "features/kv_offloading_usage.md",
-          "features/batch_invariance.md"
+          "features/batch_invariance.md",
+          "features/batch_invariance.md",
+          "design/hisparse.md"
         ]
       },
       {
@@ -791,7 +791,7 @@
           "features/lora.md",
           "design/lora_resolver_plugins.md",
           "features/lora.md",
-          "usage/security.md",
+          "design/lora_resolver_plugins.md",
           "features/lora.md"
         ]
       },
@@ -806,25 +806,25 @@
         "top_docs": [
           "benchmarking/cli.md",
           "benchmarking/cli.md",
+          "benchmarking/sweeps.md",
           "benchmarking/cli.md",
-          "benchmarking/cli.md",
-          "cli/README.md"
+          "benchmarking/cli.md"
         ]
       },
       {
         "id": "q058",
         "slice": "config_flag",
         "recall_at_1": 0.0,
-        "recall_at_5": 1.0,
+        "recall_at_5": 0.0,
         "recall_at_10": 1.0,
-        "mrr_at_10": 0.25,
-        "section_at_5": 1.0,
+        "mrr_at_10": 0.1111111111111111,
+        "section_at_5": 0.0,
         "top_docs": [
+          "design/nixl_kv_push_connector.md",
+          "design/logits_processors.md",
+          "design/logits_processors.md",
           "benchmarking/sweeps.md",
-          "deployment/nginx.md",
-          "serving/online_serving/renderer.md",
-          "features/batch_invariance.md",
-          "serving/online_serving/derenderer.md"
+          "deployment/nginx.md"
         ]
       },
       {
@@ -837,10 +837,10 @@
         "section_at_5": 1.0,
         "top_docs": [
           "benchmarking/sweeps.md",
-          "usage/security.md",
           "benchmarking/sweeps.md",
           "benchmarking/sweeps.md",
-          "features/speculative_decoding/extract_hidden_states.md"
+          "benchmarking/sweeps.md",
+          "benchmarking/sweeps.md"
         ]
       },
       {
@@ -854,8 +854,8 @@
         "top_docs": [
           "models/extensions/runai_model_streamer.md",
           "models/extensions/runai_model_streamer.md",
-          "models/extensions/instanttensor.md",
-          "deployment/integrations/production-stack.md",
+          "models/extensions/runai_model_streamer.md",
+          "models/extensions/runai_model_streamer.md",
           "models/extensions/runai_model_streamer.md"
         ]
       }
@@ -865,12 +865,12 @@
         "id": "q001",
         "slice": "factual",
         "status": "answered",
-        "answer": "In v1, when KV cache runs out and requests get preempted, they are recomputed by default. The preempted requests are recomputed when sufficient KV cache space becomes available again, rather than being swapped out [1][3].",
+        "answer": "In v1, when KV cache runs out and requests get preempted, they are recomputed by default. The feature of KV cache swapping has been removed, and the system now relies on preemption and recomputation to handle insufficient KV cache space for batched requests [1][4][2].",
         "refused": false,
-        "citations": 2,
+        "citations": 3,
         "invalid_citations": 0,
-        "cost_usd": 0.000233,
-        "latency_ms": 1293.1,
+        "cost_usd": 0.000244,
+        "latency_ms": 1264.9,
         "cached": false,
         "faithfulness": 1.0,
         "claims": [
@@ -879,59 +879,55 @@
             "supported": true
           },
           {
-            "claim": "The preempted requests are recomputed when sufficient KV cache space becomes available again, rather than being swapped out.",
+            "claim": "The feature of KV cache swapping has been removed.",
+            "supported": true
+          },
+          {
+            "claim": "The system now relies on preemption and recomputation to handle insufficient KV cache space for batched requests.",
             "supported": true
           }
         ],
         "citation_valid": 1.0,
         "correctness": 1.0,
-        "correctness_reason": "The answer correctly states that recompute is the default behavior and not swap, matching the key facts of the reference."
+        "correctness_reason": "The answer correctly states that recomputation is the default and swapping is not used, matching the reference."
       },
       {
         "id": "q002",
         "slice": "factual",
         "status": "answered",
-        "answer": "The OffloadingConnector CPU tier uses the `lru` eviction policy by default. This is specified in the `eviction_policy` key of the `kv_connector_extra_config`, which defaults to `lru` if not explicitly set [1][3].",
+        "answer": "The OffloadingConnector CPU tier uses the `lru` eviction policy by default [1][3].",
         "refused": false,
         "citations": 2,
         "invalid_citations": 0,
-        "cost_usd": 0.000218,
-        "latency_ms": 1175.5,
+        "cost_usd": 0.000189,
+        "latency_ms": 821.9,
         "cached": false,
         "faithfulness": 1.0,
         "claims": [
           {
-            "claim": "The OffloadingConnector CPU tier uses the `lru` eviction policy by default.",
-            "supported": true
-          },
-          {
-            "claim": "This is specified in the `eviction_policy` key of the `kv_connector_extra_config`, which defaults to `lru` if not explicitly set.",
+            "claim": "The OffloadingConnector CPU tier uses the lru eviction policy by default.",
             "supported": true
           }
         ],
         "citation_valid": 1.0,
         "correctness": 1.0,
-        "correctness_reason": "The answer correctly states that the default eviction policy is 'lru' and matches the key fact from the reference answer."
+        "correctness_reason": "The answer correctly states that the default eviction policy is 'lru' for the OffloadingConnector CPU tier and does not contradict the reference."
       },
       {
         "id": "q003",
         "slice": "factual",
         "status": "answered",
-        "answer": "If you don't pass an optimization level, vLLM uses the default optimization level, which is `-O2` [1][2].",
+        "answer": "If you don't pass an optimization level, vLLM uses the default optimization level, which is `-O2` [2][3].",
         "refused": false,
         "citations": 2,
         "invalid_citations": 0,
-        "cost_usd": 0.000215,
-        "latency_ms": 898.3,
+        "cost_usd": 0.000207,
+        "latency_ms": 946.8,
         "cached": false,
         "faithfulness": 1.0,
         "claims": [
           {
-            "claim": "If you don't pass an optimization level, vLLM uses the default optimization level.",
-            "supported": true
-          },
-          {
-            "claim": "The default optimization level is `-O2`.",
+            "claim": "If you don't pass an optimization level, vLLM uses the default optimization level, which is `-O2`.",
             "supported": true
           }
         ],
@@ -943,87 +939,87 @@
         "id": "q004",
         "slice": "how_to",
         "status": "answered",
-        "answer": "Yes, you can disable thinking for Qwen3 server-wide by using the `--default-chat-template-kwargs '{\"enable_thinking\": false}'` flag when starting the server. This will ensure that thinking is disabled for all requests without needing to change client code [1].",
+        "answer": "Yes, you can disable thinking for Qwen3 models server-wide by using the `--default-chat-template-kwargs` flag when starting the server. You would set it to `{\"enable_thinking\": false}`. This way, all requests will have thinking disabled by default without needing to change the client code [4].",
         "refused": false,
         "citations": 1,
         "invalid_citations": 0,
-        "cost_usd": 0.000201,
-        "latency_ms": 1163.7,
+        "cost_usd": 0.0003,
+        "latency_ms": 2094.4,
         "cached": false,
         "faithfulness": 1.0,
         "claims": [
           {
-            "claim": "You can disable thinking for Qwen3 server-wide by using the --default-chat-template-kwargs '{\"enable_thinking\": false}' flag when starting the server.",
+            "claim": "You can disable thinking for Qwen3 models server-wide by using the --default-chat-template-kwargs flag when starting the server.",
             "supported": true
           },
           {
-            "claim": "This will ensure that thinking is disabled for all requests without needing to change client code.",
+            "claim": "You would set it to {\"enable_thinking\": false}.",
+            "supported": true
+          },
+          {
+            "claim": "This way, all requests will have thinking disabled by default without needing to change the client code.",
             "supported": true
           }
         ],
         "citation_valid": 1.0,
         "correctness": 1.0,
-        "correctness_reason": "The answer correctly explains how to disable Qwen3 thinking server-wide using the appropriate flag, matching the key facts of the reference."
+        "correctness_reason": "The answer correctly explains that you can disable Qwen3 thinking server-wide using --default-chat-template-kwargs and does not contradict the reference."
       },
       {
         "id": "q005",
         "slice": "multi_hop",
         "status": "answered",
-        "answer": "Yes, turning off v1 multiprocessing by setting `VLLM_ENABLE_V1_MULTIPROCESSING=0` will allow the random state in user code to be updated by vLLM. This means that the results may not remain consistent for each vLLM run, as the `seed` parameter defaults to `0` when multiprocessing is enabled, ensuring consistent results across runs even if `temperature > 0` [2]. If you disable multiprocessing, you may inadvertently make deterministic subsequent operations that rely on random state [2].",
+        "answer": "Yes, turning off v1 multiprocessing by setting the environment variable `VLLM_ENABLE_V1_MULTIPROCESSING` to `0` will allow the random state in user code to be updated by vLLM. This means that the results will remain consistent for each vLLM run even if `temperature > 0` [3]. However, if `VLLM_ENABLE_V1_MULTIPROCESSING` is set to `1`, the random state will not be updated, which is the default behavior [3].",
         "refused": false,
         "citations": 1,
         "invalid_citations": 0,
-        "cost_usd": 0.00031,
-        "latency_ms": 1888.1,
+        "cost_usd": 0.000347,
+        "latency_ms": 2044.0,
         "cached": false,
         "faithfulness": 1.0,
         "claims": [
           {
-            "claim": "Turning off v1 multiprocessing by setting VLLM_ENABLE_V1_MULTIPROCESSING=0 will allow the random state in user code to be updated by vLLM.",
+            "claim": "Turning off v1 multiprocessing by setting the environment variable VLLM_ENABLE_V1_MULTIPROCESSING to 0 will allow the random state in user code to be updated by vLLM.",
             "supported": true
           },
           {
-            "claim": "This means that the results may not remain consistent for each vLLM run.",
+            "claim": "This means that the results will remain consistent for each vLLM run even if temperature > 0.",
             "supported": true
           },
           {
-            "claim": "The seed parameter defaults to 0 when multiprocessing is enabled, ensuring consistent results across runs even if temperature > 0.",
-            "supported": true
-          },
-          {
-            "claim": "If you disable multiprocessing, you may inadvertently make deterministic subsequent operations that rely on random state.",
+            "claim": "If VLLM_ENABLE_V1_MULTIPROCESSING is set to 1, the random state will not be updated, which is the default behavior.",
             "supported": true
           }
         ],
         "citation_valid": 1.0,
         "correctness": 1.0,
-        "correctness_reason": "The answer correctly explains that disabling v1 multiprocessing affects the random state, matching the key facts of the reference."
+        "correctness_reason": "The answer correctly explains that disabling v1 multiprocessing causes vLLM to affect the random state, matching the reference answer."
       },
       {
         "id": "q006",
         "slice": "factual",
         "status": "answered",
-        "answer": "By default, when you call `pause_generation`, it aborts all in-flight requests immediately and returns partial results. This behavior is controlled by the `mode` parameter, which defaults to `\"abort\"` [1].",
+        "answer": "By default, when you call `pause_generation`, it aborts all in-flight requests immediately and returns partial results. This behavior is specified by the `\"abort\"` mode, which is the default setting for the `mode` parameter in the `pause_generation` method [1][2].",
         "refused": false,
-        "citations": 1,
+        "citations": 2,
         "invalid_citations": 0,
-        "cost_usd": 0.000147,
-        "latency_ms": 1071.9,
+        "cost_usd": 0.000186,
+        "latency_ms": 1222.2,
         "cached": false,
         "faithfulness": 1.0,
         "claims": [
           {
-            "claim": "By default, when you call `pause_generation`, it aborts all in-flight requests immediately and returns partial results.",
+            "claim": "By default, when you call pause_generation, it aborts all in-flight requests immediately and returns partial results.",
             "supported": true
           },
           {
-            "claim": "This behavior is controlled by the `mode` parameter, which defaults to \"abort\".",
+            "claim": "This behavior is specified by the \"abort\" mode, which is the default setting for the mode parameter in the pause_generation method.",
             "supported": true
           }
         ],
         "citation_valid": 1.0,
         "correctness": 1.0,
-        "correctness_reason": "The answer correctly states that in-flight requests are aborted and partial results are returned by default, matching the reference answer."
+        "correctness_reason": "The answer correctly states that in-flight requests are aborted immediately and partial results are returned by default, matching the reference answer."
       },
       {
         "id": "q007",
@@ -1034,7 +1030,7 @@
         "citations": 1,
         "invalid_citations": 0,
         "cost_usd": 0.000188,
-        "latency_ms": 931.9,
+        "latency_ms": 1238.0,
         "cached": false,
         "faithfulness": 1.0,
         "claims": [
@@ -1045,40 +1041,44 @@
         ],
         "citation_valid": 1.0,
         "correctness": 1.0,
-        "correctness_reason": "The answer correctly identifies the --exclude-tools-when-tool-choice-none option as the solution and matches the key fact from the reference."
+        "correctness_reason": "The answer correctly identifies the --exclude-tools-when-tool-choice-none option and matches the key fact from the reference."
       },
       {
         "id": "q008",
         "slice": "factual",
         "status": "answered",
-        "answer": "The non-root `vllm` user has a UID of `2000` in the official Docker image [1].",
+        "answer": "The non-root `vllm` user in the official Docker image has a UID of 2000 and a GID of 0 [1].",
         "refused": false,
         "citations": 1,
         "invalid_citations": 0,
-        "cost_usd": 0.000335,
-        "latency_ms": 949.5,
+        "cost_usd": 0.000384,
+        "latency_ms": 925.5,
         "cached": false,
         "faithfulness": 1.0,
         "claims": [
           {
-            "claim": "The non-root `vllm` user has a UID of `2000` in the official Docker image.",
+            "claim": "The non-root vllm user in the official Docker image has a UID of 2000.",
+            "supported": true
+          },
+          {
+            "claim": "The non-root vllm user in the official Docker image has a GID of 0.",
             "supported": true
           }
         ],
         "citation_valid": 1.0,
         "correctness": 1.0,
-        "correctness_reason": "The answer correctly states that the vllm user has UID 2000, matching the key fact from the reference."
+        "correctness_reason": "The answer correctly states that the vllm user has UID 2000 and GID 0, matching the reference answer."
       },
       {
         "id": "q009",
         "slice": "config_flag",
         "status": "answered",
-        "answer": "To allow vLLM to grab more GPU memory for the KV cache, you can increase `gpu_memory_utilization`. This setting pre-allocates GPU cache using a higher percentage of memory, providing more KV cache space. Additionally, you might consider increasing `tensor_parallel_size`, which shards model weights across GPUs, allowing each GPU to have more memory available for KV cache. However, be aware that increasing this value may cause excessive synchronization overhead [1][4].",
+        "answer": "To allow vLLM to grab more GPU memory for the KV cache, you can increase `gpu_memory_utilization`. This setting pre-allocates GPU cache using a higher percentage of memory, providing more KV cache space. Additionally, you can consider increasing `tensor_parallel_size`, which shards model weights across GPUs, allowing each GPU to have more memory available for KV cache. Another option is to increase `pipeline_parallel_size`, which distributes model layers across GPUs, indirectly leaving more memory available for KV cache [1][2].",
         "refused": false,
         "citations": 2,
         "invalid_citations": 0,
-        "cost_usd": 0.000264,
-        "latency_ms": 1875.9,
+        "cost_usd": 0.000322,
+        "latency_ms": 1433.8,
         "cached": false,
         "faithfulness": 1.0,
         "claims": [
@@ -1091,17 +1091,17 @@
             "supported": true
           },
           {
-            "claim": "Additionally, you might consider increasing `tensor_parallel_size`, which shards model weights across GPUs, allowing each GPU to have more memory available for KV cache.",
+            "claim": "Additionally, you can consider increasing `tensor_parallel_size`, which shards model weights across GPUs, allowing each GPU to have more memory available for KV cache.",
             "supported": true
           },
           {
-            "claim": "However, be aware that increasing this value may cause excessive synchronization overhead.",
+            "claim": "Another option is to increase `pipeline_parallel_size`, which distributes model layers across GPUs, indirectly leaving more memory available for KV cache.",
             "supported": true
           }
         ],
         "citation_valid": 1.0,
-        "correctness": 1.0,
-        "correctness_reason": "The answer correctly identifies raising gpu_memory_utilization as the main setting and mentions tensor_parallel_size, matching the key facts of the reference."
+        "correctness": 0.5,
+        "correctness_reason": "The answer correctly identifies increasing `gpu_memory_utilization` and mentions `tensor_parallel_size`, but it incorrectly suggests increasing `pipeline_parallel_size` (not mentioned in the reference), and omits lowering `max_num_seqs` or `max_num_batched_tokens`."
       },
       {
         "id": "q010",
@@ -1111,8 +1111,8 @@
         "refused": true,
         "citations": 0,
         "invalid_citations": 0,
-        "cost_usd": 0.000194,
-        "latency_ms": 789.4,
+        "cost_usd": 0.000171,
+        "latency_ms": 841.0,
         "cached": false,
         "refusal_correct": 1.0
       },
@@ -1120,12 +1120,12 @@
         "id": "q011",
         "slice": "how_to",
         "status": "answered",
-        "answer": "To check if NCCL is using GPUDirect RDMA across nodes, run vLLM with detailed NCCL logs using the command: `NCCL_DEBUG=TRACE vllm serve ...`. Then, look for the logs to find the NCCL version and the network used. If you see `[send] via NET/IB/GDRDMA`, it indicates that NCCL is using InfiniBand with GPUDirect RDMA, which is efficient. Conversely, if you see `[send] via NET/Socket`, it means NCCL used a raw TCP socket, which is not efficient for cross-node tensor parallelism [1][2].",
+        "answer": "To check if NCCL is using GPUDirect RDMA across nodes, run vLLM with detailed NCCL logs using the command: `NCCL_DEBUG=TRACE vllm serve ...`. Then, look for the logs to find the NCCL version and the network used. If you see `[send] via NET/IB/GDRDMA`, it indicates that NCCL is using InfiniBand with GPUDirect RDMA, which is efficient. Conversely, if you see `[send] via NET/Socket`, it means NCCL used a raw TCP socket, which is not efficient for cross-node tensor parallelism [1][3].",
         "refused": false,
         "citations": 2,
         "invalid_citations": 0,
-        "cost_usd": 0.000396,
-        "latency_ms": 2039.7,
+        "cost_usd": 0.000349,
+        "latency_ms": 1846.3,
         "cached": false,
         "faithfulness": 1.0,
         "claims": [
@@ -1148,101 +1148,137 @@
         ],
         "citation_valid": 1.0,
         "correctness": 1.0,
-        "correctness_reason": "The answer includes the key facts: running with NCCL_DEBUG=TRACE, checking the logs for '[send] via NET/IB/GDRDMA' versus '[send] via NET/Socket', and correctly interprets their meanings."
+        "correctness_reason": "The answer contains all key facts from the reference, including how to enable NCCL debug logs and how to interpret the relevant log messages, with no contradictions."
       },
       {
         "id": "q012",
         "slice": "multi_hop",
         "status": "answered",
-        "answer": "Ensure that vLLM and Ray use the same IP address by setting `VLLM_HOST_IP` in `examples/ray_serving/run_cluster.sh` (with a different value on each node) to resolve the issue of the error message `Error: No available node types can fulfill resource request` [1].",
+        "answer": "You should set `VLLM_HOST_IP` to the correct IP address that both vLLM and Ray will use. This is important especially when nodes have multiple IP addresses. Ensure that `VLLM_HOST_IP` is set with a different value on each node, and you can verify the chosen IP address using `ray status` and `ray list nodes` commands [1].",
         "refused": false,
         "citations": 1,
         "invalid_citations": 0,
-        "cost_usd": 0.000294,
-        "latency_ms": 1313.7,
+        "cost_usd": 0.000304,
+        "latency_ms": 1873.4,
         "cached": false,
         "faithfulness": 1.0,
         "claims": [
           {
-            "claim": "Ensure that vLLM and Ray use the same IP address by setting VLLM_HOST_IP in examples/ray_serving/run_cluster.sh (with a different value on each node) to resolve the issue of the error message Error: No available node types can fulfill resource request.",
+            "claim": "You should set `VLLM_HOST_IP` to the correct IP address that both vLLM and Ray will use.",
+            "supported": true
+          },
+          {
+            "claim": "This is important especially when nodes have multiple IP addresses.",
+            "supported": true
+          },
+          {
+            "claim": "Ensure that `VLLM_HOST_IP` is set with a different value on each node.",
+            "supported": true
+          },
+          {
+            "claim": "You can verify the chosen IP address using `ray status` and `ray list nodes` commands.",
             "supported": true
           }
         ],
         "citation_valid": 1.0,
         "correctness": 1.0,
-        "correctness_reason": "The answer correctly states to set VLLM_HOST_IP to the same value as Ray and to use a different value on each node, matching the key facts of the reference."
+        "correctness_reason": "The answer covers setting VLLM_HOST_IP to the correct per-node IP so vLLM and Ray agree, and mentions multiple IPs and per-node uniqueness, matching the key facts of the reference."
       },
       {
         "id": "q013",
         "slice": "multi_hop",
-        "status": "refused",
-        "answer": "I don't know based on the vLLM documentation.",
-        "refused": true,
-        "citations": 0,
+        "status": "answered",
+        "answer": "To serve `QwQ-32B` with reasoning plus function calling, you should pass the parsers as follows:\n\n- Reasoning Parser: `deepseek_r1`\n- Tool Calling: The model supports tool calling, so you can enable it as well.\n\nYou would use the command:\n```bash\nvllm serve Qwen/QwQ-32B --reasoning-parser deepseek_r1\n``` \nThis configuration allows for both reasoning and function calling capabilities [1][2].",
+        "refused": false,
+        "citations": 2,
         "invalid_citations": 0,
-        "cost_usd": 0.000289,
-        "latency_ms": 917.4,
+        "cost_usd": 0.000345,
+        "latency_ms": 1630.7,
         "cached": false,
-        "correctness": 0.0,
-        "correctness_reason": "not answered (refused)"
+        "faithfulness": 0.6,
+        "claims": [
+          {
+            "claim": "To serve `QwQ-32B` with reasoning plus function calling, you should pass the parsers as follows:",
+            "supported": false
+          },
+          {
+            "claim": "Reasoning Parser: `deepseek_r1`",
+            "supported": true
+          },
+          {
+            "claim": "Tool Calling: The model supports tool calling, so you can enable it as well.",
+            "supported": true
+          },
+          {
+            "claim": "You would use the command:\n```bash\nvllm serve Qwen/QwQ-32B --reasoning-parser deepseek_r1\n```",
+            "supported": false
+          },
+          {
+            "claim": "This configuration allows for both reasoning and function calling capabilities.",
+            "supported": true
+          }
+        ],
+        "citation_valid": 1.0,
+        "correctness": 0.5,
+        "correctness_reason": "The answer correctly specifies the reasoning parser but omits the required tool-call parser (hermes) and the need for --enable-auto-tool-choice, which are key details from the reference."
       },
       {
         "id": "q014",
         "slice": "how_to",
         "status": "answered",
-        "answer": "You can load CLI arguments via a YAML config file by specifying the argument names in the long form outlined in the documentation. For example, your `config.yaml` might look like this:\n\n```yaml\nmodel: meta-llama/Llama-3.1-8B-Instruct\nhost: \"127.0.0.1\"\nport: 6379\nuvicorn-log-level: \"info\"\n```\n\nTo use the config file, run the command: \n\n```bash\nvllm serve --config config.yaml\n```\n\nThis allows you to avoid passing options directly on the command line [1][2].",
+        "answer": "You can load CLI arguments via a YAML config file by specifying the argument names in the long form as outlined in the documentation. For example, you can create a `config.yaml` file with the desired options like this:\n\n```yaml\n# config.yaml\n\nmodel: meta-llama/Llama-3.1-8B-Instruct\nhost: \"127.0.0.1\"\nport: 6379\nuvicorn-log-level: \"info\"\n```\n\nTo use the config file, run the command:\n\n```bash\nvllm serve --config config.yaml\n```\n\nThis allows you to set your vLLM serve options in the YAML file instead of passing them on the command line [2].",
         "refused": false,
-        "citations": 2,
+        "citations": 1,
         "invalid_citations": 0,
-        "cost_usd": 0.00027,
-        "latency_ms": 1746.3,
+        "cost_usd": 0.000323,
+        "latency_ms": 2744.0,
         "cached": false,
         "faithfulness": 1.0,
         "claims": [
           {
-            "claim": "You can load CLI arguments via a YAML config file by specifying the argument names in the long form outlined in the documentation.",
+            "claim": "You can load CLI arguments via a YAML config file by specifying the argument names in the long form as outlined in the documentation.",
             "supported": true
           },
           {
-            "claim": "For example, your config.yaml might look like this: model: meta-llama/Llama-3.1-8B-Instruct host: \"127.0.0.1\" port: 6379 uvicorn-log-level: \"info\"",
+            "claim": "You can create a config.yaml file with the desired options like this: model: meta-llama/Llama-3.1-8B-Instruct, host: \"127.0.0.1\", port: 6379, uvicorn-log-level: \"info\".",
             "supported": true
           },
           {
-            "claim": "To use the config file, run the command: vllm serve --config config.yaml",
+            "claim": "To use the config file, run the command: vllm serve --config config.yaml.",
             "supported": true
           },
           {
-            "claim": "This allows you to avoid passing options directly on the command line.",
+            "claim": "This allows you to set your vLLM serve options in the YAML file instead of passing them on the command line.",
             "supported": true
           }
         ],
         "citation_valid": 1.0,
         "correctness": 1.0,
-        "correctness_reason": "The answer correctly explains using a YAML file with long-form argument names and running vllm serve --config config.yaml, matching the reference answer."
+        "correctness_reason": "The answer correctly explains how to use a YAML config file with long-form argument names and how to launch vllm serve with it, matching the reference answer."
       },
       {
         "id": "q015",
         "slice": "config_flag",
         "status": "answered",
-        "answer": "You should use the `--lora-target-modules` parameter to restrict LoRA to the `o_proj` module. The command would be:\n\n```bash\nvllm serve model --enable-lora --lora-target-modules o_proj\n```\n\nThis will apply LoRA only to the output projection layers as specified [1].",
+        "answer": "You should use the `--lora-target-modules` parameter to restrict LoRA to specific modules. For applying LoRA only to the `o_proj` layer, you can run the command:\n\n```bash\nvllm serve model --enable-lora --lora-target-modules o_proj\n```\n\nThis will ensure that LoRA is applied only to the output projection layers [1].",
         "refused": false,
         "citations": 1,
         "invalid_citations": 0,
-        "cost_usd": 0.000306,
-        "latency_ms": 3891.4,
+        "cost_usd": 0.000336,
+        "latency_ms": 1330.4,
         "cached": false,
         "faithfulness": 1.0,
         "claims": [
           {
-            "claim": "You should use the --lora-target-modules parameter to restrict LoRA to the o_proj module.",
+            "claim": "You should use the --lora-target-modules parameter to restrict LoRA to specific modules.",
             "supported": true
           },
           {
-            "claim": "The command would be: vllm serve model --enable-lora --lora-target-modules o_proj",
+            "claim": "For applying LoRA only to the o_proj layer, you can run the command: vllm serve model --enable-lora --lora-target-modules o_proj",
             "supported": true
           },
           {
-            "claim": "This will apply LoRA only to the output projection layers as specified.",
+            "claim": "This will ensure that LoRA is applied only to the output projection layers.",
             "supported": true
           }
         ],
@@ -1254,61 +1290,57 @@
         "id": "q016",
         "slice": "config_flag",
         "status": "answered",
-        "answer": "You can use the `--api-server-count` flag to run more API servers in a large data parallel deployment. For example, you can run 4 API processes with the command: \n\n```console\nvllm serve Qwen/Qwen2.5-VL-3B-Instruct --api-server-count 4\n``` \n\nThis is useful when input processing becomes a bottleneck compared to model execution and you have excess CPU capacity [1][5].",
+        "answer": "You can use the `--api-server-count` flag to run more API server processes in a large data parallel deployment. This allows you to scale out the API server process to alleviate bottlenecks when input processing becomes an issue compared to model execution [3][4].",
         "refused": false,
         "citations": 2,
         "invalid_citations": 0,
-        "cost_usd": 0.000196,
-        "latency_ms": 1943.2,
+        "cost_usd": 0.000241,
+        "latency_ms": 1196.2,
         "cached": false,
         "faithfulness": 1.0,
         "claims": [
           {
-            "claim": "You can use the --api-server-count flag to run more API servers in a large data parallel deployment.",
+            "claim": "You can use the --api-server-count flag to run more API server processes in a large data parallel deployment.",
             "supported": true
           },
           {
-            "claim": "For example, you can run 4 API processes with the command: vllm serve Qwen/Qwen2.5-VL-3B-Instruct --api-server-count 4",
-            "supported": true
-          },
-          {
-            "claim": "This is useful when input processing becomes a bottleneck compared to model execution and you have excess CPU capacity.",
+            "claim": "This allows you to scale out the API server process to alleviate bottlenecks when input processing becomes an issue compared to model execution.",
             "supported": true
           }
         ],
         "citation_valid": 1.0,
         "correctness": 1.0,
-        "correctness_reason": "The answer correctly identifies the --api-server-count flag, gives an example, and explains its use, matching the key facts of the reference."
+        "correctness_reason": "The answer correctly identifies the --api-server-count flag and its purpose, matching the key facts of the reference answer."
       },
       {
         "id": "q017",
         "slice": "config_flag",
         "status": "answered",
-        "answer": "Use the `--kv-cache-dtype-skip-layers` flag to keep the sliding window attention layers at full precision while using FP8 KV cache. You can specify it as follows:\n\n```bash\nvllm serve <model> \\\n  --kv-cache-dtype fp8 \\\n  --kv-cache-dtype-skip-layers sliding_window\n```\n\nThis will skip quantization for every sliding-window attention layer [3].",
+        "answer": "Use the `--kv-cache-dtype-skip-layers` flag to keep the sliding window attention layers at the model's native dtype while using `fp8` for the rest of the layers. You can specify it as follows:\n\n```bash\nvllm serve <model> \\\n  --kv-cache-dtype fp8 \\\n  --kv-cache-dtype-skip-layers sliding_window\n```\n\nThis will skip every sliding-window attention layer from KV-cache quantization [1].",
         "refused": false,
         "citations": 1,
         "invalid_citations": 0,
-        "cost_usd": 0.000273,
-        "latency_ms": 1558.1,
+        "cost_usd": 0.000315,
+        "latency_ms": 1565.2,
         "cached": false,
         "faithfulness": 1.0,
         "claims": [
           {
-            "claim": "Use the --kv-cache-dtype-skip-layers flag to keep the sliding window attention layers at full precision while using FP8 KV cache.",
+            "claim": "Use the --kv-cache-dtype-skip-layers flag to keep the sliding window attention layers at the model's native dtype while using fp8 for the rest of the layers.",
             "supported": true
           },
           {
-            "claim": "You can specify it as follows:\n\n```bash\nvllm serve <model> \\\n  --kv-cache-dtype fp8 \\\n  --kv-cache-dtype-skip-layers sliding_window\n```",
+            "claim": "You can specify it as follows: vllm serve <model> --kv-cache-dtype fp8 --kv-cache-dtype-skip-layers sliding_window",
             "supported": true
           },
           {
-            "claim": "This will skip quantization for every sliding-window attention layer.",
+            "claim": "This will skip every sliding-window attention layer from KV-cache quantization.",
             "supported": true
           }
         ],
         "citation_valid": 1.0,
         "correctness": 1.0,
-        "correctness_reason": "The answer correctly identifies the flag and usage, matching the reference answer without contradiction."
+        "correctness_reason": "The answer correctly identifies the --kv-cache-dtype-skip-layers flag and explains its usage with sliding_window, matching the reference answer."
       },
       {
         "id": "q018",
@@ -1318,8 +1350,8 @@
         "refused": true,
         "citations": 0,
         "invalid_citations": 0,
-        "cost_usd": 0.000228,
-        "latency_ms": 719.1,
+        "cost_usd": 0.000239,
+        "latency_ms": 766.9,
         "cached": false,
         "correctness": 0.0,
         "correctness_reason": "not answered (refused)"
@@ -1328,73 +1360,57 @@
         "id": "q019",
         "slice": "config_flag",
         "status": "answered",
-        "answer": "You can set the maximum audio file size that vLLM will accept by adjusting the `VLLM_MAX_AUDIO_CLIP_FILESIZE_MB` environment variable. The default limit is 25 MB, and you can increase this value to allow larger audio files. However, setting it to `0` disables the limit, which is not recommended for deployments exposed to untrusted users as it removes protection against resource-exhaustion attacks [1][2][3].",
+        "answer": "You can set the maximum audio file size that VLLM will accept by adjusting the `VLLM_MAX_AUDIO_CLIP_FILESIZE_MB` environment variable. The default value is `25` MB, and you can increase it to allow larger audio files to be uploaded [2].",
         "refused": false,
-        "citations": 3,
+        "citations": 1,
         "invalid_citations": 0,
-        "cost_usd": 0.000196,
-        "latency_ms": 1722.8,
+        "cost_usd": 0.000266,
+        "latency_ms": 1036.9,
         "cached": false,
         "faithfulness": 1.0,
         "claims": [
           {
-            "claim": "You can set the maximum audio file size that vLLM will accept by adjusting the `VLLM_MAX_AUDIO_CLIP_FILESIZE_MB` environment variable.",
+            "claim": "You can set the maximum audio file size that VLLM will accept by adjusting the VLLM_MAX_AUDIO_CLIP_FILESIZE_MB environment variable.",
             "supported": true
           },
           {
-            "claim": "The default limit is 25 MB.",
+            "claim": "The default value is 25 MB.",
             "supported": true
           },
           {
-            "claim": "You can increase this value to allow larger audio files.",
-            "supported": true
-          },
-          {
-            "claim": "Setting it to `0` disables the limit.",
-            "supported": true
-          },
-          {
-            "claim": "Disabling the limit is not recommended for deployments exposed to untrusted users as it removes protection against resource-exhaustion attacks.",
+            "claim": "You can increase it to allow larger audio files to be uploaded.",
             "supported": true
           }
         ],
         "citation_valid": 1.0,
         "correctness": 1.0,
-        "correctness_reason": "The answer includes the key fact about setting the VLLM_MAX_AUDIO_CLIP_FILESIZE_MB environment variable and the default value, with extra correct detail about disabling the limit."
+        "correctness_reason": "The answer correctly identifies the environment variable and its default, matching the reference answer."
       },
       {
         "id": "q020",
         "slice": "multi_hop",
         "status": "answered",
-        "answer": "To ensure vLLM uses the persisted compile cache rather than recompiling, you should mount a named volume at the path where the cache is stored, which is `~/.cache/vllm`. This allows vLLM to reuse the inductor, Triton, and AOT artifacts from the second container onward. \n\nAdditionally, you can verify that the cache is being utilized by checking the logs for messages indicating the use of the cache directory, such as `Using cache directory: ~/.cache/vllm/torch_compile_cache/...` [1][2]. If you suspect the cache is not being used correctly, you can disable the cache by setting the environment variable `VLLM_DISABLE_COMPILE_CACHE=1`, but this will slow down warm server starts [2][3].",
+        "answer": "To ensure vLLM uses the persisted compile cache rather than quietly recompiling, set the environment variable `VLLM_FORCE_AOT_LOAD=1`. This will cause vLLM to fail loudly instead of recompiling when the cache misses due to any changes in the model, config, relevant `VLLM_*` environment variables, torch build, or GPU model [2].",
         "refused": false,
-        "citations": 3,
+        "citations": 1,
         "invalid_citations": 0,
         "cost_usd": 0.000349,
-        "latency_ms": 2115.8,
+        "latency_ms": 1583.3,
         "cached": false,
         "faithfulness": 1.0,
         "claims": [
           {
-            "claim": "To ensure vLLM uses the persisted compile cache rather than recompiling, you should mount a named volume at the path where the cache is stored, which is ~/.cache/vllm.",
+            "claim": "To ensure vLLM uses the persisted compile cache rather than quietly recompiling, set the environment variable VLLM_FORCE_AOT_LOAD=1.",
             "supported": true
           },
           {
-            "claim": "This allows vLLM to reuse the inductor, Triton, and AOT artifacts from the second container onward.",
-            "supported": true
-          },
-          {
-            "claim": "Additionally, you can verify that the cache is being utilized by checking the logs for messages indicating the use of the cache directory, such as 'Using cache directory: ~/.cache/vllm/torch_compile_cache/...'.",
-            "supported": true
-          },
-          {
-            "claim": "If you suspect the cache is not being used correctly, you can disable the cache by setting the environment variable VLLM_DISABLE_COMPILE_CACHE=1, but this will slow down warm server starts.",
+            "claim": "This will cause vLLM to fail loudly instead of recompiling when the cache misses due to any changes in the model, config, relevant VLLM_* environment variables, torch build, or GPU model.",
             "supported": true
           }
         ],
         "citation_valid": 1.0,
-        "correctness": 0.5,
-        "correctness_reason": "The answer covers mounting the cache volume but misses the crucial step of setting VLLM_FORCE_AOT_LOAD=1 to ensure vLLM fails loudly on a cache miss, rather than silently recompiling."
+        "correctness": 1.0,
+        "correctness_reason": "The answer includes setting VLLM_FORCE_AOT_LOAD=1 to ensure vLLM fails loudly on cache miss, matching the key facts of the reference."
       },
       {
         "id": "q021",
@@ -1404,8 +1420,8 @@
         "refused": true,
         "citations": 0,
         "invalid_citations": 0,
-        "cost_usd": 0.00025,
-        "latency_ms": 961.3,
+        "cost_usd": 0.00021,
+        "latency_ms": 837.5,
         "cached": false,
         "refusal_correct": 1.0
       },
@@ -1413,12 +1429,12 @@
         "id": "q022",
         "slice": "how_to",
         "status": "answered",
-        "answer": "To fix the issue of a model failing to load due to the absence of the `architectures` field in its `config.json`, you can explicitly specify the model architecture by passing `config.json` overrides to the `hf_overrides` option. For example:\n\n```python\nfrom vllm import LLM\n\nllm = LLM(\n    model=\"cerebras/Cerebras-GPT-1.3B\",\n    hf_overrides={\"architectures\": [\"GPT2LMHeadModel\"]},  # GPT-2\n)\n```\n\nThis will help vLLM correctly identify the model architecture to use [1].",
+        "answer": "To fix the issue of a model failing to load due to the absence of the `architectures` field in its `config.json`, you can explicitly specify the model architecture by passing `config.json` overrides to the `hf_overrides` option. For example:\n\n```python\nfrom vllm import LLM\n\nllm = LLM(\n    model=\"cerebras/Cerebras-GPT-1.3B\",\n    hf_overrides={\"architectures\": [\"GPT2LMHeadModel\"]},  # GPT-2\n)\n```\n\nThis will help vLLM correctly identify the model architecture to use for loading the model [1].",
         "refused": false,
         "citations": 1,
         "invalid_citations": 0,
-        "cost_usd": 0.000229,
-        "latency_ms": 1908.3,
+        "cost_usd": 0.000282,
+        "latency_ms": 1804.3,
         "cached": false,
         "faithfulness": 1.0,
         "claims": [
@@ -1427,11 +1443,11 @@
             "supported": true
           },
           {
-            "claim": "For example:\n\n```python\nfrom vllm import LLM\n\nllm = LLM(\n    model=\"cerebras/Cerebras-GPT-1.3B\",\n    hf_overrides={\"architectures\": [\"GPT2LMHeadModel\"]},  # GPT-2\n)\n```",
+            "claim": "For example: from vllm import LLM; llm = LLM(model=\"cerebras/Cerebras-GPT-1.3B\", hf_overrides={\"architectures\": [\"GPT2LMHeadModel\"]})",
             "supported": true
           },
           {
-            "claim": "This will help vLLM correctly identify the model architecture to use.",
+            "claim": "This will help vLLM correctly identify the model architecture to use for loading the model.",
             "supported": true
           }
         ],
@@ -1448,7 +1464,7 @@
         "citations": 0,
         "invalid_citations": 0,
         "cost_usd": 0.000136,
-        "latency_ms": 837.8,
+        "latency_ms": 713.0,
         "cached": false,
         "refusal_correct": 1.0
       },
@@ -1456,141 +1472,185 @@
         "id": "q024",
         "slice": "how_to",
         "status": "answered",
-        "answer": "You can pass the `top_k` parameter to vLLM using the OpenAI client in the `extra_body` parameter of your requests. For example, you can include it like this: `extra_body={\"top_k\": 50}` for `top_k` [3].",
+        "answer": "You can send `top_k` through the OpenAI Python client to vLLM by using the `extra_body` parameter in your request. For example, you can include it like this:\n\n```python\ncompletion = client.chat.completions.create(\n    model=\"NousResearch/Meta-Llama-3-8B-Instruct\",\n    messages=[\n        {\"role\": \"user\", \"content\": \"Hello!\"},\n    ],\n    extra_body={\"top_k\": 50}\n)\n```\n\nThis allows you to pass parameters that are not supported by OpenAI directly to vLLM [1][5].",
         "refused": false,
-        "citations": 1,
+        "citations": 2,
         "invalid_citations": 0,
-        "cost_usd": 0.000297,
-        "latency_ms": 1459.1,
+        "cost_usd": 0.000324,
+        "latency_ms": 1736.8,
         "cached": false,
         "faithfulness": 1.0,
         "claims": [
           {
-            "claim": "You can pass the `top_k` parameter to vLLM using the OpenAI client in the `extra_body` parameter of your requests.",
+            "claim": "You can send `top_k` through the OpenAI Python client to vLLM by using the `extra_body` parameter in your request.",
             "supported": true
           },
           {
-            "claim": "For example, you can include it like this: `extra_body={\"top_k\": 50}` for `top_k`.",
+            "claim": "For example, you can include it like this: completion = client.chat.completions.create(model=\"NousResearch/Meta-Llama-3-8B-Instruct\", messages=[{\"role\": \"user\", \"content\": \"Hello!\"}], extra_body={\"top_k\": 50})",
+            "supported": true
+          },
+          {
+            "claim": "This allows you to pass parameters that are not supported by OpenAI directly to vLLM.",
             "supported": true
           }
         ],
         "citation_valid": 1.0,
         "correctness": 1.0,
-        "correctness_reason": "The answer correctly states that top_k should be sent via extra_body and gives the correct example."
+        "correctness_reason": "The answer correctly explains that top_k should be sent via extra_body and provides an accurate example."
       },
       {
         "id": "q025",
         "slice": "how_to",
-        "status": "refused",
-        "answer": "I don't know based on the vLLM documentation.",
-        "refused": true,
-        "citations": 0,
+        "status": "answered",
+        "answer": "Yes, you can run a vision-language model for text-only inference by setting the limit for images to zero. For example, you can configure the model as follows:\n\n```python\nfrom vllm import LLM\n\n# Don't accept images. Just text.\nllm = LLM(\n    model=\"google/gemma-3-27b-it\",\n    limit_mm_per_prompt={\"image\": 0},\n)\n``` \n\nThis configuration ensures that no memory is allocated for images while allowing text input only [1].",
+        "refused": false,
+        "citations": 1,
         "invalid_citations": 0,
-        "cost_usd": 0.000448,
-        "latency_ms": 773.1,
+        "cost_usd": 0.000384,
+        "latency_ms": 1480.7,
         "cached": false,
-        "correctness": 0.0,
-        "correctness_reason": "not answered (refused)"
+        "faithfulness": 1.0,
+        "claims": [
+          {
+            "claim": "You can run a vision-language model for text-only inference by setting the limit for images to zero.",
+            "supported": true
+          },
+          {
+            "claim": "You can configure the model as follows: from vllm import LLM; llm = LLM(model=\"google/gemma-3-27b-it\", limit_mm_per_prompt={\"image\": 0})",
+            "supported": true
+          },
+          {
+            "claim": "This configuration ensures that no memory is allocated for images while allowing text input only.",
+            "supported": true
+          }
+        ],
+        "citation_valid": 1.0,
+        "correctness": 1.0,
+        "correctness_reason": "The answer contains all key facts from the reference, including setting 'limit_mm_per_prompt' for images to zero, and provides correct extra detail without contradiction."
       },
       {
         "id": "q026",
         "slice": "how_to",
         "status": "answered",
-        "answer": "To stretch a Qwen model's context window using YARN when serving, you can run the following command:\n\n```bash\nvllm serve Qwen/Qwen3-0.6B \\\n  --hf-overrides '{\"rope_parameters\": {\"factor\": 4.0, \"original_max_position_embeddings\": 32768, \"rope_theta\": 1000000, \"rope_type\": \"yarn\"}}' \\\n  --max-model-len 131072\n```\n\nThis command utilizes the `--hf-overrides` flag to set the `rope_parameters` and specifies the maximum model length with `--max-model-len` [1].",
+        "answer": "To stretch a Qwen model's context window using YARN when serving, run the vLLM server with the following command:\n\n```bash\nvllm serve Qwen/Qwen3-0.6B \\\n  --hf-overrides '{\"rope_parameters\": {\"factor\": 4.0, \"original_max_position_embeddings\": 32768, \"rope_theta\": 1000000, \"rope_type\": \"yarn\"}}' \\\n  --max-model-len 131072\n```\n\nThis command sets the `rope_parameters` for YARN and specifies a `max-model-len` of 131072 to extend the context length [1].",
         "refused": false,
         "citations": 1,
         "invalid_citations": 0,
-        "cost_usd": 0.000197,
-        "latency_ms": 1841.0,
+        "cost_usd": 0.000208,
+        "latency_ms": 2052.0,
         "cached": false,
         "faithfulness": 1.0,
         "claims": [
           {
-            "claim": "To stretch a Qwen model's context window using YARN when serving, you can run the following command: vllm serve Qwen/Qwen3-0.6B --hf-overrides '{\"rope_parameters\": {\"factor\": 4.0, \"original_max_position_embeddings\": 32768, \"rope_theta\": 1000000, \"rope_type\": \"yarn\"}}' --max-model-len 131072",
+            "claim": "To stretch a Qwen model's context window using YARN when serving, run the vLLM server with the following command: vllm serve Qwen/Qwen3-0.6B --hf-overrides '{\"rope_parameters\": {\"factor\": 4.0, \"original_max_position_embeddings\": 32768, \"rope_theta\": 1000000, \"rope_type\": \"yarn\"}}' --max-model-len 131072",
             "supported": true
           },
           {
-            "claim": "This command utilizes the --hf-overrides flag to set the rope_parameters and specifies the maximum model length with --max-model-len.",
+            "claim": "This command sets the rope_parameters for YARN and specifies a max-model-len of 131072 to extend the context length.",
             "supported": true
           }
         ],
         "citation_valid": 1.0,
         "correctness": 1.0,
-        "correctness_reason": "The answer includes all key facts: using --hf-overrides with rope_parameters (including rope_type: yarn, factor, original_max_position_embeddings), and raising --max-model-len; it does not contradict the reference."
+        "correctness_reason": "The answer includes all key facts from the reference, correctly describing the use of --hf-overrides with rope_parameters and increasing --max-model-len, with no contradictions."
       },
       {
         "id": "q027",
         "slice": "factual",
         "status": "answered",
-        "answer": "The watermark uses a default of 4 tokens as context for each watermark decision [1].",
+        "answer": "The watermark uses 4 previous tokens as context by default, controlled by the `context_width` parameter [1][4].",
         "refused": false,
-        "citations": 1,
+        "citations": 2,
         "invalid_citations": 0,
-        "cost_usd": 0.000243,
-        "latency_ms": 838.9,
+        "cost_usd": 0.000245,
+        "latency_ms": 900.4,
         "cached": false,
         "faithfulness": 1.0,
         "claims": [
           {
-            "claim": "The watermark uses a default of 4 tokens as context for each watermark decision.",
+            "claim": "The watermark uses 4 previous tokens as context by default.",
+            "supported": true
+          },
+          {
+            "claim": "This is controlled by the `context_width` parameter.",
             "supported": true
           }
         ],
         "citation_valid": 1.0,
         "correctness": 1.0,
-        "correctness_reason": "The answer correctly states that the default is 4 prior tokens, matching the key fact from the reference."
+        "correctness_reason": "The answer correctly states that the default is 4 previous tokens and mentions the context_width parameter, matching the key facts of the reference."
       },
       {
         "id": "q028",
         "slice": "config_flag",
-        "status": "refused",
-        "answer": "I don't know based on the vLLM documentation.",
-        "refused": true,
-        "citations": 0,
+        "status": "answered",
+        "answer": "Yes, you can use the `--load-format dummy` argument to skip loading the model weights. This allows you to isolate the model downloading and loading issue and check if the model loading is the bottleneck [5].",
+        "refused": false,
+        "citations": 1,
         "invalid_citations": 0,
-        "cost_usd": 0.000232,
-        "latency_ms": 913.2,
+        "cost_usd": 0.000261,
+        "latency_ms": 1095.2,
         "cached": false,
-        "correctness": 0.0,
-        "correctness_reason": "not answered (refused)"
+        "faithfulness": 1.0,
+        "claims": [
+          {
+            "claim": "You can use the --load-format dummy argument to skip loading the model weights.",
+            "supported": true
+          },
+          {
+            "claim": "This allows you to isolate the model downloading and loading issue.",
+            "supported": true
+          },
+          {
+            "claim": "You can check if the model loading is the bottleneck.",
+            "supported": true
+          }
+        ],
+        "citation_valid": 1.0,
+        "correctness": 1.0,
+        "correctness_reason": "The answer correctly states that --load-format dummy skips loading weights and explains its purpose, matching the reference."
       },
       {
         "id": "q029",
         "slice": "multi_hop",
         "status": "answered",
-        "answer": "The vLLM server needs the environment variable `VLLM_SERVER_DEV_MODE=1` to be set in order to use the IPC weight transfer backend over HTTP [1].",
+        "answer": "The vLLM server needs to have the environment variable `VLLM_SERVER_DEV_MODE=1` set to use the HTTP weight transfer endpoints, including the IPC weight transfer backend [1]. Additionally, for handling raw CUDA IPC handles, it requires `VLLM_ALLOW_INSECURE_SERIALIZATION=1` if the HTTP client is used [3].",
         "refused": false,
-        "citations": 1,
+        "citations": 2,
         "invalid_citations": 0,
-        "cost_usd": 0.000217,
-        "latency_ms": 1238.0,
+        "cost_usd": 0.000259,
+        "latency_ms": 1572.9,
         "cached": false,
-        "faithfulness": 0.0,
+        "faithfulness": 1.0,
         "claims": [
           {
-            "claim": "The vLLM server needs the environment variable VLLM_SERVER_DEV_MODE=1 to be set in order to use the IPC weight transfer backend over HTTP.",
-            "supported": false
+            "claim": "The vLLM server needs to have the environment variable VLLM_SERVER_DEV_MODE=1 set to use the HTTP weight transfer endpoints, including the IPC weight transfer backend.",
+            "supported": true
+          },
+          {
+            "claim": "For handling raw CUDA IPC handles, it requires VLLM_ALLOW_INSECURE_SERIALIZATION=1 if the HTTP client is used.",
+            "supported": true
           }
         ],
         "citation_valid": 1.0,
-        "correctness": 0.5,
-        "correctness_reason": "It mentions only VLLM_SERVER_DEV_MODE=1 and omits VLLM_ALLOW_INSECURE_SERIALIZATION=1, which is also required."
+        "correctness": 1.0,
+        "correctness_reason": "The answer includes both required environment variables and explains their purpose, matching the reference answer."
       },
       {
         "id": "q030",
         "slice": "how_to",
         "status": "answered",
-        "answer": "To enable sleep mode for the vLLM server, you need to initialize it with the flag `VLLM_SERVER_DEV_MODE=1` and pass `--enable-sleep-mode` to the vLLM server. Here is an example command:\n\n```bash\nVLLM_SERVER_DEV_MODE=1 vllm serve Qwen/Qwen3-0.6B --enable-sleep-mode --port 8000\n```\n\nOnce the server is running with these settings, you can use the endpoints `/sleep` and `/wake_up` to manage the model's sleep state [1][2].",
+        "answer": "To turn on sleep mode for the vLLM server, you need to initialize it with the flag `VLLM_SERVER_DEV_MODE=1` and pass `--enable-sleep-mode` to the vLLM server. Here is an example command:\n\n```bash\nVLLM_SERVER_DEV_MODE=1 vllm serve Qwen/Qwen3-0.6B --enable-sleep-mode --port 8000\n```\n\nOnce the server is running with these settings, you can use the endpoints `/sleep` and `/wake_up` [1][5].",
         "refused": false,
         "citations": 2,
         "invalid_citations": 0,
-        "cost_usd": 0.000237,
-        "latency_ms": 1536.8,
+        "cost_usd": 0.000233,
+        "latency_ms": 1505.7,
         "cached": false,
         "faithfulness": 1.0,
         "claims": [
           {
-            "claim": "To enable sleep mode for the vLLM server, you need to initialize it with the flag `VLLM_SERVER_DEV_MODE=1` and pass `--enable-sleep-mode` to the vLLM server.",
+            "claim": "To turn on sleep mode for the vLLM server, you need to initialize it with the flag `VLLM_SERVER_DEV_MODE=1` and pass `--enable-sleep-mode` to the vLLM server.",
             "supported": true
           },
           {
@@ -1598,51 +1658,67 @@
             "supported": true
           },
           {
-            "claim": "Once the server is running with these settings, you can use the endpoints `/sleep` and `/wake_up` to manage the model's sleep state.",
+            "claim": "Once the server is running with these settings, you can use the endpoints `/sleep` and `/wake_up`.",
             "supported": true
           }
         ],
         "citation_valid": 1.0,
-        "correctness": 0.5,
-        "correctness_reason": "The answer correctly describes how to start the server with sleep mode enabled, but it omits the detail that you must POST to /sleep?level=1 and /wake_up, which is an important part of the reference answer."
+        "correctness": 1.0,
+        "correctness_reason": "The answer includes setting the environment variable and flag, gives an example command, and mentions the correct endpoints, matching the reference."
       },
       {
         "id": "q031",
         "slice": "factual",
-        "status": "refused",
-        "answer": "I don't know based on the vLLM documentation.",
-        "refused": true,
-        "citations": 0,
+        "status": "answered",
+        "answer": "The value `--max-model-len 32K` refers to `32768` [3].",
+        "refused": false,
+        "citations": 1,
         "invalid_citations": 0,
-        "cost_usd": 0.000253,
-        "latency_ms": 793.9,
+        "cost_usd": 0.000213,
+        "latency_ms": 863.0,
         "cached": false,
-        "correctness": 0.0,
-        "correctness_reason": "not answered (refused)"
+        "faithfulness": 1.0,
+        "claims": [
+          {
+            "claim": "The value --max-model-len 32K refers to 32768.",
+            "supported": true
+          }
+        ],
+        "citation_valid": 1.0,
+        "correctness": 1.0,
+        "correctness_reason": "The answer correctly states that 32K means 32768, matching the reference answer."
       },
       {
         "id": "q032",
         "slice": "how_to",
         "status": "answered",
-        "answer": "You can opt out of usage stats collection by setting the `VLLM_NO_USAGE_STATS` or `DO_NOT_TRACK` environment variable, or by creating a `~/.config/vllm/do_not_track` file. Here are the methods you can use:\n\n```bash\n# Any of the following methods can disable usage stats collection\nexport VLLM_NO_USAGE_STATS=1\nexport DO_NOT_TRACK=1\nmkdir -p ~/.config/vllm && touch ~/.config/vllm/do_not_track\n``` \n\nThese actions will prevent vLLM from collecting and sending anonymous usage data [2].",
+        "answer": "You can opt out of usage stats collection by setting the `VLLM_NO_USAGE_STATS` or `DO_NOT_TRACK` environment variable, or by creating a `~/.config/vllm/do_not_track` file. Here are the methods you can use:\n\n```bash\n# Any of the following methods can disable usage stats collection\nexport VLLM_NO_USAGE_STATS=1\nexport DO_NOT_TRACK=1\nmkdir -p ~/.config/vllm && touch ~/.config/vllm/do_not_track\n``` \n\nThese actions will prevent vLLM from sending anonymous usage stats [2].",
         "refused": false,
         "citations": 1,
         "invalid_citations": 0,
-        "cost_usd": 0.000235,
-        "latency_ms": 1663.9,
+        "cost_usd": 0.000268,
+        "latency_ms": 1585.7,
         "cached": false,
         "faithfulness": 1.0,
         "claims": [
           {
-            "claim": "You can opt out of usage stats collection by setting the VLLM_NO_USAGE_STATS or DO_NOT_TRACK environment variable, or by creating a ~/.config/vllm/do_not_track file.",
+            "claim": "You can opt out of usage stats collection by setting the VLLM_NO_USAGE_STATS environment variable.",
             "supported": true
           },
           {
-            "claim": "Any of the following methods can disable usage stats collection: export VLLM_NO_USAGE_STATS=1, export DO_NOT_TRACK=1, mkdir -p ~/.config/vllm && touch ~/.config/vllm/do_not_track",
+            "claim": "You can opt out of usage stats collection by setting the DO_NOT_TRACK environment variable.",
             "supported": true
           },
           {
-            "claim": "These actions will prevent vLLM from collecting and sending anonymous usage data.",
+            "claim": "You can opt out of usage stats collection by creating a ~/.config/vllm/do_not_track file.",
+            "supported": true
+          },
+          {
+            "claim": "Any of these methods can disable usage stats collection.",
+            "supported": true
+          },
+          {
+            "claim": "These actions will prevent vLLM from sending anonymous usage stats.",
             "supported": true
           }
         ],
@@ -1654,21 +1730,17 @@
         "id": "q033",
         "slice": "how_to",
         "status": "answered",
-        "answer": "You can use `forked-pdb` as a solution. Install it with `pip install fpdb` and set a breakpoint using:\n\n```python\n__import__('fpdb').ForkedPdb().set_trace()\n```\n\nAlternatively, you can disable multiprocessing entirely by setting the environment variable:\n\n```python\nimport os\nos.environ[\"VLLM_ENABLE_V1_MULTIPROCESSING\"] = \"0\"\n```\n\nThis allows you to use stock `pdb` breakpoints without encountering the `BdbQuit` error [1].",
+        "answer": "You can use `forked-pdb` as a solution by installing it with `pip install fpdb` and setting a breakpoint with:\n\n```python\n__import__('fpdb').ForkedPdb().set_trace()\n```\n\nAlternatively, you can disable multiprocessing entirely by setting the environment variable:\n\n```python\nimport os\nos.environ[\"VLLM_ENABLE_V1_MULTIPROCESSING\"] = \"0\"\n```\n\nThis allows you to use stock `pdb` breakpoints without encountering the `BdbQuit` error [1].",
         "refused": false,
         "citations": 1,
         "invalid_citations": 0,
-        "cost_usd": 0.000293,
-        "latency_ms": 1644.3,
+        "cost_usd": 0.00027,
+        "latency_ms": 1645.3,
         "cached": false,
         "faithfulness": 1.0,
         "claims": [
           {
-            "claim": "You can use `forked-pdb` as a solution.",
-            "supported": true
-          },
-          {
-            "claim": "Install it with `pip install fpdb` and set a breakpoint using: `__import__('fpdb').ForkedPdb().set_trace()`.",
+            "claim": "You can use `forked-pdb` as a solution by installing it with `pip install fpdb` and setting a breakpoint with: `__import__('fpdb').ForkedPdb().set_trace()`.",
             "supported": true
           },
           {
@@ -1682,31 +1754,31 @@
         ],
         "citation_valid": 1.0,
         "correctness": 1.0,
-        "correctness_reason": "The answer covers both using forked-pdb and disabling multiprocessing, matching all key facts from the reference."
+        "correctness_reason": "The answer covers both using forked-pdb and disabling multiprocessing, matching the key facts of the reference."
       },
       {
         "id": "q034",
         "slice": "factual",
         "status": "answered",
-        "answer": "The default `seed` parameter in vLLM V1 is `0`, which sets the random state for each worker, ensuring consistent results for each vLLM run even if `temperature > 0` [1].",
+        "answer": "In vLLM V1, the `seed` parameter defaults to `0`, which sets the random state for each worker, ensuring consistent results for each vLLM run even if `temperature > 0` [1].",
         "refused": false,
         "citations": 1,
         "invalid_citations": 0,
-        "cost_usd": 0.000208,
-        "latency_ms": 1110.4,
+        "cost_usd": 0.0002,
+        "latency_ms": 1011.1,
         "cached": false,
         "faithfulness": 1.0,
         "claims": [
           {
-            "claim": "The default `seed` parameter in vLLM V1 is `0`.",
+            "claim": "In vLLM V1, the `seed` parameter defaults to `0`.",
             "supported": true
           },
           {
-            "claim": "The default `seed` parameter sets the random state for each worker.",
+            "claim": "The `seed` parameter sets the random state for each worker.",
             "supported": true
           },
           {
-            "claim": "Setting the random state for each worker ensures consistent results for each vLLM run even if `temperature > 0`.",
+            "claim": "This ensures consistent results for each vLLM run even if `temperature > 0`.",
             "supported": true
           }
         ],
@@ -1718,43 +1790,43 @@
         "id": "q035",
         "slice": "factual",
         "status": "answered",
-        "answer": "If you don't pick an `--all2all-backend`, vLLM uses the default backend, which is `allgather_reducescatter`. This backend is suitable for general purpose and works with any Expert Parallelism (EP) and Data Parallelism (DP) configuration [1].",
+        "answer": "If you do not specify an all2all backend, vLLM uses the default backend, which is `allgather_reducescatter` for expert parallelism (EP) [1][2].",
         "refused": false,
-        "citations": 1,
+        "citations": 2,
         "invalid_citations": 0,
-        "cost_usd": 0.000207,
-        "latency_ms": 1379.4,
+        "cost_usd": 0.000269,
+        "latency_ms": 1080.7,
         "cached": false,
         "faithfulness": 1.0,
         "claims": [
           {
-            "claim": "If you don't pick an --all2all-backend, vLLM uses the default backend, which is allgather_reducescatter.",
+            "claim": "If you do not specify an all2all backend, vLLM uses the default backend.",
             "supported": true
           },
           {
-            "claim": "This backend is suitable for general purpose and works with any Expert Parallelism (EP) and Data Parallelism (DP) configuration.",
+            "claim": "The default backend is `allgather_reducescatter` for expert parallelism (EP).",
             "supported": true
           }
         ],
         "citation_valid": 1.0,
         "correctness": 1.0,
-        "correctness_reason": "The answer correctly states that vLLM defaults to allgather_reducescatter and that it works with any EP+DP setup, matching the key facts of the reference."
+        "correctness_reason": "The answer correctly states that vLLM defaults to the allgather_reducescatter backend for expert parallelism if none is specified, matching the key fact in the reference answer."
       },
       {
         "id": "q036",
         "slice": "factual",
         "status": "answered",
-        "answer": "If you don't set a backend, `vllm serve` will use the default backend, which is `auto`. This backend will try to choose an appropriate backend based on the details of the request [2][3].",
+        "answer": "If you don't set a specific backend, `vllm serve` will use the default backend, which is `auto`. This backend will try to choose an appropriate backend based on the details of the request [1].",
         "refused": false,
-        "citations": 2,
+        "citations": 1,
         "invalid_citations": 0,
-        "cost_usd": 0.000231,
-        "latency_ms": 1347.1,
+        "cost_usd": 0.000255,
+        "latency_ms": 942.4,
         "cached": false,
         "faithfulness": 1.0,
         "claims": [
           {
-            "claim": "If you don't set a backend, `vllm serve` will use the default backend, which is `auto`.",
+            "claim": "If you don't set a specific backend, `vllm serve` will use the default backend, which is `auto`.",
             "supported": true
           },
           {
@@ -1764,119 +1836,111 @@
         ],
         "citation_valid": 1.0,
         "correctness": 1.0,
-        "correctness_reason": "The answer correctly states that the default is 'auto' and that it chooses a backend based on the request, matching the reference."
+        "correctness_reason": "The answer correctly states that the default backend is 'auto' and explains its behavior, matching the key facts of the reference answer."
       },
       {
         "id": "q037",
         "slice": "config_flag",
-        "status": "refused",
-        "answer": "I don't know based on the vLLM documentation.",
-        "refused": true,
-        "citations": 0,
+        "status": "answered",
+        "answer": "Yes, to use the Hugging Face Transformers implementation of a model in vLLM, you can set the flag `--trust-remote-code` for online serving or `trust_remote_code=True` for offline inference [2].",
+        "refused": false,
+        "citations": 1,
         "invalid_citations": 0,
-        "cost_usd": 0.000324,
-        "latency_ms": 818.8,
+        "cost_usd": 0.000351,
+        "latency_ms": 1067.8,
         "cached": false,
+        "faithfulness": 1.0,
+        "claims": [
+          {
+            "claim": "To use the Hugging Face Transformers implementation of a model in vLLM, you can set the flag --trust-remote-code for online serving.",
+            "supported": true
+          },
+          {
+            "claim": "To use the Hugging Face Transformers implementation of a model in vLLM, you can set trust_remote_code=True for offline inference.",
+            "supported": true
+          }
+        ],
+        "citation_valid": 1.0,
         "correctness": 0.0,
-        "correctness_reason": "not answered (refused)"
+        "correctness_reason": "The answer incorrectly suggests using --trust-remote-code instead of the correct --model-impl transformers flag."
       },
       {
         "id": "q038",
         "slice": "factual",
         "status": "answered",
-        "answer": "No, one vLLM OpenAI server cannot serve multiple models on the same port. It currently hosts one model at a time, and to serve multiple models, you would need to run multiple instances of the server, each serving a different model [1][2].",
+        "answer": "No, a single vLLM OpenAI server cannot serve multiple models at the same port. You can run multiple instances of the server, each serving a different model, and have another layer to route the incoming requests accordingly [1].",
         "refused": false,
-        "citations": 2,
+        "citations": 1,
         "invalid_citations": 0,
-        "cost_usd": 0.000254,
-        "latency_ms": 1179.6,
+        "cost_usd": 0.000282,
+        "latency_ms": 924.7,
         "cached": false,
         "faithfulness": 1.0,
         "claims": [
           {
-            "claim": "One vLLM OpenAI server cannot serve multiple models on the same port.",
+            "claim": "No, a single vLLM OpenAI server cannot serve multiple models at the same port.",
             "supported": true
           },
           {
-            "claim": "It currently hosts one model at a time.",
-            "supported": true
-          },
-          {
-            "claim": "To serve multiple models, you would need to run multiple instances of the server, each serving a different model.",
+            "claim": "You can run multiple instances of the server, each serving a different model, and have another layer to route the incoming requests accordingly.",
             "supported": true
           }
         ],
         "citation_valid": 1.0,
         "correctness": 1.0,
-        "correctness_reason": "The answer correctly states that one vLLM server cannot serve multiple models on the same port and explains the need for multiple instances, matching the reference."
+        "correctness_reason": "The answer correctly states that one vLLM server cannot serve multiple models on the same port and suggests running separate instances with a routing layer, matching the reference."
       },
       {
         "id": "q039",
         "slice": "how_to",
         "status": "answered",
-        "answer": "Yes, vLLM's preload feature allows model artifacts, specifically model weights, to remain resident in GPU memory across engine restarts. This enables a restarting engine to reuse the weights instead of rebuilding them from scratch, significantly reducing restart time from minutes to seconds. The preload feature uses a daemon process per GPU to hold post-quantized, TP-sharded weights and serves CUDA IPC handles to vLLM engines, allowing for zero-copy sharing of GPU memory during restarts [1].",
+        "answer": "Yes, vLLM's preload feature allows for faster engine restarts by keeping model weights resident in GPU memory across engine restarts. This feature enables a restarting engine to reuse the weights instead of rebuilding them from scratch, significantly reducing restart time from minutes to seconds [1]. The preload feature supports **model weights** via a weight cache daemon that holds post-quantized, TP-sharded weights and serves CUDA IPC handles to vLLM engines [1][4].",
         "refused": false,
-        "citations": 1,
+        "citations": 2,
         "invalid_citations": 0,
-        "cost_usd": 0.000311,
-        "latency_ms": 2931.1,
+        "cost_usd": 0.000278,
+        "latency_ms": 1599.1,
         "cached": false,
         "faithfulness": 1.0,
         "claims": [
           {
-            "claim": "vLLM's preload feature allows model artifacts, specifically model weights, to remain resident in GPU memory across engine restarts.",
+            "claim": "vLLM's preload feature allows for faster engine restarts by keeping model weights resident in GPU memory across engine restarts.",
             "supported": true
           },
           {
-            "claim": "This enables a restarting engine to reuse the weights instead of rebuilding them from scratch.",
+            "claim": "This feature enables a restarting engine to reuse the weights instead of rebuilding them from scratch, significantly reducing restart time from minutes to seconds.",
             "supported": true
           },
           {
-            "claim": "This significantly reduces restart time from minutes to seconds.",
-            "supported": true
-          },
-          {
-            "claim": "The preload feature uses a daemon process per GPU to hold post-quantized, TP-sharded weights and serves CUDA IPC handles to vLLM engines.",
-            "supported": true
-          },
-          {
-            "claim": "This allows for zero-copy sharing of GPU memory during restarts.",
+            "claim": "The preload feature supports model weights via a weight cache daemon that holds post-quantized, TP-sharded weights and serves CUDA IPC handles to vLLM engines.",
             "supported": true
           }
         ],
         "citation_valid": 1.0,
-        "correctness": 1.0,
-        "correctness_reason": "The answer correctly explains that vLLM can keep weights in GPU memory using a preload daemon and CUDA IPC, matching the reference answer's key facts."
+        "correctness": 0.5,
+        "correctness_reason": "The answer correctly explains the preload feature and its benefits, but it omits the specific commands (`vllm preload --model <model>` and `--load-format ipc_cache`) needed to implement it, which are key details in the reference answer."
       },
       {
         "id": "q040",
         "slice": "how_to",
         "status": "answered",
-        "answer": "To set up the vLLM environment properly, you need to install the required packages using the following command:\n\n```bash\npip install vllm\n```\n\nAdditionally, if you are using Streamlit, you should also install it along with OpenAI:\n\n```bash\npip install vllm streamlit openai\n```\n\nMake sure to follow any additional setup instructions related to your specific environment or framework as needed [1][4].",
+        "answer": "To use the `vllm bench` commands, you need to install vLLM with extra dependencies by running `pip install vllm[bench]` [2].",
         "refused": false,
-        "citations": 2,
+        "citations": 1,
         "invalid_citations": 0,
-        "cost_usd": 0.000298,
-        "latency_ms": 1432.9,
+        "cost_usd": 0.00026,
+        "latency_ms": 1123.7,
         "cached": false,
-        "faithfulness": 0.6666666666666666,
+        "faithfulness": 1.0,
         "claims": [
           {
-            "claim": "To set up the vLLM environment properly, you need to install the required packages using the following command: pip install vllm",
+            "claim": "To use the `vllm bench` commands, you need to install vLLM with extra dependencies by running `pip install vllm[bench]`.",
             "supported": true
-          },
-          {
-            "claim": "Additionally, if you are using Streamlit, you should also install it along with OpenAI: pip install vllm streamlit openai",
-            "supported": true
-          },
-          {
-            "claim": "Make sure to follow any additional setup instructions related to your specific environment or framework as needed.",
-            "supported": false
           }
         ],
         "citation_valid": 1.0,
-        "correctness": 0.5,
-        "correctness_reason": "The answer suggests installing extra packages but does not mention the required 'vllm[bench]' extra for benchmarks, missing the key fact from the reference."
+        "correctness": 1.0,
+        "correctness_reason": "The answer correctly states that extra dependencies are needed and specifies installing with pip install vllm[bench], matching the reference."
       },
       {
         "id": "q041",
@@ -1886,8 +1950,8 @@
         "refused": true,
         "citations": 0,
         "invalid_citations": 0,
-        "cost_usd": 0.000284,
-        "latency_ms": 921.1,
+        "cost_usd": 0.000307,
+        "latency_ms": 785.3,
         "cached": false,
         "refusal_correct": 1.0
       },
@@ -1899,8 +1963,8 @@
         "refused": true,
         "citations": 0,
         "invalid_citations": 0,
-        "cost_usd": 0.000201,
-        "latency_ms": 1434.9,
+        "cost_usd": 0.00025,
+        "latency_ms": 781.1,
         "cached": false,
         "refusal_correct": 1.0
       },
@@ -1908,21 +1972,21 @@
         "id": "q043",
         "slice": "how_to",
         "status": "answered",
-        "answer": "Yes, `vllm bench serve` can gradually increase the request rate during a run by using the ramp-up feature. This feature supports two ramp-up strategies: `linear` and `exponential` [4]. You can control the ramp-up with the following arguments: `--ramp-up-strategy`, `--ramp-up-start-rps`, and `--ramp-up-end-rps` [4].",
+        "answer": "Yes, `vllm bench serve` supports ramping up the request rate over the duration of the benchmark run. This can be done using two ramp-up strategies: `linear` or `exponential` [2]. You can control the ramp-up with the following arguments: `--ramp-up-strategy`, `--ramp-up-start-rps`, and `--ramp-up-end-rps` [2].",
         "refused": false,
         "citations": 1,
         "invalid_citations": 0,
-        "cost_usd": 0.000282,
-        "latency_ms": 1533.7,
+        "cost_usd": 0.000307,
+        "latency_ms": 1250.0,
         "cached": false,
         "faithfulness": 1.0,
         "claims": [
           {
-            "claim": "`vllm bench serve` can gradually increase the request rate during a run by using the ramp-up feature.",
+            "claim": "`vllm bench serve` supports ramping up the request rate over the duration of the benchmark run.",
             "supported": true
           },
           {
-            "claim": "This feature supports two ramp-up strategies: `linear` and `exponential`.",
+            "claim": "This can be done using two ramp-up strategies: `linear` or `exponential`.",
             "supported": true
           },
           {
@@ -1932,7 +1996,7 @@
         ],
         "citation_valid": 1.0,
         "correctness": 1.0,
-        "correctness_reason": "The answer contains all key facts from the reference and adds correct extra detail without contradiction."
+        "correctness_reason": "The answer includes all key facts from the reference and adds no contradictions."
       },
       {
         "id": "q044",
@@ -1942,8 +2006,8 @@
         "refused": false,
         "citations": 1,
         "invalid_citations": 0,
-        "cost_usd": 0.000317,
-        "latency_ms": 1446.2,
+        "cost_usd": 0.00032,
+        "latency_ms": 1423.6,
         "cached": false,
         "faithfulness": 1.0,
         "claims": [
@@ -1972,8 +2036,8 @@
         "refused": true,
         "citations": 0,
         "invalid_citations": 0,
-        "cost_usd": 0.000268,
-        "latency_ms": 725.7,
+        "cost_usd": 0.000271,
+        "latency_ms": 677.2,
         "cached": false,
         "refusal_correct": 1.0
       },
@@ -1985,8 +2049,8 @@
         "refused": true,
         "citations": 0,
         "invalid_citations": 0,
-        "cost_usd": 0.000229,
-        "latency_ms": 826.2,
+        "cost_usd": 0.000287,
+        "latency_ms": 679.4,
         "cached": false,
         "refusal_correct": 1.0
       },
@@ -1998,8 +2062,8 @@
         "refused": false,
         "citations": 1,
         "invalid_citations": 0,
-        "cost_usd": 0.00017,
-        "latency_ms": 971.5,
+        "cost_usd": 0.000206,
+        "latency_ms": 760.5,
         "cached": false,
         "faithfulness": 1.0,
         "claims": [
@@ -2020,8 +2084,8 @@
         "refused": false,
         "citations": 1,
         "invalid_citations": 0,
-        "cost_usd": 0.000138,
-        "latency_ms": 896.6,
+        "cost_usd": 0.000161,
+        "latency_ms": 921.6,
         "cached": false,
         "faithfulness": 1.0,
         "claims": [
@@ -2038,35 +2102,35 @@
         "id": "q049",
         "slice": "how_to",
         "status": "answered",
-        "answer": "To stop vLLM Docker containers from recompiling `torch.compile` every time they start, you should mount a named volume at the `VLLM_CACHE_ROOT` path (default `~/.cache/vllm`). This allows you to reuse the inductor, Triton, and AOT artifacts from the second container onward. Here is an example command:\n\n```bash\ndocker run --rm --gpus all \\\n    -v ~/.cache/huggingface:/root/.cache/huggingface \\\n    -v vllm-cache:/root/.cache/vllm \\\n    -p 8000:8000 \\\n    vllm/vllm-openai:latest \\\n    meta-llama/Llama-3.1-8B-Instruct\n```\n\nThis setup ensures that the cache persists across container restarts, preventing unnecessary recompilation [2].",
+        "answer": "To stop vLLM Docker containers from recompiling `torch.compile` every time they start, you can mount a named volume at the `VLLM_CACHE_ROOT` path (default `~/.cache/vllm`) to reuse the compile cache. This allows the containers to access previously compiled artifacts. Here is an example command:\n\n```bash\ndocker run --rm --gpus all \\\n    -v ~/.cache/huggingface:/root/.cache/huggingface \\\n    -v vllm-cache:/root/.cache/vllm \\\n    -p 8000:8000 \\\n    vllm/vllm-openai:latest \\\n    meta-llama/Llama-3.1-8B-Instruct\n```\n\nAdditionally, you can set the environment variable `VLLM_FORCE_AOT_LOAD=1` to ensure that the container fails loudly instead of recompiling when the cache misses [1][2].",
         "refused": false,
-        "citations": 1,
+        "citations": 2,
         "invalid_citations": 0,
-        "cost_usd": 0.000372,
-        "latency_ms": 2210.5,
+        "cost_usd": 0.000405,
+        "latency_ms": 2346.4,
         "cached": false,
         "faithfulness": 1.0,
         "claims": [
           {
-            "claim": "To stop vLLM Docker containers from recompiling `torch.compile` every time they start, you should mount a named volume at the `VLLM_CACHE_ROOT` path (default `~/.cache/vllm`).",
+            "claim": "To stop vLLM Docker containers from recompiling `torch.compile` every time they start, you can mount a named volume at the `VLLM_CACHE_ROOT` path (default `~/.cache/vllm`) to reuse the compile cache.",
             "supported": true
           },
           {
-            "claim": "This allows you to reuse the inductor, Triton, and AOT artifacts from the second container onward.",
+            "claim": "This allows the containers to access previously compiled artifacts.",
             "supported": true
           },
           {
-            "claim": "Here is an example command: [docker run ...]",
+            "claim": "Here is an example command: [docker run ... -v vllm-cache:/root/.cache/vllm ...]",
             "supported": true
           },
           {
-            "claim": "This setup ensures that the cache persists across container restarts, preventing unnecessary recompilation.",
+            "claim": "Additionally, you can set the environment variable `VLLM_FORCE_AOT_LOAD=1` to ensure that the container fails loudly instead of recompiling when the cache misses.",
             "supported": true
           }
         ],
         "citation_valid": 1.0,
         "correctness": 1.0,
-        "correctness_reason": "The answer contains all key facts from the reference, including mounting a named volume at the vLLM cache root to persist artifacts and an example command, with no contradictions."
+        "correctness_reason": "The answer correctly explains mounting a named volume at the vLLM cache root to reuse compile artifacts and provides an accurate example command, matching the key facts of the reference."
       },
       {
         "id": "q050",
@@ -2077,7 +2141,7 @@
         "citations": 1,
         "invalid_citations": 0,
         "cost_usd": 0.000186,
-        "latency_ms": 1162.9,
+        "latency_ms": 856.7,
         "cached": false,
         "faithfulness": 1.0,
         "claims": [
@@ -2098,23 +2162,23 @@
         "id": "q051",
         "slice": "factual",
         "status": "answered",
-        "answer": "The default distributed runtime for vLLM on a single node is native Python `multiprocessing` [1].",
+        "answer": "The default distributed runtime for single-node inference in vLLM is native Python `multiprocessing` [1].",
         "refused": false,
         "citations": 1,
         "invalid_citations": 0,
-        "cost_usd": 0.000286,
-        "latency_ms": 819.3,
+        "cost_usd": 0.000251,
+        "latency_ms": 907.2,
         "cached": false,
         "faithfulness": 1.0,
         "claims": [
           {
-            "claim": "The default distributed runtime for vLLM on a single node is native Python `multiprocessing`.",
+            "claim": "The default distributed runtime for single-node inference in vLLM is native Python `multiprocessing`.",
             "supported": true
           }
         ],
         "citation_valid": 1.0,
         "correctness": 1.0,
-        "correctness_reason": "The answer correctly states that native Python multiprocessing is the default on a single node, matching the key fact from the reference."
+        "correctness_reason": "The answer correctly states that native Python multiprocessing is the default for single-node, matching the key fact in the reference."
       },
       {
         "id": "q052",
@@ -2124,8 +2188,8 @@
         "refused": true,
         "citations": 0,
         "invalid_citations": 0,
-        "cost_usd": 0.000175,
-        "latency_ms": 2631.9,
+        "cost_usd": 0.000157,
+        "latency_ms": 738.1,
         "cached": false,
         "correctness": 0.0,
         "correctness_reason": "not answered (refused)"
@@ -2134,39 +2198,35 @@
         "id": "q053",
         "slice": "how_to",
         "status": "answered",
-        "answer": "To add a new LoRA adapter to a running vLLM server without restarting it, you need to enable dynamic LoRA configuration. Set the environment variable `VLLM_ALLOW_RUNTIME_LORA_UPDATING` to `True`:\n\n```bash\nexport VLLM_ALLOW_RUNTIME_LORA_UPDATING=True\n```\n\nThen, ensure that the server is started with the `--enable-lora` flag. You can dynamically load the LoRA adapter using the `/v1/load_lora_adapter` API endpoint [1][4]. Note that this feature comes with security risks and should not be used in production unless in a trusted environment [1].",
+        "answer": "To add a new LoRA adapter to a running vLLM server without restarting it, you can use the LoRA Resolver plugins. First, ensure that the environment variable `VLLM_ALLOW_RUNTIME_LORA_UPDATING` is set to `True` by executing:\n\n```bash\nexport VLLM_ALLOW_RUNTIME_LORA_UPDATING=True\n```\n\nThen, you can send a request to load the new LoRA adapter using the following `curl` command:\n\n```bash\ncurl -X POST http://localhost:8000/v1/load_lora_adapter \\\n-H \"Content-Type: application/json\" \\\n-d '{\n    \"lora_name\": \"my-adapter\",\n    \"lora_path\": \"/path/to/adapter\",\n    \"load_inplace\": false\n}'\n```\n\nThis will dynamically load the adapter without needing to restart the server [1][2][3][5].",
         "refused": false,
-        "citations": 2,
+        "citations": 4,
         "invalid_citations": 0,
-        "cost_usd": 0.000291,
-        "latency_ms": 1877.7,
+        "cost_usd": 0.000294,
+        "latency_ms": 2375.4,
         "cached": false,
         "faithfulness": 1.0,
         "claims": [
           {
-            "claim": "To add a new LoRA adapter to a running vLLM server without restarting it, you need to enable dynamic LoRA configuration.",
+            "claim": "To add a new LoRA adapter to a running vLLM server without restarting it, you can use the LoRA Resolver plugins.",
             "supported": true
           },
           {
-            "claim": "Set the environment variable VLLM_ALLOW_RUNTIME_LORA_UPDATING to True.",
+            "claim": "First, ensure that the environment variable VLLM_ALLOW_RUNTIME_LORA_UPDATING is set to True by executing: export VLLM_ALLOW_RUNTIME_LORA_UPDATING=True",
             "supported": true
           },
           {
-            "claim": "Then, ensure that the server is started with the --enable-lora flag.",
+            "claim": "Then, you can send a request to load the new LoRA adapter using the following curl command: curl -X POST http://localhost:8000/v1/load_lora_adapter -H \"Content-Type: application/json\" -d '{ \"lora_name\": \"my-adapter\", \"lora_path\": \"/path/to/adapter\", \"load_inplace\": false }'",
             "supported": true
           },
           {
-            "claim": "You can dynamically load the LoRA adapter using the /v1/load_lora_adapter API endpoint.",
-            "supported": true
-          },
-          {
-            "claim": "Note that this feature comes with security risks and should not be used in production unless in a trusted environment.",
+            "claim": "This will dynamically load the adapter without needing to restart the server.",
             "supported": true
           }
         ],
         "citation_valid": 1.0,
         "correctness": 1.0,
-        "correctness_reason": "The answer includes all key steps: enabling LoRA, setting the environment variable, and using the correct endpoint, with no contradictions."
+        "correctness_reason": "The answer includes all key steps: enabling runtime LoRA updating, setting the environment variable, and POSTing lora_name and lora_path to the correct endpoint, matching the reference answer."
       },
       {
         "id": "q054",
@@ -2176,8 +2236,8 @@
         "refused": true,
         "citations": 0,
         "invalid_citations": 0,
-        "cost_usd": 0.000245,
-        "latency_ms": 809.5,
+        "cost_usd": 0.000278,
+        "latency_ms": 920.8,
         "cached": false,
         "refusal_correct": 1.0
       },
@@ -2189,8 +2249,8 @@
         "refused": true,
         "citations": 0,
         "invalid_citations": 0,
-        "cost_usd": 0.000243,
-        "latency_ms": 726.5,
+        "cost_usd": 0.000249,
+        "latency_ms": 820.0,
         "cached": false,
         "refusal_correct": 1.0
       },
@@ -2202,8 +2262,8 @@
         "refused": true,
         "citations": 0,
         "invalid_citations": 0,
-        "cost_usd": 0.000181,
-        "latency_ms": 1023.2,
+        "cost_usd": 0.000237,
+        "latency_ms": 815.2,
         "cached": false,
         "refusal_correct": 1.0
       },
@@ -2211,68 +2271,76 @@
         "id": "q057",
         "slice": "config_flag",
         "status": "answered",
-        "answer": "To send a trickle of tiny side requests during a benchmark and measure how much the main load slows them down, you should set the `--probe-request-rate` to a positive value. This will send single-token text-only probe requests at that rate alongside the main workload, allowing you to measure the interference that the main workload inflicts on unrelated requests [1].",
+        "answer": "You can use the `--probe-request-rate` option to send single-token text-only probe requests at a specified rate alongside the main workload. Setting `--probe-request-rate` to a positive value allows you to measure how the main workload affects unrelated traffic, as the probe requests bypass `--max-concurrency` and their latency is reported separately. This setup helps in assessing the interference that the main workload inflicts on the side requests [1].",
         "refused": false,
         "citations": 1,
         "invalid_citations": 0,
-        "cost_usd": 0.000236,
-        "latency_ms": 1229.0,
+        "cost_usd": 0.000325,
+        "latency_ms": 1350.3,
         "cached": false,
         "faithfulness": 1.0,
         "claims": [
           {
-            "claim": "To send a trickle of tiny side requests during a benchmark and measure how much the main load slows them down, you should set the --probe-request-rate to a positive value.",
+            "claim": "You can use the --probe-request-rate option to send single-token text-only probe requests at a specified rate alongside the main workload.",
             "supported": true
           },
           {
-            "claim": "This will send single-token text-only probe requests at that rate alongside the main workload.",
+            "claim": "Setting --probe-request-rate to a positive value allows you to measure how the main workload affects unrelated traffic.",
             "supported": true
           },
           {
-            "claim": "This allows you to measure the interference that the main workload inflicts on unrelated requests.",
+            "claim": "The probe requests bypass --max-concurrency and their latency is reported separately.",
+            "supported": true
+          },
+          {
+            "claim": "This setup helps in assessing the interference that the main workload inflicts on the side requests.",
             "supported": true
           }
         ],
         "citation_valid": 1.0,
         "correctness": 1.0,
-        "correctness_reason": "The answer correctly identifies the use of --probe-request-rate, describes its function, and matches all key facts from the reference answer."
+        "correctness_reason": "The answer correctly identifies the use of --probe-request-rate, explains its function, and adds accurate extra detail without contradicting the reference."
       },
       {
         "id": "q058",
         "slice": "config_flag",
         "status": "answered",
-        "answer": "To achieve batch invariance in vLLM, you need to set the environment variable `VLLM_BATCH_INVARIANT` to `1` by using the command:\n\n```bash\nexport VLLM_BATCH_INVARIANT=1\n``` \n\nThis will ensure that the output remains consistent regardless of how requests are batched together [4].",
+        "answer": "The environment variable to ensure that requests get the same output regardless of how they are batched together is `VLLM_DISABLE_REQUEST_ID_RANDOMIZATION`. This variable is slated for removal upstream, but it allows for consistent request IDs by stripping the trailing per-engine random suffix from the request IDs [1].",
         "refused": false,
         "citations": 1,
         "invalid_citations": 0,
-        "cost_usd": 0.000207,
-        "latency_ms": 1434.2,
+        "cost_usd": 0.000288,
+        "latency_ms": 1226.1,
         "cached": false,
-        "faithfulness": 0.5,
+        "faithfulness": 0.3333333333333333,
         "claims": [
           {
-            "claim": "To achieve batch invariance in vLLM, you need to set the environment variable VLLM_BATCH_INVARIANT to 1 by using the command: export VLLM_BATCH_INVARIANT=1",
+            "claim": "The environment variable to ensure that requests get the same output regardless of how they are batched together is VLLM_DISABLE_REQUEST_ID_RANDOMIZATION.",
+            "supported": false
+          },
+          {
+            "claim": "This variable is slated for removal upstream.",
             "supported": true
           },
           {
-            "claim": "This will ensure that the output remains consistent regardless of how requests are batched together",
+            "claim": "It allows for consistent request IDs by stripping the trailing per-engine random suffix from the request IDs.",
             "supported": false
           }
         ],
         "citation_valid": 1.0,
-        "correctness": 1.0,
-        "correctness_reason": "The answer correctly states to set VLLM_BATCH_INVARIANT=1 and explains its effect, matching the reference."
+        "correctness": 0.5,
+        "correctness_reason": "Mentions a related but deprecated variable and misses the key fact that VLLM_BATCH_INVARIANT=1 is the correct current environment variable."
       },
       {
         "id": "q059",
         "slice": "config_flag",
         "status": "answered",
-        "answer": "Use the `--strict-params` flag to fail fast on unknown keys in your parameters JSON. By default, unsupported parameters in `--serve-params` or `--startup-params` are ignored with a warning [1].",
+        "answer": "Use the `--strict-params` flag to fail fast on unknown keys in your parameters JSON. By default, unsupported parameters in `--serve-params` or `--startup-params` are ignored with a warning, but using `--strict-params` will change this behavior to raise an error instead [1].",
         "refused": false,
         "citations": 1,
         "invalid_citations": 0,
-        "cost_usd": 0.000219,
-        "latency_ms": 999.2,
+        "cost_usd": 0.000334,
+        "latency_ms": 1344.7,
         "cached": false,
         "faithfulness": 1.0,
         "claims": [
@@ -2283,81 +2351,61 @@
           {
             "claim": "By default, unsupported parameters in --serve-params or --startup-params are ignored with a warning.",
             "supported": true
+          },
+          {
+            "claim": "Using --strict-params will change this behavior to raise an error instead.",
+            "supported": true
           }
         ],
         "citation_valid": 1.0,
         "correctness": 1.0,
-        "correctness_reason": "The answer correctly states to use the --strict-params flag to error out on unknown keys, matching the reference answer."
+        "correctness_reason": "The answer correctly explains that using --strict-params will cause unknown keys to error out instead of just warning, matching the reference answer."
       },
       {
         "id": "q060",
         "slice": "multi_hop",
-        "status": "answered",
-        "answer": "To load weights with the Run:ai Model Streamer in your `vllm serve` configuration, you need to specify the `--load-format runai_streamer` flag in your command. However, the provided excerpts do not contain specific YAML configuration details for this purpose. \n\nYou can run the command as follows:\n\n```bash\nvllm serve /path/to/model --load-format runai_streamer\n```\n\nFor sharded models, you would use:\n\n```bash\nvllm serve /path/to/sharded/model --load-format runai_streamer_sharded\n```\n\nThe excerpts do not provide a direct YAML configuration example for this specific case.",
-        "refused": false,
+        "status": "refused",
+        "answer": "I don't know based on the vLLM documentation.",
+        "refused": true,
         "citations": 0,
         "invalid_citations": 0,
-        "cost_usd": 0.000332,
-        "latency_ms": 1812.9,
+        "cost_usd": 0.000259,
+        "latency_ms": 713.3,
         "cached": false,
-        "faithfulness": 1.0,
-        "claims": [
-          {
-            "claim": "To load weights with the Run:ai Model Streamer in your `vllm serve` configuration, you need to specify the `--load-format runai_streamer` flag in your command.",
-            "supported": true
-          },
-          {
-            "claim": "The provided excerpts do not contain specific YAML configuration details for this purpose.",
-            "supported": true
-          },
-          {
-            "claim": "You can run the command as follows: `vllm serve /path/to/model --load-format runai_streamer`.",
-            "supported": true
-          },
-          {
-            "claim": "For sharded models, you would use: `vllm serve /path/to/sharded/model --load-format runai_streamer_sharded`.",
-            "supported": true
-          },
-          {
-            "claim": "The excerpts do not provide a direct YAML configuration example for this specific case.",
-            "supported": true
-          }
-        ],
-        "citation_valid": 0.0,
-        "correctness": 0.5,
-        "correctness_reason": "The answer explains the correct flag but does not specify the YAML key (`load-format: runai_streamer`), which is the key fact from the reference answer."
+        "correctness": 0.0,
+        "correctness_reason": "not answered (refused)"
       }
     ]
   },
   "generation": {
     "overall": {
-      "faithfulness": 0.9574,
-      "correctness": 0.8,
+      "faithfulness": 0.9773,
+      "correctness": 0.87,
       "refusal_accuracy": 1.0,
-      "false_refusal_rate": 0.14,
-      "citation_validity": 0.9767,
+      "false_refusal_rate": 0.06,
+      "citation_validity": 1.0,
       "degraded": 0
     },
     "by_slice": {
       "config_flag": {
         "n": 12,
-        "faithfulness": 0.95,
+        "faithfulness": 0.9444,
         "correctness": 0.8333
       },
       "factual": {
         "n": 15,
         "faithfulness": 1.0,
-        "correctness": 0.9
+        "correctness": 0.9667
       },
       "how_to": {
         "n": 15,
-        "faithfulness": 0.9762,
-        "correctness": 0.8667
+        "faithfulness": 1.0,
+        "correctness": 0.9667
       },
       "multi_hop": {
         "n": 8,
-        "faithfulness": 0.8,
-        "correctness": 0.4375
+        "faithfulness": 0.92,
+        "correctness": 0.5625
       },
       "unanswerable": {
         "n": 10,
@@ -2367,14 +2415,14 @@
     },
     "n": 60,
     "cost": {
-      "generation_per_query_usd": 0.000251,
-      "judge_spent_this_run_usd": 0.1907
+      "generation_per_query_usd": 0.000269,
+      "judge_spent_this_run_usd": 0.2235
     },
     "latency_ms": {
-      "p50": 1434.2,
-      "p95": 2210.5,
-      "p99": 3891.4,
-      "n_uncached": 43
+      "p50": 1330.4,
+      "p95": 2346.4,
+      "p99": 2744.0,
+      "n_uncached": 47
     }
   }
 }
