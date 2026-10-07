@@ -1,0 +1,65 @@
+{
+  "golden": "golden.csv",
+  "rows": [
+    {
+      "chunk_size": 200,
+      "mode": "dense",
+      "recall_at_1": 0.69,
+      "recall_at_5": 0.89,
+      "recall_at_10": 0.94,
+      "mrr_at_10": 0.829,
+      "section_at_5": 0.8,
+      "config_flag_recall_at_5": 0.8333
+    },
+    {
+      "chunk_size": 200,
+      "mode": "hybrid",
+      "recall_at_1": 0.76,
+      "recall_at_5": 0.95,
+      "recall_at_10": 0.95,
+      "mrr_at_10": 0.8917,
+      "section_at_5": 0.84,
+      "config_flag_recall_at_5": 0.9167
+    },
+    {
+      "chunk_size": 400,
+      "mode": "dense",
+      "recall_at_1": 0.72,
+      "recall_at_5": 0.87,
+      "recall_at_10": 0.92,
+      "mrr_at_10": 0.8329,
+      "section_at_5": 0.8,
+      "config_flag_recall_at_5": 0.9167
+    },
+    {
+      "chunk_size": 400,
+      "mode": "hybrid",
+      "recall_at_1": 0.78,
+      "recall_at_5": 0.93,
+      "recall_at_10": 0.98,
+      "mrr_at_10": 0.9057,
+      "section_at_5": 0.86,
+      "config_flag_recall_at_5": 0.9167
+    },
+    {
+      "chunk_size": 800,
+      "mode": "dense",
+      "recall_at_1": 0.72,
+      "recall_at_5": 0.88,
+      "recall_at_10": 0.92,
+      "mrr_at_10": 0.8333,
+      "section_at_5": 0.76,
+      "config_flag_recall_at_5": 0.9167
+    },
+    {
+      "chunk_size": 800,
+      "mode": "hybrid",
+      "recall_at_1": 0.76,
+      "recall_at_5": 0.95,
+      "recall_at_10": 0.99,
+      "mrr_at_10": 0.8937,
+      "section_at_5": 0.86,
+      "config_flag_recall_at_5": 0.9167
+    }
+  ]
+}
