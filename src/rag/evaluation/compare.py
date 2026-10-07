@@ -90,7 +90,7 @@ def render_report(checks: list[dict], baseline: dict, current: dict) -> str:
                       f"${cost['judge_spent_this_run_usd']:.4f} · latency p50/p99: {latency['p50']}/{latency['p99']} ms "
                       f"({latency['n_uncached']} uncached calls)"]
     lines += ["", "<sub>Rules live in `config/gate.yaml`. Retrieval metrics are deterministic; "
-                  "judge metrics (GPT-4o-mini) have wider tolerances.</sub>"]
+                  f"judge metrics ({meta['judge']}, scoring {meta['generator']} answers) have wider tolerances.</sub>"]
     return "\n".join(lines)
 
 

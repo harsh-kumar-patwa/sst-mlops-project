@@ -40,13 +40,15 @@ else:
     latency = requests["latency_total_ms"]
 
     st.subheader("Operational")
-    cols = st.columns(6)
+    cols = st.columns(3)
     cols[0].metric("Requests", len(requests))
-    cols[1].metric("p50 latency", f"{latency.quantile(0.50) / 1000:.2f} s")
-    cols[2].metric("p95 latency", f"{latency.quantile(0.95) / 1000:.2f} s")
-    cols[3].metric("p99 latency", f"{latency.quantile(0.99) / 1000:.2f} s")
-    cols[4].metric("Cost / answered query", f"${answered['cost_usd'].mean():.5f}" if len(answered) else "–")
-    cols[5].metric("LLM errors (degraded)", f"{(requests['status'] == 'degraded').mean():.1%}")
+    cols[1].metric("Cost per answered query", f"${answered['cost_usd'].mean():.5f}" if len(answered) else "–",
+                   help=f"Total spend: ${requests['cost_usd'].sum():.4f}")
+    cols[2].metric("LLM errors (degraded)", f"{(requests['status'] == 'degraded').mean():.1%}")
+    cols = st.columns(3)
+    cols[0].metric("p50 latency", f"{latency.quantile(0.50) / 1000:.2f} s")
+    cols[1].metric("p95 latency", f"{latency.quantile(0.95) / 1000:.2f} s")
+    cols[2].metric("p99 latency", f"{latency.quantile(0.99) / 1000:.2f} s")
 
     left, right = st.columns(2)
     left.caption("Latency per request (ms), split by stage")
@@ -55,22 +57,24 @@ else:
     right.line_chart(requests.set_index("ts")[["cost_usd"]])
 
     st.subheader("Input and output")
-    cols = st.columns(4)
+    cols = st.columns(2)
     cols[0].metric("Median question length", f"{requests['question_chars'].median():.0f} chars")
     cols[1].metric("Refusal rate", f"{(requests['status'] == 'refused').mean():.1%}")
-    cols[2].metric("Answers with valid citations",
+    cols = st.columns(2)
+    cols[0].metric("Answers with valid citations",
                    f"{((answered['n_citations'] > 0) & (answered['invalid_citations'] == 0)).mean():.1%}" if len(answered) else "–")
-    cols[3].metric("Median answer length", f"{answered['answer_chars'].median():.0f} chars" if len(answered) else "–")
+    cols[1].metric("Median answer length", f"{answered['answer_chars'].median():.0f} chars" if len(answered) else "–")
 
     st.subheader("Quality")
+    st.caption("North star: thumbs-up rate. Online faithfulness: GPT-4.1 scores a random 20% of live answers.")
     cols = st.columns(3)
     if not feedback.empty:
-        cols[0].metric("Thumbs-up rate (north star)", f"{(feedback['rating'] == 'up').mean():.1%}",
+        cols[0].metric("Thumbs-up rate", f"{(feedback['rating'] == 'up').mean():.1%}",
                        help=f"{len(feedback)} ratings")
     else:
-        cols[0].metric("Thumbs-up rate (north star)", "–")
+        cols[0].metric("Thumbs-up rate", "–")
     scored = online[online.get("faithfulness").notna()] if not online.empty and "faithfulness" in online else pd.DataFrame()
-    cols[1].metric("Online faithfulness (sampled judge)", f"{scored['faithfulness'].mean():.3f}" if len(scored) else "–",
+    cols[1].metric("Online faithfulness", f"{scored['faithfulness'].mean():.3f}" if len(scored) else "–",
                    help="GPT-4o-mini scores a random sample of live answers")
     cols[2].metric("Judged answers", len(scored))
 
