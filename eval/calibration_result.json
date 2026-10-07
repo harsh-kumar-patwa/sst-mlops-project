@@ -1,0 +1,16 @@
+{
+  "judge": "faithfulness == 1.0 means the judge says faithful",
+  "panel_faithful": {
+    "labelled": 20,
+    "agreement": 0.8,
+    "cohens_kappa": -0.081,
+    "labeller_says_faithful": 0.95,
+    "judge_says_faithful": 0.85,
+    "disagreements": [
+      "q005",
+      "q058",
+      "q040",
+      "q029"
+    ]
+  }
+}

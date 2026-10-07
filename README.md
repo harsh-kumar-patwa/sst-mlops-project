@@ -16,6 +16,7 @@ quality is blocked from merging**.
 | Faithfulness / Correctness (GPT-4.1 judge) | 0.957 / 0.800 |
 | Refusal accuracy (unanswerable) / false refusals (answerable) | 1.00 / 0.14 |
 | Latency p50 / p95 / p99 (end to end, uncached) | 1.43 s / 2.21 s / 3.89 s |
+| Judge calibration (20 answers vs an independent 2-agent Claude panel) | 80% agreement: judge flagged 3 faithful answers (strict), missed 1 unfaithful one. See `eval/calibration_result.json` |
 | Retrieval latency (warm) | ~4–50 ms |
 | Cost per query (gpt-4o-mini generator) | $0.00025 · full 60-question eval incl. judge ≈ $0.19 |
 | Load test throughput | _fill in from `make loadtest`_ |
@@ -72,6 +73,20 @@ Set `LANGFUSE_PUBLIC_KEY` / `LANGFUSE_SECRET_KEY` and every answer becomes a Lan
 Scores attached to traces: `faithfulness` and `correctness` from eval runs (tagged `eval`), `faithfulness_online`
 from the sampled live judge, and `user_feedback` from 👍/👎. The API's `request_id` is the trace id.
 Export happens in a background thread, so tracing adds no request latency; without keys it is a no-op.
+
+## Judge calibration
+
+The faithfulness judge (GPT-4.1) is checked against an independent labelling of 20 sampled answers
+(`make calibrate`, labels in `eval/calibration.csv`). Labels are kept in separate columns:
+`human_faithful` for people, `panel_faithful` for an AI panel of two Claude labellers with opposite
+instructions (one hunting for unsupported claims, one looking for support), with an adjudicator for
+disagreements. The panel is a cross-family check on the GPT judge, not a substitute for human labels.
+
+Result (panel, 20 answers): **80% agreement**. The judge is stricter than the panel: it flagged 3 answers the
+panel found fully supported (once on a sentence the excerpt states word for word), and missed 1 answer that
+invents a condition. Cohen's kappa is not meaningful here because 19 of 20 answers are faithful, so the
+disagreements are reported individually instead. Because the judge errs toward flagging, a faithfulness
+drop in CI is more likely a false alarm than a missed regression, which is the safe direction for a merge gate.
 
 ## Versioning
 
