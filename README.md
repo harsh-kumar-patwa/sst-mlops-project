@@ -9,17 +9,40 @@ quality is blocked from merging**.
 
 ## Results
 
+Current baseline on `main` (hybrid retrieval, chunk 400, prompt `answer_v1`, gpt-4o-mini, judged by GPT-4.1):
+
 | Metric | Value |
 |---|---|
 | Golden set | 60 questions: 15 factual, 15 how-to, 12 config-flag, 8 multi-hop, 10 unanswerable (`eval/golden.csv`) |
-| Recall@5 / MRR@10 (dense, chunk 400) | 0.870 / 0.833 (multi-hop Recall@5: 0.688) |
-| Faithfulness / Correctness (GPT-4.1 judge) | 0.957 / 0.800 |
-| Refusal accuracy (unanswerable) / false refusals (answerable) | 1.00 / 0.14 |
-| Latency p50 / p95 / p99 (end to end, uncached) | 1.43 s / 2.21 s / 3.89 s |
-| Judge calibration (20 answers vs an independent 2-agent Claude panel) | 80% agreement: judge flagged 3 faithful answers (strict), missed 1 unfaithful one. See `eval/calibration_result.json` |
-| Retrieval latency (warm) | ~4–50 ms |
-| Cost per query (gpt-4o-mini generator) | $0.00025 · full 60-question eval incl. judge ≈ $0.19 |
-| Load test throughput | _fill in from `make loadtest`_ |
+| Recall@5 / MRR@10 | **0.930 / 0.906** (dense-only was 0.870 / 0.833) · multi-hop Recall@5 0.812 |
+| Faithfulness / Correctness | **0.977 / 0.870** |
+| Refusal accuracy (unanswerable) / false refusals (answerable) | **1.00 / 0.06** |
+| Citation validity | 1.00 |
+| Cost per query (generation) | **$0.00027** · a full 60-question eval incl. judge ≈ $0.22 |
+| Latency, eval run (uncached LLM calls) | p50 1.33 s · p95 2.35 s · p99 2.74 s |
+| Latency, live API (60 questions through `/ask`) | p50 1.21 s · p95 2.30 s · p99 2.98 s · 0% errors |
+| Load test, retrieval path (`/search`, 1 process, laptop CPU) | **78 req/s at 100 users, 0 failures**, p50 6 ms, p99 38 ms |
+| Judge calibration (20 answers vs an independent 2-agent Claude panel) | 80% agreement: judge flagged 3 faithful answers (strict), missed 1 unfaithful one (`eval/calibration_result.json`) |
+
+The end-to-end path is bound by the LLM API (≈1.2 s and a provider rate limit per answer), not by retrieval:
+the retrieval path was not saturated at 78 req/s.
+
+## The eval gate in action
+
+Three pull requests, each changing one thing, judged by the same 60 questions:
+
+| PR | Change | What the gate saw | Result |
+|---|---|---|---|
+| [#4](https://github.com/harsh-kumar-patwa/sst-mlops-project/pull/4) | Pass only the top chunk to the LLM (`top_k` 5 → 1) to cut cost | Cost −61%, retrieval metrics unchanged, but **correctness 0.80 → 0.63** | ❌ blocked |
+| [#2](https://github.com/harsh-kumar-patwa/sst-mlops-project/pull/2) | Prompt v2: "thorough answers, add your own knowledge" | Correctness *rose* to 0.84, but **faithfulness 0.96 → 0.64**, refusal accuracy 1.0 → 0.0, citations 0.98 → 0.73, p50 latency 5.2 s | ❌ blocked |
+| [#3](https://github.com/harsh-kumar-patwa/sst-mlops-project/pull/3) | Hybrid retrieval (dense + BM25, RRF) | Recall@5 +0.06, multi-hop +0.125, correctness +0.06, faithfulness +0.02 | ✅ merged, new baseline |
+
+Each regression was caught by a different metric: #4 is invisible to retrieval metrics, and #2 would pass a
+correctness-only eval. That is why retrieval, correctness, faithfulness and refusals are gated separately.
+
+![PR #4 blocked by the eval gate](docs/screenshots/pr4-one-chunk-blocked.png)
+![PR #2 blocked by the eval gate](docs/screenshots/pr2-prompt-v2-blocked.png)
+![PR #3 passing the eval gate](docs/screenshots/pr3-hybrid-passed.png)
 
 ## Architecture
 
@@ -48,7 +71,7 @@ flowchart LR
 ```
 
 **Request path:** embed the question (same model as the index; the service refuses to start on a mismatch) →
-top-20 dense search (optionally fused with BM25 by Reciprocal Rank Fusion) → refuse if nothing relevant →
+top-20 dense search and top-20 BM25 search fused by Reciprocal Rank Fusion → refuse if nothing relevant →
 top-5 excerpts wrapped in `[BEGIN DOCUMENT n]` delimiters → gpt-4o-mini answers with `[n]` citations →
 citations checked against the retrieved set. If the LLM fails, the service returns the relevant doc sections instead of an error.
 
