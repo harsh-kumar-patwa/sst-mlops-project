@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.env
+.qdrant/
+.cache/
+logs/
+eval/results/latest.json
+eval/results/smoke.json
+loadtest/results*
+.DS_Store

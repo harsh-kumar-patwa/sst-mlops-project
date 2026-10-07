@@ -1,0 +1,44 @@
+# Every tunable of the RAG pipeline lives here, never in code.
+# The sha256 of this file (config_hash) is stamped on every response, trace and eval run,
+# so any answer can be traced back to the exact configuration that produced it.
+
+corpus:
+  name: vllm-docs
+  version: v0.31.0                                   # vLLM release the docs snapshot is taken from
+  commit: db9527a46873454610df6dbedf79a36d6bf1a7f6
+  path: data/vllm-docs
+
+chunking:
+  # Token counts are approximated as characters / 4.
+  # 400 (not the textbook 512) because bge-small truncates input at 512 tokens and
+  # every chunk is prefixed with its "page > section" breadcrumb before embedding.
+  chunk_size_tokens: 400
+  chunk_overlap_tokens: 60
+  min_chunk_tokens: 25          # drop near-empty fragments (lone headings, link lists)
+
+embedding:
+  model: BAAI/bge-small-en-v1.5  # local, CPU, 384-d; index-time and query-time model MUST match
+  sparse_model: Qdrant/bm25      # only used when retrieval.mode = hybrid
+
+retrieval:
+  mode: dense                    # dense | hybrid (dense + BM25 fused with Reciprocal Rank Fusion)
+  candidates: 20                 # retrieved per retriever before fusion / truncation
+  top_k: 5                       # chunks passed to the LLM
+  rrf_k: 60
+  min_score: 0.55                # refuse to answer if the best dense cosine score is below this
+
+generation:
+  provider: anthropic
+  model: claude-haiku-4-5
+  temperature: 0.0
+  max_tokens: 1024
+  timeout_seconds: 30
+  prompt_version: answer_v1      # file in prompts/
+  max_context_tokens: 3000
+  price_per_mtok: {input: 1.00, output: 5.00}
+
+judge:
+  provider: openai
+  model: gpt-4o-mini             # different model family from the generator, avoids self-preference bias
+  temperature: 0.0
+  price_per_mtok: {input: 0.15, output: 0.60}
