@@ -3,6 +3,9 @@ name: deploy
 # Continuous deployment to Hugging Face Spaces, gated by evaluation: this runs only after the
 # eval-gate workflow has PASSED on main. A commit that fails the gate is never deployed.
 # Rollback = revert the commit on main; the revert passes the gate and redeploys the previous version.
+# A deploy is skipped when the files that make up the app are identical to what the Space already
+# has (e.g. README-only or test-only merges), so the live app is not rebuilt and restarted for nothing.
+# Running the workflow by hand (workflow_dispatch) always deploys.
 
 on:
   workflow_run:
@@ -48,29 +51,55 @@ jobs:
       - name: Expected config version
         if: steps.settings.outputs.enabled == 'true'
         id: expected
+        env:
+          PYTHONDONTWRITEBYTECODE: "1"   # keep __pycache__ out of the files shipped to the Space
         run: |
           pip install -q pyyaml python-dotenv
           echo "config_hash=$(PYTHONPATH=src python -c 'from rag.config import load_config; print(load_config()["config_hash"])')" >> "$GITHUB_OUTPUT"
 
       # The Space only needs what the Docker image is built from; screenshots and other binaries
       # are left out (Spaces reject binary files that are not stored with Git LFS/Xet).
-      - name: Push to the Space
+      - name: Prepare the Space files
         if: steps.settings.outputs.enabled == 'true'
         run: |
           mkdir "$RUNNER_TEMP/space"
           cp -r Dockerfile .dockerignore requirements.txt config prompts data src "$RUNNER_TEMP/space/"
           cp deploy/hf-space/README.md "$RUNNER_TEMP/space/README.md"
+          find "$RUNNER_TEMP/space" -name __pycache__ -type d -prune -exec rm -rf {} +
+
+      - name: Compare with what the Space is running
+        if: steps.settings.outputs.enabled == 'true'
+        id: diff
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "Manual run: deploying regardless of changes"; echo "changed=true" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          git clone -q --depth 1 "https://${HF_SPACE%%/*}:${HF_TOKEN}@huggingface.co/spaces/${HF_SPACE}" "$RUNNER_TEMP/live" || mkdir -p "$RUNNER_TEMP/live"
+          if diff -rq -x .git -x __pycache__ -x .gitattributes "$RUNNER_TEMP/space" "$RUNNER_TEMP/live" > "$RUNNER_TEMP/changes.txt"; then
+            echo "::notice::No app changes since the last deploy, skipping (the live Space already runs these files)"
+            echo "No app changes since the last deploy: skipped." >> "$GITHUB_STEP_SUMMARY"
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "Files that differ from the live Space:"; cat "$RUNNER_TEMP/changes.txt"
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Push to the Space
+        if: steps.settings.outputs.enabled == 'true' && steps.diff.outputs.changed == 'true'
+        env:
+          DEPLOY_SHA: ${{ github.event.workflow_run.head_sha || github.sha }}
+        run: |
           cd "$RUNNER_TEMP/space"
           git init -q -b main
           git config user.name "${{ github.actor }}"
           git config user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
           git add -A
-          git commit -q -m "Deploy ${GITHUB_SHA::7} (config ${{ steps.expected.outputs.config_hash }})"
+          git commit -q -m "Deploy ${DEPLOY_SHA::7} (config ${{ steps.expected.outputs.config_hash }})"
           git push --force "https://${HF_SPACE%%/*}:${HF_TOKEN}@huggingface.co/spaces/${HF_SPACE}" main
 
       # Rollout verification: wait until the live app reports the config version we just shipped.
       - name: Verify the live app serves this version
-        if: steps.settings.outputs.enabled == 'true'
+        if: steps.settings.outputs.enabled == 'true' && steps.diff.outputs.changed == 'true'
         run: |
           url="${{ steps.settings.outputs.url }}"
           expected="${{ steps.expected.outputs.config_hash }}"

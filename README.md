@@ -104,6 +104,8 @@ passed on `main`**: it pushes the image sources to the Space, then polls the liv
 same `config_hash` as the commit, so the deployed app is verified to match `main`.
 
 - **Rollout:** every change reaches `main` through a PR that passed the gate, then deploys automatically.
+  The deploy compares the app files with what the Space already runs and skips when nothing changed
+  (README, tests, eval data), so the live app is not rebuilt and restarted for nothing.
 - **Rollback:** revert the commit on `main`; the revert passes the gate and redeploys the previous version.
   `config_hash` in every response shows which version answered.
 - **Image:** the vector index and embedding models are built into the image (810 MB, ~340 MB RAM, starts in ~4 s),
