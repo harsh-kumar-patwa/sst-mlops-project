@@ -1,9 +1,9 @@
 {
   "meta": {
-    "timestamp": "2026-10-07T19:06:23+00:00",
-    "git_sha": "unknown",
-    "n_questions": 6,
-    "golden": "eval/smoke.csv",
+    "timestamp": "2026-10-07T19:35:33+00:00",
+    "git_sha": "3d325e7",
+    "n_questions": 60,
+    "golden": "eval/golden.csv",
     "config_hash": "c73325c5cb6c",
     "index_hash": "92296854eba9",
     "retrieval_mode": "dense",
@@ -11,48 +11,72 @@
     "prompt_version": "answer_v1",
     "generator": "claude-haiku-4-5",
     "judge": "gpt-4o-mini",
-    "duration_s": 0.2
+    "duration_s": 0.5
   },
   "retrieval": {
     "overall": {
-      "recall_at_1": 1.0,
-      "recall_at_5": 1.0,
-      "recall_at_10": 1.0,
-      "mrr_at_10": 1.0,
+      "recall_at_1": 0.72,
+      "recall_at_5": 0.87,
+      "recall_at_10": 0.92,
+      "mrr_at_10": 0.8329,
       "section_at_5": 0.8
     },
     "by_slice": {
       "config_flag": {
-        "recall_at_1": 1.0,
-        "recall_at_5": 1.0,
-        "recall_at_10": 1.0,
-        "mrr_at_10": 1.0,
-        "section_at_5": 1.0,
-        "n": 2
+        "recall_at_1": 0.75,
+        "recall_at_5": 0.9167,
+        "recall_at_10": 0.9167,
+        "mrr_at_10": 0.7986,
+        "section_at_5": 0.75,
+        "n": 12
       },
       "factual": {
-        "recall_at_1": 1.0,
-        "recall_at_5": 1.0,
-        "recall_at_10": 1.0,
-        "mrr_at_10": 1.0,
-        "section_at_5": 0.5,
-        "n": 2
+        "recall_at_1": 0.8667,
+        "recall_at_5": 0.9333,
+        "recall_at_10": 0.9333,
+        "mrr_at_10": 0.8889,
+        "section_at_5": 0.8667,
+        "n": 15
       },
       "how_to": {
-        "recall_at_1": 1.0,
-        "recall_at_5": 1.0,
-        "recall_at_10": 1.0,
-        "mrr_at_10": 1.0,
-        "section_at_5": 1.0,
-        "n": 1
+        "recall_at_1": 0.7333,
+        "recall_at_5": 0.8667,
+        "recall_at_10": 0.9333,
+        "mrr_at_10": 0.7984,
+        "section_at_5": 0.7333,
+        "n": 15
+      },
+      "multi_hop": {
+        "recall_at_1": 0.375,
+        "recall_at_5": 0.6875,
+        "recall_at_10": 0.875,
+        "mrr_at_10": 0.8438,
+        "section_at_5": 0.875,
+        "n": 8
       }
     },
-    "n": 5
+    "n": 50
   },
   "per_question": {
     "retrieval": [
       {
-        "id": "smoke01",
+        "id": "q001",
+        "slice": "factual",
+        "recall_at_1": 0.0,
+        "recall_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "mrr_at_10": 0.3333333333333333,
+        "section_at_5": 1.0,
+        "top_docs": [
+          "design/metrics.md",
+          "features/nixl_connector_usage.md",
+          "configuration/optimization.md",
+          "features/kv_offloading_usage.md",
+          "design/nixl_kv_cache_lease.md"
+        ]
+      },
+      {
+        "id": "q002",
         "slice": "factual",
         "recall_at_1": 1.0,
         "recall_at_5": 1.0,
@@ -60,31 +84,31 @@
         "mrr_at_10": 1.0,
         "section_at_5": 1.0,
         "top_docs": [
-          "getting_started/quickstart.md",
-          "serving/online_serving/openai_compatible_server.md",
-          "deployment/integrations/llamastack.md",
-          "deployment/integrations/production-stack.md",
-          "deployment/frameworks/runpod.md"
+          "features/kv_offloading_usage.md",
+          "features/kv_offloading_usage.md",
+          "features/kv_offloading_usage.md",
+          "design/prefix_caching.md",
+          "features/kv_offloading_usage.md"
         ]
       },
       {
-        "id": "smoke02",
-        "slice": "config_flag",
+        "id": "q003",
+        "slice": "factual",
         "recall_at_1": 1.0,
         "recall_at_5": 1.0,
         "recall_at_10": 1.0,
         "mrr_at_10": 1.0,
         "section_at_5": 1.0,
         "top_docs": [
-          "features/automatic_prefix_caching.md",
-          "benchmarking/cli.md",
-          "features/automatic_prefix_caching.md",
-          "design/prefix_caching.md",
-          "serving/online_serving/README.md"
+          "configuration/optimization.md",
+          "design/optimization_levels.md",
+          "design/vllm_ir.md",
+          "getting_started/installation/cpu.md",
+          "usage/v1_guide.md"
         ]
       },
       {
-        "id": "smoke03",
+        "id": "q004",
         "slice": "how_to",
         "recall_at_1": 1.0,
         "recall_at_5": 1.0,
@@ -92,15 +116,47 @@
         "mrr_at_10": 1.0,
         "section_at_5": 1.0,
         "top_docs": [
-          "configuration/conserving_memory.md",
-          "getting_started/installation/gpu.cuda.inc.md",
-          "getting_started/installation/gpu.cuda.inc.md",
-          "features/preload.md",
-          "usage/troubleshooting.md"
+          "features/reasoning_outputs.md",
+          "features/reasoning_outputs.md",
+          "features/reasoning_outputs.md",
+          "deployment/frameworks/nebius.md",
+          "features/batch_invariance.md"
         ]
       },
       {
-        "id": "smoke04",
+        "id": "q005",
+        "slice": "multi_hop",
+        "recall_at_1": 0.0,
+        "recall_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "mrr_at_10": 0.5,
+        "section_at_5": 1.0,
+        "top_docs": [
+          "design/multiprocessing.md",
+          "usage/reproducibility.md",
+          "usage/troubleshooting.md",
+          "design/multiprocessing.md",
+          "design/multiprocessing.md"
+        ]
+      },
+      {
+        "id": "q006",
+        "slice": "factual",
+        "recall_at_1": 1.0,
+        "recall_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "mrr_at_10": 1.0,
+        "section_at_5": 1.0,
+        "top_docs": [
+          "training/async_rl.md",
+          "training/async_rl.md",
+          "training/async_rl.md",
+          "training/async_rl.md",
+          "serving/online_serving/derenderer.md"
+        ]
+      },
+      {
+        "id": "q007",
         "slice": "config_flag",
         "recall_at_1": 1.0,
         "recall_at_5": 1.0,
@@ -108,15 +164,447 @@
         "mrr_at_10": 1.0,
         "section_at_5": 1.0,
         "top_docs": [
-          "configuration/conserving_memory.md",
-          "features/kv_offloading_usage.md",
+          "features/tool_calling.md",
+          "features/tool_calling.md",
+          "features/tool_calling.md",
+          "features/tool_calling.md",
+          "features/tool_calling.md"
+        ]
+      },
+      {
+        "id": "q008",
+        "slice": "factual",
+        "recall_at_1": 1.0,
+        "recall_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "mrr_at_10": 1.0,
+        "section_at_5": 1.0,
+        "top_docs": [
+          "deployment/docker.md",
+          "features/initialized_snapshots.md",
+          "getting_started/installation/gpu.cuda.inc.md",
+          "getting_started/installation/gpu.rocm.inc.md",
+          "getting_started/installation/cpu.x86.inc.md"
+        ]
+      },
+      {
+        "id": "q009",
+        "slice": "config_flag",
+        "recall_at_1": 1.0,
+        "recall_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "mrr_at_10": 1.0,
+        "section_at_5": 1.0,
+        "top_docs": [
           "configuration/optimization.md",
-          "getting_started/installation/cpu.md",
+          "benchmarking/cli.md",
+          "configuration/conserving_memory.md",
+          "configuration/optimization.md",
+          "deployment/integrations/kthena.md"
+        ]
+      },
+      {
+        "id": "q011",
+        "slice": "how_to",
+        "recall_at_1": 1.0,
+        "recall_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "mrr_at_10": 1.0,
+        "section_at_5": 1.0,
+        "top_docs": [
+          "serving/parallelism_scaling.md",
+          "serving/parallelism_scaling.md",
+          "usage/troubleshooting.md",
+          "usage/troubleshooting.md",
+          "usage/troubleshooting.md"
+        ]
+      },
+      {
+        "id": "q012",
+        "slice": "multi_hop",
+        "recall_at_1": 0.5,
+        "recall_at_5": 0.5,
+        "recall_at_10": 1.0,
+        "mrr_at_10": 1.0,
+        "section_at_5": 1.0,
+        "top_docs": [
+          "serving/distributed_troubleshooting.md",
+          "getting_started/installation/gpu.cuda.inc.md",
+          "serving/distributed_troubleshooting.md",
+          "getting_started/installation/gpu.cuda.inc.md",
+          "deployment/integrations/kthena.md"
+        ]
+      },
+      {
+        "id": "q013",
+        "slice": "multi_hop",
+        "recall_at_1": 0.5,
+        "recall_at_5": 0.5,
+        "recall_at_10": 1.0,
+        "mrr_at_10": 1.0,
+        "section_at_5": 1.0,
+        "top_docs": [
+          "features/reasoning_outputs.md",
+          "features/reasoning_outputs.md",
+          "features/reasoning_outputs.md",
+          "features/reasoning_outputs.md",
+          "features/quantization/inc.md"
+        ]
+      },
+      {
+        "id": "q014",
+        "slice": "how_to",
+        "recall_at_1": 1.0,
+        "recall_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "mrr_at_10": 1.0,
+        "section_at_5": 1.0,
+        "top_docs": [
+          "configuration/serve_args.md",
+          "configuration/serve_args.md",
+          "configuration/serve_args.md",
+          "deployment/docker.md",
+          "cli/README.md"
+        ]
+      },
+      {
+        "id": "q015",
+        "slice": "config_flag",
+        "recall_at_1": 1.0,
+        "recall_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "mrr_at_10": 1.0,
+        "section_at_5": 1.0,
+        "top_docs": [
+          "features/lora.md",
+          "usage/security.md",
+          "models/supported_models.md",
+          "models/extensions/tensorizer.md",
+          "usage/security.md"
+        ]
+      },
+      {
+        "id": "q016",
+        "slice": "config_flag",
+        "recall_at_1": 1.0,
+        "recall_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "mrr_at_10": 1.0,
+        "section_at_5": 1.0,
+        "top_docs": [
+          "configuration/optimization.md",
+          "serving/data_parallel_deployment.md",
+          "serving/parallelism_scaling.md",
+          "serving/expert_parallel_deployment.md",
+          "configuration/optimization.md"
+        ]
+      },
+      {
+        "id": "q017",
+        "slice": "config_flag",
+        "recall_at_1": 0.0,
+        "recall_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "mrr_at_10": 0.3333333333333333,
+        "section_at_5": 1.0,
+        "top_docs": [
+          "design/hybrid_kv_cache_manager.md",
+          "design/hybrid_kv_cache_manager.md",
+          "features/quantization/quantized_kvcache.md",
+          "features/quantization/quantized_kvcache.md",
+          "features/quantization/quantized_kvcache.md"
+        ]
+      },
+      {
+        "id": "q018",
+        "slice": "multi_hop",
+        "recall_at_1": 0.0,
+        "recall_at_5": 0.5,
+        "recall_at_10": 0.5,
+        "mrr_at_10": 0.25,
+        "section_at_5": 1.0,
+        "top_docs": [
+          "deployment/integrations/kthena.md",
+          "deployment/integrations/kthena.md",
+          "features/speculative_decoding/adaptive_verification.md",
+          "configuration/conserving_memory.md",
+          "deployment/integrations/kthena.md"
+        ]
+      },
+      {
+        "id": "q019",
+        "slice": "config_flag",
+        "recall_at_1": 1.0,
+        "recall_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "mrr_at_10": 1.0,
+        "section_at_5": 1.0,
+        "top_docs": [
+          "serving/online_serving/speech_to_text.md",
+          "usage/security.md",
+          "usage/security.md",
+          "usage/security.md",
+          "usage/security.md"
+        ]
+      },
+      {
+        "id": "q020",
+        "slice": "multi_hop",
+        "recall_at_1": 0.5,
+        "recall_at_5": 0.5,
+        "recall_at_10": 1.0,
+        "mrr_at_10": 1.0,
+        "section_at_5": 1.0,
+        "top_docs": [
+          "deployment/docker.md",
+          "design/torch_compile.md",
+          "design/debug_vllm_compile.md",
+          "design/torch_compile.md",
+          "deployment/docker.md"
+        ]
+      },
+      {
+        "id": "q022",
+        "slice": "how_to",
+        "recall_at_1": 1.0,
+        "recall_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "mrr_at_10": 1.0,
+        "section_at_5": 0.0,
+        "top_docs": [
+          "configuration/model_resolution.md",
+          "usage/troubleshooting.md",
+          "usage/troubleshooting.md",
+          "serving/integrations/codex.md",
+          "deployment/frameworks/helm.md"
+        ]
+      },
+      {
+        "id": "q024",
+        "slice": "how_to",
+        "recall_at_1": 0.0,
+        "recall_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "mrr_at_10": 0.3333333333333333,
+        "section_at_5": 1.0,
+        "top_docs": [
+          "deployment/integrations/production-stack.md",
+          "benchmarking/cli.md",
+          "serving/online_serving/openai_compatible_server.md",
+          "getting_started/installation/gpu.apple.inc.md",
+          "serving/expert_parallel_deployment.md"
+        ]
+      },
+      {
+        "id": "q025",
+        "slice": "how_to",
+        "recall_at_1": 0.0,
+        "recall_at_5": 0.0,
+        "recall_at_10": 1.0,
+        "mrr_at_10": 0.14285714285714285,
+        "section_at_5": 0.0,
+        "top_docs": [
+          "models/supported_models.md",
+          "models/supported_models.md",
+          "models/supported_models.md",
+          "models/supported_models.md",
+          "models/supported_models.md"
+        ]
+      },
+      {
+        "id": "q026",
+        "slice": "how_to",
+        "recall_at_1": 1.0,
+        "recall_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "mrr_at_10": 1.0,
+        "section_at_5": 1.0,
+        "top_docs": [
+          "features/context_extension.md",
+          "features/context_extension.md",
+          "features/batch_invariance.md",
+          "design/torch_compile.md",
+          "features/context_extension.md"
+        ]
+      },
+      {
+        "id": "q027",
+        "slice": "factual",
+        "recall_at_1": 1.0,
+        "recall_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "mrr_at_10": 1.0,
+        "section_at_5": 1.0,
+        "top_docs": [
+          "features/watermarking.md",
+          "features/watermarking.md",
+          "features/watermarking.md",
+          "features/watermarking.md",
+          "features/watermarking.md"
+        ]
+      },
+      {
+        "id": "q028",
+        "slice": "config_flag",
+        "recall_at_1": 0.0,
+        "recall_at_5": 0.0,
+        "recall_at_10": 0.0,
+        "mrr_at_10": 0.0,
+        "section_at_5": 0.0,
+        "top_docs": [
+          "features/sleep_mode.md",
+          "features/preload.md",
+          "features/preload.md",
+          "benchmarking/sweeps.md",
+          "models/extensions/instanttensor.md"
+        ]
+      },
+      {
+        "id": "q029",
+        "slice": "multi_hop",
+        "recall_at_1": 0.5,
+        "recall_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "mrr_at_10": 1.0,
+        "section_at_5": 1.0,
+        "top_docs": [
+          "training/weight_transfer/README.md",
+          "training/weight_transfer/ipc.md",
+          "training/weight_transfer/ipc.md",
+          "training/async_rl.md",
+          "training/weight_transfer/m2n.md"
+        ]
+      },
+      {
+        "id": "q030",
+        "slice": "how_to",
+        "recall_at_1": 1.0,
+        "recall_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "mrr_at_10": 1.0,
+        "section_at_5": 1.0,
+        "top_docs": [
+          "features/sleep_mode.md",
+          "features/sleep_mode.md",
+          "features/sleep_mode.md",
+          "features/sleep_mode.md",
+          "features/sleep_mode.md"
+        ]
+      },
+      {
+        "id": "q031",
+        "slice": "factual",
+        "recall_at_1": 0.0,
+        "recall_at_5": 0.0,
+        "recall_at_10": 0.0,
+        "mrr_at_10": 0.0,
+        "section_at_5": 0.0,
+        "top_docs": [
+          "configuration/optimization.md",
+          "design/mm_processing.md",
+          "usage/security.md",
+          "usage/security.md",
+          "features/kv_offloading_usage.md"
+        ]
+      },
+      {
+        "id": "q032",
+        "slice": "how_to",
+        "recall_at_1": 1.0,
+        "recall_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "mrr_at_10": 1.0,
+        "section_at_5": 1.0,
+        "top_docs": [
+          "usage/usage_stats.md",
+          "usage/usage_stats.md",
+          "usage/security.md",
+          "usage/usage_stats.md",
+          "design/metrics.md"
+        ]
+      },
+      {
+        "id": "q033",
+        "slice": "how_to",
+        "recall_at_1": 1.0,
+        "recall_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "mrr_at_10": 1.0,
+        "section_at_5": 1.0,
+        "top_docs": [
+          "usage/troubleshooting.md",
+          "design/debug_vllm_compile.md",
+          "design/debug_vllm_compile.md",
+          "usage/troubleshooting.md",
+          "design/debug_vllm_compile.md"
+        ]
+      },
+      {
+        "id": "q034",
+        "slice": "factual",
+        "recall_at_1": 1.0,
+        "recall_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "mrr_at_10": 1.0,
+        "section_at_5": 1.0,
+        "top_docs": [
+          "usage/reproducibility.md",
+          "usage/reproducibility.md",
+          "usage/v1_guide.md",
+          "deployment/frameworks/streamlit.md",
+          "README.md"
+        ]
+      },
+      {
+        "id": "q035",
+        "slice": "factual",
+        "recall_at_1": 1.0,
+        "recall_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "mrr_at_10": 1.0,
+        "section_at_5": 1.0,
+        "top_docs": [
+          "serving/expert_parallel_deployment.md",
+          "getting_started/quickstart.md",
+          "serving/expert_parallel_deployment.md",
+          "serving/parallelism_scaling.md",
+          "configuration/optimization.md"
+        ]
+      },
+      {
+        "id": "q036",
+        "slice": "factual",
+        "recall_at_1": 1.0,
+        "recall_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "mrr_at_10": 1.0,
+        "section_at_5": 1.0,
+        "top_docs": [
+          "features/structured_outputs.md",
+          "design/attention_backends.md",
+          "features/structured_outputs.md",
+          "features/tool_calling.md",
           "benchmarking/cli.md"
         ]
       },
       {
-        "id": "smoke05",
+        "id": "q037",
+        "slice": "config_flag",
+        "recall_at_1": 1.0,
+        "recall_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "mrr_at_10": 1.0,
+        "section_at_5": 0.0,
+        "top_docs": [
+          "models/supported_models.md",
+          "deployment/frameworks/hf_inference_endpoints.md",
+          "design/huggingface_integration.md",
+          "models/supported_models.md",
+          "models/supported_models.md"
+        ]
+      },
+      {
+        "id": "q038",
         "slice": "factual",
         "recall_at_1": 1.0,
         "recall_at_5": 1.0,
@@ -124,11 +612,251 @@
         "mrr_at_10": 1.0,
         "section_at_5": 0.0,
         "top_docs": [
-          "features/quantization/gguf.md",
+          "usage/faq.md",
+          "getting_started/quickstart.md",
+          "features/quantization/modelopt.md",
+          "deployment/frameworks/bentoml.md",
+          "serving/online_serving/openai_compatible_server.md"
+        ]
+      },
+      {
+        "id": "q039",
+        "slice": "how_to",
+        "recall_at_1": 1.0,
+        "recall_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "mrr_at_10": 1.0,
+        "section_at_5": 0.0,
+        "top_docs": [
+          "features/preload.md",
+          "configuration/optimization.md",
+          "models/extensions/instanttensor.md",
+          "configuration/optimization.md",
+          "features/sleep_mode.md"
+        ]
+      },
+      {
+        "id": "q040",
+        "slice": "how_to",
+        "recall_at_1": 0.0,
+        "recall_at_5": 0.0,
+        "recall_at_10": 0.0,
+        "mrr_at_10": 0.0,
+        "section_at_5": 0.0,
+        "top_docs": [
+          "deployment/frameworks/streamlit.md",
+          "getting_started/installation/cpu.x86.inc.md",
+          "getting_started/installation/cpu.arm.inc.md",
+          "deployment/frameworks/dify.md",
+          "getting_started/installation/cpu.arm.inc.md"
+        ]
+      },
+      {
+        "id": "q043",
+        "slice": "how_to",
+        "recall_at_1": 1.0,
+        "recall_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "mrr_at_10": 1.0,
+        "section_at_5": 1.0,
+        "top_docs": [
+          "benchmarking/cli.md",
+          "benchmarking/sweeps.md",
+          "benchmarking/sweeps.md",
+          "benchmarking/cli.md",
+          "cli/README.md"
+        ]
+      },
+      {
+        "id": "q044",
+        "slice": "config_flag",
+        "recall_at_1": 1.0,
+        "recall_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "mrr_at_10": 1.0,
+        "section_at_5": 0.0,
+        "top_docs": [
+          "models/supported_models.md",
+          "models/supported_models.md",
+          "models/supported_models.md",
+          "models/supported_models.md",
+          "design/huggingface_integration.md"
+        ]
+      },
+      {
+        "id": "q047",
+        "slice": "factual",
+        "recall_at_1": 1.0,
+        "recall_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "mrr_at_10": 1.0,
+        "section_at_5": 1.0,
+        "top_docs": [
+          "features/sleep_mode.md",
+          "features/sleep_mode.md",
+          "features/sleep_mode.md",
+          "features/sleep_mode.md",
+          "features/sleep_mode.md"
+        ]
+      },
+      {
+        "id": "q048",
+        "slice": "factual",
+        "recall_at_1": 1.0,
+        "recall_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "mrr_at_10": 1.0,
+        "section_at_5": 1.0,
+        "top_docs": [
+          "features/batch_invariance.md",
+          "configuration/optimization.md",
+          "features/quantization/modelopt.md",
+          "features/batch_invariance.md",
+          "features/quantization/modelopt.md"
+        ]
+      },
+      {
+        "id": "q049",
+        "slice": "how_to",
+        "recall_at_1": 0.0,
+        "recall_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "mrr_at_10": 0.5,
+        "section_at_5": 1.0,
+        "top_docs": [
+          "design/debug_vllm_compile.md",
+          "deployment/docker.md",
+          "design/torch_compile.md",
+          "design/torch_compile.md",
+          "design/debug_vllm_compile.md"
+        ]
+      },
+      {
+        "id": "q050",
+        "slice": "factual",
+        "recall_at_1": 1.0,
+        "recall_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "mrr_at_10": 1.0,
+        "section_at_5": 1.0,
+        "top_docs": [
           "serving/expert_parallel_deployment.md",
-          "features/quantization/gguf.md",
-          "deployment/k8s.md",
-          "deployment/integrations/kthena.md"
+          "serving/expert_parallel_deployment.md",
+          "serving/expert_parallel_deployment.md",
+          "serving/expert_parallel_deployment.md",
+          "serving/expert_parallel_deployment.md"
+        ]
+      },
+      {
+        "id": "q051",
+        "slice": "factual",
+        "recall_at_1": 1.0,
+        "recall_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "mrr_at_10": 1.0,
+        "section_at_5": 1.0,
+        "top_docs": [
+          "serving/parallelism_scaling.md",
+          "serving/parallelism_scaling.md",
+          "serving/parallelism_scaling.md",
+          "deployment/frameworks/skypilot.md",
+          "serving/data_parallel_deployment.md"
+        ]
+      },
+      {
+        "id": "q052",
+        "slice": "multi_hop",
+        "recall_at_1": 0.5,
+        "recall_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "mrr_at_10": 1.0,
+        "section_at_5": 1.0,
+        "top_docs": [
+          "features/batch_invariance.md",
+          "features/kv_offloading_usage.md",
+          "features/kv_offloading_usage.md",
+          "features/kv_offloading_usage.md",
+          "features/batch_invariance.md"
+        ]
+      },
+      {
+        "id": "q053",
+        "slice": "how_to",
+        "recall_at_1": 1.0,
+        "recall_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "mrr_at_10": 1.0,
+        "section_at_5": 1.0,
+        "top_docs": [
+          "features/lora.md",
+          "design/lora_resolver_plugins.md",
+          "features/lora.md",
+          "usage/security.md",
+          "features/lora.md"
+        ]
+      },
+      {
+        "id": "q057",
+        "slice": "config_flag",
+        "recall_at_1": 1.0,
+        "recall_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "mrr_at_10": 1.0,
+        "section_at_5": 1.0,
+        "top_docs": [
+          "benchmarking/cli.md",
+          "benchmarking/cli.md",
+          "benchmarking/cli.md",
+          "benchmarking/cli.md",
+          "cli/README.md"
+        ]
+      },
+      {
+        "id": "q058",
+        "slice": "config_flag",
+        "recall_at_1": 0.0,
+        "recall_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "mrr_at_10": 0.25,
+        "section_at_5": 1.0,
+        "top_docs": [
+          "benchmarking/sweeps.md",
+          "deployment/nginx.md",
+          "serving/online_serving/renderer.md",
+          "features/batch_invariance.md",
+          "serving/online_serving/derenderer.md"
+        ]
+      },
+      {
+        "id": "q059",
+        "slice": "config_flag",
+        "recall_at_1": 1.0,
+        "recall_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "mrr_at_10": 1.0,
+        "section_at_5": 1.0,
+        "top_docs": [
+          "benchmarking/sweeps.md",
+          "usage/security.md",
+          "benchmarking/sweeps.md",
+          "benchmarking/sweeps.md",
+          "features/speculative_decoding/extract_hidden_states.md"
+        ]
+      },
+      {
+        "id": "q060",
+        "slice": "multi_hop",
+        "recall_at_1": 0.5,
+        "recall_at_5": 0.5,
+        "recall_at_10": 0.5,
+        "mrr_at_10": 1.0,
+        "section_at_5": 0.0,
+        "top_docs": [
+          "models/extensions/runai_model_streamer.md",
+          "models/extensions/runai_model_streamer.md",
+          "models/extensions/instanttensor.md",
+          "deployment/integrations/production-stack.md",
+          "models/extensions/runai_model_streamer.md"
         ]
       }
     ]

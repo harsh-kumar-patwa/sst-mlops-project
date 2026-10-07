@@ -11,8 +11,8 @@ quality is blocked from merging**.
 
 | Metric | Value |
 |---|---|
-| Golden set | _60 hand-written questions (in progress; CI currently runs the 6-question smoke set)_ |
-| Recall@5 / MRR@10 | _fill in from `eval/baseline.json`_ |
+| Golden set | 60 questions: 15 factual, 15 how-to, 12 config-flag, 8 multi-hop, 10 unanswerable (`eval/golden.csv`) |
+| Recall@5 / MRR@10 (dense, chunk 400) | 0.870 / 0.833 (multi-hop Recall@5: 0.688) |
 | Faithfulness / Correctness (LLM judge) | _fill in_ |
 | Refusal accuracy on unanswerable questions | _fill in_ |
 | Latency p50 / p99 (end to end) | _fill in from the dashboard_ |
