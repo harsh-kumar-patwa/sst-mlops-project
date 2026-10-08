@@ -23,7 +23,7 @@ embedding:
 retrieval:
   mode: hybrid                   # dense | hybrid (dense + BM25 fused with Reciprocal Rank Fusion)
   candidates: 20                 # retrieved per retriever before fusion / truncation
-  top_k: 5                       # chunks passed to the LLM
+  top_k: 1                       # chunks passed to the LLM
   rrf_k: 60
   min_score: 0.55                # refuse to answer if the best dense cosine score is below this
 
