@@ -33,7 +33,7 @@ generation:
   temperature: 0.0
   max_tokens: 1024
   timeout_seconds: 30
-  prompt_version: answer_v1      # file in prompts/
+  prompt_version: answer_v2      # file in prompts/
   max_context_tokens: 3000
   price_per_mtok: {input: 0.15, output: 0.60}   # list prices; check the provider's pricing page
 
